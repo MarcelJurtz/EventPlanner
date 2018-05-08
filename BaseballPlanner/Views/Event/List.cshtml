@@ -1,0 +1,19 @@
+﻿@model EventListViewModel
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Planner</title>
+</head>
+<body>
+    @foreach(var item in Model.Events) {
+        <div>
+            <h2>@item.Designation</h2>
+            <p>@item.Created, @item.CreatedBy.Username</p>
+            <p>@item.Description</p>
+        </div>
+    }
+</body>
+</html>
