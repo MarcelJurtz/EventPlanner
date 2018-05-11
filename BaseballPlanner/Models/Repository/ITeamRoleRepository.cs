@@ -8,6 +8,6 @@ namespace Planner.Models.Repository
         void ModifyRole(TeamRole role);
         void DeleteRole(TeamRole role);
 
-        IEnumerable<TeamRole> GetAllTeamRoles();
+        IEnumerable<TeamRole> TeamRoles { get; }
     }
 }

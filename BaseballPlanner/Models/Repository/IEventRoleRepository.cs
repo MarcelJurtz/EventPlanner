@@ -8,6 +8,6 @@ namespace Planner.Models.Repository
         void ModifyEventRole(EventRole role);
         void DeleteEventRole(EventRole role);
 
-        IEnumerable<EventRole> GetAllEventRoles();
+        IEnumerable<EventRole> EventRoles { get; }
     }
 }
