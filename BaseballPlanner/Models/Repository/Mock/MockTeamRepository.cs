@@ -29,6 +29,11 @@ namespace Planner.Models.Repository.Mock
             };
         }
 
+        public IEnumerable<Team> Teams
+        {
+            get { return _teams; }
+        }
+
         public void AddTeam(Team team)
         {
             _teams.Add(team);

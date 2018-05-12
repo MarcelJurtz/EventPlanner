@@ -59,9 +59,9 @@ namespace Planner.Models.Repository.Mock
             _eventRoles.Remove(role);
         }
 
-        public IEnumerable<EventRole> GetAllEventRoles()
+        public IEnumerable<EventRole> EventRoles
         {
-            return _eventRoles;
+            get { return _eventRoles; }
         }
 
         public void ModifyEventRole(EventRole role)

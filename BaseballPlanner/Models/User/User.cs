@@ -8,6 +8,6 @@ namespace Planner.Models
         public string Username { get; set; }
         public string EMail { get; set; }
 
-        public Dictionary<Team, TeamRole> TeamAffiliations { get; set; }
+        public IEnumerable<TeamAffiliation> TeamAffiliations { get; set; }
     }
 }

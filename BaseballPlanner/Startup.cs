@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Planner.Models;
 using Planner.Models.Repository;
 using Planner.Models.Repository.Mock;
+using Planner.Models.Repository.PostgreSQL;
 
 namespace Planner
 {
@@ -36,11 +37,12 @@ namespace Planner
             });
 
             // Transient defines that a new instance is returned for each request
-            services.AddTransient<IEventRepository, MockEventRepository>();
-            services.AddTransient<IEventRoleRepository, MockEventRoleRepository>();
-            services.AddTransient<ITeamRepository, MockTeamRepository>();
-            services.AddTransient<ITeamRoleRepository, MockTeamRoleRepository>();
-            services.AddTransient<IUserRepository, MockUserRepository>();
+            services.AddTransient<IEventRepository, PostgresEventRepository>();
+            services.AddTransient<IEventRoleRepository, PostgresEventRoleRepository>();
+            services.AddTransient<ITeamRepository, PostgresTeamRepository>();
+            services.AddTransient<ITeamRoleRepository, PostgresTeamRoleRepository>();
+            services.AddTransient<ITeamAffiliationRepository, PostgresTeamAffiliationRepository>();
+            services.AddTransient<IUserRepository, PostgresUserRepository>();
 
             services.AddMvc();
         }

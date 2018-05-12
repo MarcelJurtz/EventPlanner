@@ -36,9 +36,9 @@ namespace Planner.Models.Repository.Mock
             _teamRoles.Remove(role);
         }
 
-        public IEnumerable<TeamRole> GetAllTeamRoles()
+        public IEnumerable<TeamRole> TeamRoles
         {
-            return _teamRoles;
+            get { return _teamRoles; }
         }
 
         public void ModifyRole(TeamRole role)
