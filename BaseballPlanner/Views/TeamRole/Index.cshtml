@@ -1,0 +1,23 @@
+﻿@model IEnumerable<TeamRole>
+
+<h2>Aufgabenverteilung</h2>
+@if (Model.Count() > 0)
+{
+<table>
+    <thead>
+        <tr>
+            <td>Bezeichnung</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>@role.Designation</tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}

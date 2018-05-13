@@ -4,18 +4,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Planner</title>
-    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
+    @*TODO <link rel="stylesheet" asp-href-include="~/lib/bootstrap/dist/css/*.min.css" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
-<body><!-- RenderBody will be replaced by actual view -->
-    <div class="container">
+<body>
+    
+    <!-- RenderBody will be replaced by actual view -->
+    <div class="container-fluid">
         <div class="row">
+            @await Html.PartialAsync("Header")
+        </div>
+        <div class="row">
+            @*<div class="col-md-3">
+                    <p class="lead">
+                        <img class="img-responsive" alt="Bethany's Pie Shop'" src="~/Images/logo.png" />
+                    </p>
+                </div>*@
             <div class="col-md-3">
-                <p class="lead">
-                    <img class="img-responsive" alt="Bethany's Pie Shop'" src="~/Images/logo.png" />
-                </p>
+                @await Html.PartialAsync("Sidebar")
             </div>
             <div class="col-md-9">
                 @RenderBody()
