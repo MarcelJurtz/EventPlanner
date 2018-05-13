@@ -1,7 +1,26 @@
-﻿@model IEnumerable<TeamRole>
+﻿@model TeamRoleViewModel
 
 <h2>Aufgabenverteilung</h2>
-@if (Model.Count() > 0)
+
+<form asp-action="Index" method="post" role="form">
+
+    @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+    <div class="form-group">
+        <label asp-for="Role.Designation" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Role.Designation" class="form-control" />
+            <span asp-validation-for="Role.Designation" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Speichern" />
+        </div>
+    </div>
+</form>
+
+@if (Model.Roles.Count() > 0)
 {
 <table>
     <thead>
@@ -10,9 +29,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var role in Model)
+        @foreach (var role in Model.Roles)
         {
-            <tr>@role.Designation</tr>
+            <tr><td>@role.Designation</td></tr>
         }
     </tbody>
 </table>

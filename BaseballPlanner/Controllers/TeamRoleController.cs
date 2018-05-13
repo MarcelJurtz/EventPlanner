@@ -1,20 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Planner.Models;
 using Planner.Models.Repository;
+using Planner.ViewModels;
 
 namespace BaseballPlanner.Controllers
 {
     public class TeamRoleController : Controller
     {
         private readonly ITeamRoleRepository _teamRoleRepository;
+        private TeamRoleViewModel vm;
 
         public TeamRoleController(ITeamRoleRepository teamRoleRepository)
         {
             _teamRoleRepository = teamRoleRepository;
+
+            vm = new TeamRoleViewModel();
+            vm.Roles = _teamRoleRepository.TeamRoles;
+            vm.Role = new TeamRole();
         }
 
         public IActionResult Index()
         {
-            return View(_teamRoleRepository.TeamRoles);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult Index(TeamRole role)
+        {
+            if(ModelState.IsValid)
+            {
+                _teamRoleRepository.AddRole(role);
+                return RedirectToAction("Index");
+            }
+            return View(vm);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Planner.Models.Repository.PostgreSQL
         public void AddRole(TeamRole role)
         {
             _appDbContext.TeamRoles.Add(role);
+            _appDbContext.SaveChanges(); // TODO
         }
 
         public void DeleteRole(TeamRole role)
