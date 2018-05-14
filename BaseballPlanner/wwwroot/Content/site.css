@@ -12,17 +12,76 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.slide-image {
-    width: 100%;
+.login-header {
+    margin: 0 auto;
 }
 
-.carousel-holder {
-    margin-bottom: 30px;
+.login-header img {
+    display: block;
+    margin: 0 auto;
+    max-width: 128px;
 }
 
-.carousel-control,
-.item {
-    border-radius: 4px;
+l {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.navbar {
+    background-image: none;
+}
+
+.navbar-inverse {
+    background-color: #E3001B;
+    border-color: #a593c2;
+}
+
+.nav.navbar-nav.navbar-right li a {
+    color: white;
+    font-size: 1.2em;
+}
+
+.navbar .nav > li > a {
+    font-size: 1.2em;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    color: white;
+    line-height: 50px;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+
+.navbar li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-header img {
+    float: left;
+    max-width: 100px;
+    margin-right: 25px;
+    padding: 10px;
+}
+
+.navbar-header h1 {
+    float: left;
+}
+
+.lobster {
+    font-family: 'Lobster 1.3', sans-serif
+}
+
+.primary {
+    color: #44A72A;
+}
+
+.secondary {
+    color: #E3001B;
 }
 
 .caption {
@@ -62,34 +121,34 @@ header {
     width: 100%;
 }
 
-header h1 {
-    font-family: 'Lobster 1.3', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    float: left;
-    color: #44A72A;
-    font-size: 2.5em;
-}
+    header h1 {
+        font-family: 'Lobster 1.3', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        float: left;
+        color: #44A72A;
+        font-size: 2.5em;
+    }
 
-header img {
-    float: left;
-    max-width: 100px;
-    margin-right: 25px;
-    padding: 10px;
-}
+    header img {
+        float: left;
+        max-width: 100px;
+        margin-right: 25px;
+        padding: 10px;
+    }
 
-header ul {
-    float: right;
-    list-style-type: none;
-    vertical-align: middle;
-}
+    header ul {
+        float: right;
+        list-style-type: none;
+        vertical-align: middle;
+    }
 
-header ul li {
-    float: left;
-    margin: 10px;
-}
+        header ul li {
+            float: left;
+            margin: 10px;
+        }
 
-header a {
-    text-decoration: none;
-}
+    header a {
+        text-decoration: none;
+    }
 
 .sidebar {
     border: 1px solid #E3001B;

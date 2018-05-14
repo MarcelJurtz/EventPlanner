@@ -1,0 +1,13 @@
+﻿@model HomeViewModel
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+<p>Hello @UserManager.GetUserName(User)!</p>
+}
+else
+{
+    <p>No User logged in</p>
+}
+
