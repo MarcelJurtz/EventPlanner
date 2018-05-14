@@ -15,7 +15,7 @@ namespace BaseballPlanner.Controllers
             _teamRoleRepository = teamRoleRepository;
 
             vm = new TeamRoleViewModel();
-            vm.Roles = _teamRoleRepository.TeamRoles;
+            vm.Roles = _teamRoleRepository.GetAll();
             vm.Role = new TeamRole();
         }
 
@@ -29,7 +29,7 @@ namespace BaseballPlanner.Controllers
         {
             if(ModelState.IsValid)
             {
-                _teamRoleRepository.AddRole(role);
+                _teamRoleRepository.Add(role);
                 return RedirectToAction("Index");
             }
             return View(vm);

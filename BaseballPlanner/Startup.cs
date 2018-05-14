@@ -78,7 +78,6 @@ namespace Planner
             services.AddTransient<ITeamRepository, PostgresTeamRepository>();
             services.AddTransient<ITeamRoleRepository, PostgresTeamRoleRepository>();
             services.AddTransient<ITeamAffiliationRepository, PostgresTeamAffiliationRepository>();
-            services.AddTransient<IUserRepository, PostgresUserRepository>();
 
             services.AddMvc();
         }

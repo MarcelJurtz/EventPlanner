@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.Mock
 {
@@ -26,25 +25,39 @@ namespace Planner.Models.Repository.Mock
             };
         }
 
-        public void AddRole(TeamRole role)
+        public void Add(TeamRole entity)
         {
-            _teamRoles.Add(role);
+            throw new NotImplementedException();
         }
 
-        public void DeleteRole(TeamRole role)
+        public void AddRange(IEnumerable<TeamRole> entities)
         {
-            _teamRoles.Remove(role);
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<TeamRole> TeamRoles
+        public IEnumerable<TeamRole> Find(Expression<Func<TeamRole, bool>> predicate)
         {
-            get { return _teamRoles; }
+            throw new NotImplementedException();
         }
 
-        public void ModifyRole(TeamRole role)
+        public TeamRole Get(int id)
         {
-            var item = _teamRoles.FirstOrDefault(x => x.Id == role.Id);
-            item = role;
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TeamRole> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(TeamRole entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(IEnumerable<TeamRole> entities)
+        {
+            throw new NotImplementedException();
         }
     }
 }

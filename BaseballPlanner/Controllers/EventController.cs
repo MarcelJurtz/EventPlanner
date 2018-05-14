@@ -27,7 +27,7 @@ namespace Planner.Controllers
         public ViewResult List() // Action
         {
             EventListViewModel viewModel = new EventListViewModel();
-            viewModel.Events = _eventRepository.GetAllEvents();
+            viewModel.Events = _eventRepository.GetAll();
             return View(viewModel); // View to Show -> Render default view for this method action
             // Default View: Controller will search in View-Subfolder for View with same name as the controller
             // Passing Parameters to View results in a strongly typed view. Alternative: Razor / ViewBag-Property

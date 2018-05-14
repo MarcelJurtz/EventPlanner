@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Planner.Models.Repository.Mock
@@ -33,30 +34,39 @@ namespace Planner.Models.Repository.Mock
            };
         }
 
-        public void AddEvent(Event e)
+        public void Add(Event entity)
         {
-            _events.Add(e);
+            throw new NotImplementedException();
         }
 
-        public void DeleteEvent(Event e)
+        public void AddRange(IEnumerable<Event> entities)
         {
-            _events.Remove(e);
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<Event> GetAllEvents()
+        public IEnumerable<Event> Find(Expression<Func<Event, bool>> predicate)
         {
-            return _events;
+            throw new NotImplementedException();
         }
 
-        public Event GetEventById(int id)
+        public Event Get(int id)
         {
-            return _events.FirstOrDefault(x => x.Id == id);
+            throw new NotImplementedException();
         }
 
-        public void ModifyEvent(Event e)
+        public IEnumerable<Event> GetAll()
         {
-            var item = _events.FirstOrDefault(x => x.Id == e.Id);
-            item = e;
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Event entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(IEnumerable<Event> entities)
+        {
+            throw new NotImplementedException();
         }
     }
 }

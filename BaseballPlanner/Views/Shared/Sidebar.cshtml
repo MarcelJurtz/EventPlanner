@@ -1,10 +1,37 @@
-﻿<div class="sidebar">
-    <h2>Menu</h2>
-    <ul>
-        <li>Einstellungen</li>
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+<div class="sidebar">
+    <h2>Menü</h2>
+
+    @if (User.IsInRole("administrator"))
+    {
         <ul>
-            <li>Event-Rollen</li>
-            <li>Team-Rollen</li>
+            <li>
+                Administration
+                <ul>
+                    <li>Teams</li>
+                    <li>Benutzer</li>
+                    <li>Events</li>
+                    <li>
+                        Einstellungen
+                        <ul>
+                            <li>Teamrollen</li>
+                            <li>Eventrollen</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
+    }
+
+    <ul>
+        <li>Meine Events</li>
+        <li>Offene Events</li>
+        <li>Einstellungen</li>
+    </ul>
+
+    <ul>
+        <li>Abmelden</li>
     </ul>
 </div>

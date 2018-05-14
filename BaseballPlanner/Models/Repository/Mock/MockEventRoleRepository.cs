@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.Mock
 {
@@ -48,26 +47,39 @@ namespace Planner.Models.Repository.Mock
             };
         }
 
-
-        public void AddEventRole(EventRole role)
+        public void Add(EventRole entity)
         {
-            _eventRoles.Add(role);
+            throw new NotImplementedException();
         }
 
-        public void DeleteEventRole(EventRole role)
+        public void AddRange(IEnumerable<EventRole> entities)
         {
-            _eventRoles.Remove(role);
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<EventRole> EventRoles
+        public IEnumerable<EventRole> Find(Expression<Func<EventRole, bool>> predicate)
         {
-            get { return _eventRoles; }
+            throw new NotImplementedException();
         }
 
-        public void ModifyEventRole(EventRole role)
+        public EventRole Get(int id)
         {
-            var item = _eventRoles.FirstOrDefault(x => x.Id == role.Id);
-            item = role;
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<EventRole> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(EventRole entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(IEnumerable<EventRole> entities)
+        {
+            throw new NotImplementedException();
         }
     }
 }

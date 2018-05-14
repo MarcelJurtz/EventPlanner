@@ -35,6 +35,10 @@ footer {
     background-image: none;
 }
 
+.navbar-header h1 {
+    display: inline;
+}
+
 .navbar-inverse {
     background-color: #E3001B;
     border-color: #a593c2;
@@ -149,7 +153,3 @@ header {
     header a {
         text-decoration: none;
     }
-
-.sidebar {
-    border: 1px solid #E3001B;
-}

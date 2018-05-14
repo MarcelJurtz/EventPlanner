@@ -39,15 +39,17 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 @*<a class="navbar-brand" href="#">WebSiteName</a>*@
-                <img src="~/Images/logo.png" alt="page logo" />
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/Images/logo.png" alt="page logo" />
+                </a>
                 <h1 class="lobster primary">Leprechauns&nbsp;-&nbsp;Events</h1>
             </div>
-            <ul class="nav navbar-nav">
+            @*<ul class="nav navbar-nav">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                @*@await Component.InvokeAsync("CategoryMenu")*@
+                @await Component.InvokeAsync("CategoryMenu")
                 <li><a asp-controller="Contact" asp-action="Index">Profil</a></li>
-                @*@await Component.InvokeAsync("ShoppingCartSummary")*@
-            </ul>
+                @await Component.InvokeAsync("ShoppingCartSummary")
+            </ul>*@
             @await Html.PartialAsync("LoginPartial")
         </div>
     </nav>

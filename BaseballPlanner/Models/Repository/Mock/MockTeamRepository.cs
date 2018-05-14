@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.Mock
 {
@@ -29,25 +31,39 @@ namespace Planner.Models.Repository.Mock
             };
         }
 
-        public IEnumerable<Team> Teams
+        public void Add(Team entity)
         {
-            get { return _teams; }
+            throw new NotImplementedException();
         }
 
-        public void AddTeam(Team team)
+        public void AddRange(IEnumerable<Team> entities)
         {
-            _teams.Add(team);
+            throw new NotImplementedException();
         }
 
-        public void DeleteTeam(Team team)
+        public IEnumerable<Team> Find(Expression<Func<Team, bool>> predicate)
         {
-            _teams.Remove(team);
+            throw new NotImplementedException();
         }
 
-        public void ModifyTeam(Team team)
+        public Team Get(int id)
         {
-            var item = _teams.FirstOrDefault(x => x.Id == team.Id);
-            item = team;
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Team> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Team entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(IEnumerable<Team> entities)
+        {
+            throw new NotImplementedException();
         }
     }
 }
