@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Planner.Models.Repository.PostgreSQL
@@ -14,19 +15,39 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public IEnumerable<TeamAffiliation> TeamAffiliations
+        public void Add(TeamAffiliation entity)
         {
-            get { return _appDbContext.TeamAffiliations; }
+            _appDbContext.TeamAffiliations.Add(entity);
         }
 
-        public void AddTeamAffiliation(TeamAffiliation teamAffiliation)
+        public void AddRange(IEnumerable<TeamAffiliation> entities)
         {
-            _appDbContext.TeamAffiliations.Add(teamAffiliation);
+            _appDbContext.TeamAffiliations.AddRange(entities);
         }
 
-        public void RemoveTeamAffiliation(TeamAffiliation teamAffiliation)
+        public IEnumerable<TeamAffiliation> Find(Expression<Func<TeamAffiliation, bool>> predicate)
         {
-            _appDbContext.TeamAffiliations.Remove(teamAffiliation);
+            return _appDbContext.TeamAffiliations.Where(predicate.Compile()).ToList();
+        }
+
+        public TeamAffiliation Get(int id)
+        {
+            return _appDbContext.TeamAffiliations.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<TeamAffiliation> GetAll()
+        {
+            return _appDbContext.TeamAffiliations;
+        }
+
+        public void Remove(TeamAffiliation entity)
+        {
+            _appDbContext.TeamAffiliations.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<TeamAffiliation> entities)
+        {
+            _appDbContext.TeamAffiliations.RemoveRange(entities);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
@@ -12,24 +14,39 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public void AddEventRole(EventRole role)
+        public EventRole Get(int id)
         {
-            _appDbContext.EventRoles.Add(role);
+            return _appDbContext.EventRoles.FirstOrDefault(x => x.Id == id);
         }
 
-        public void DeleteEventRole(EventRole role)
+        public IEnumerable<EventRole> GetAll()
         {
-            _appDbContext.EventRoles.Remove(role);
+            return _appDbContext.EventRoles;
         }
 
-        public IEnumerable<EventRole> EventRoles
+        public IEnumerable<EventRole> Find(Expression<Func<EventRole, bool>> predicate)
         {
-            get { return _appDbContext.EventRoles; }
+            return _appDbContext.EventRoles.Where(predicate.Compile()).ToList();
         }
 
-        public void ModifyEventRole(EventRole role)
+        public void Add(EventRole entity)
         {
-            throw new NotImplementedException();
+            _appDbContext.EventRoles.Add(entity);
+        }
+
+        public void AddRange(IEnumerable<EventRole> entities)
+        {
+            _appDbContext.EventRoles.AddRange(entities);
+        }
+
+        public void Remove(EventRole entity)
+        {
+            _appDbContext.EventRoles.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<EventRole> entities)
+        {
+            _appDbContext.EventRoles.RemoveRange(entities);
         }
     }
 }

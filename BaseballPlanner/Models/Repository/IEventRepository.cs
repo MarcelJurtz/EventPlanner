@@ -1,14 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Planner.Models.Repository
+﻿namespace Planner.Models.Repository
 {
-    public interface IEventRepository
+    public interface IEventRepository : IRepository<Event>
     {
-        void AddEvent(Event e);
-        void ModifyEvent(Event e);
-        void DeleteEvent(Event e);
-
-        IEnumerable<Event> GetAllEvents();
-        Event GetEventById(int id);
     }
 }

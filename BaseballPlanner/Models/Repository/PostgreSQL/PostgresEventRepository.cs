@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
@@ -14,29 +14,39 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public void AddEvent(Event e)
+        public void Add(Event entity)
         {
-            _appDbContext.Events.Add(e);
+            _appDbContext.Events.Add(entity);
         }
 
-        public void DeleteEvent(Event e)
+        public void AddRange(IEnumerable<Event> entities)
         {
-            _appDbContext.Events.Remove(e);
+            _appDbContext.Events.AddRange(entities);
         }
 
-        public IEnumerable<Event> GetAllEvents()
+        public IEnumerable<Event> Find(Expression<Func<Event, bool>> predicate)
         {
-            return _appDbContext.Events;
+            return _appDbContext.Events.Where(predicate.Compile()).ToList();
         }
 
-        public Event GetEventById(int id)
+        public Event Get(int id)
         {
             return _appDbContext.Events.FirstOrDefault(x => x.Id == id);
         }
 
-        public void ModifyEvent(Event e)
+        public IEnumerable<Event> GetAll()
         {
-            throw new NotImplementedException();
+            return _appDbContext.Events;
+        }
+
+        public void Remove(Event entity)
+        {
+            _appDbContext.Events.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<Event> entities)
+        {
+            _appDbContext.Events.RemoveRange(entities);
         }
     }
 }

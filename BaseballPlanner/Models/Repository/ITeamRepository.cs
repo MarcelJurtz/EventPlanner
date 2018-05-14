@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Planner.Models.Repository
+﻿namespace Planner.Models.Repository
 {
-    public interface ITeamRepository
+    public interface ITeamRepository : IRepository<Team>
     {
-        IEnumerable<Team> Teams { get; }
-        void AddTeam(Team team);
-        void ModifyTeam(Team team);
-        void DeleteTeam(Team team);
     }
 }

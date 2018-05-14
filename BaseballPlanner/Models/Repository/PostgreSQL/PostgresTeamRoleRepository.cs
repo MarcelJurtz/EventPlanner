@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
@@ -14,25 +14,39 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public void AddRole(TeamRole role)
+        public void Add(TeamRole entity)
         {
-            _appDbContext.TeamRoles.Add(role);
-            _appDbContext.SaveChanges(); // TODO
+            _appDbContext.TeamRoles.Add(entity);
         }
 
-        public void DeleteRole(TeamRole role)
+        public void AddRange(IEnumerable<TeamRole> entities)
         {
-            _appDbContext.TeamRoles.Remove(role);
+            _appDbContext.TeamRoles.AddRange(entities);
         }
 
-        public IEnumerable<TeamRole> TeamRoles
+        public IEnumerable<TeamRole> Find(Expression<Func<TeamRole, bool>> predicate)
         {
-            get { return _appDbContext.TeamRoles; }
+            return _appDbContext.TeamRoles.Where(predicate.Compile()).ToList();
         }
 
-        public void ModifyRole(TeamRole role)
+        public TeamRole Get(int id)
         {
-            throw new NotImplementedException();
+            return _appDbContext.TeamRoles.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<TeamRole> GetAll()
+        {
+            return _appDbContext.TeamRoles;
+        }
+
+        public void Remove(TeamRole entity)
+        {
+            _appDbContext.TeamRoles.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<TeamRole> entities)
+        {
+            _appDbContext.TeamRoles.RemoveRange(entities);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
@@ -14,27 +14,39 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public IEnumerable<Team> Teams
+        public void Add(Team entity)
         {
-            get
-            {
-                return _appDbContext.Teams;
-            }
+            _appDbContext.Teams.Add(entity);
         }
 
-        public void AddTeam(Team team)
+        public void AddRange(IEnumerable<Team> entities)
         {
-            _appDbContext.Teams.Add(team);
+            _appDbContext.Teams.AddRange(entities);
         }
 
-        public void DeleteTeam(Team team)
+        public IEnumerable<Team> Find(Expression<Func<Team, bool>> predicate)
         {
-            _appDbContext.Teams.Remove(team);
+            return _appDbContext.Teams.Where(predicate.Compile()).ToList();
         }
 
-        public void ModifyTeam(Team team)
+        public Team Get(int id)
         {
-            throw new NotImplementedException();
+            return _appDbContext.Teams.FirstOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<Team> GetAll()
+        {
+            return _appDbContext.Teams;
+        }
+
+        public void Remove(Team entity)
+        {
+            _appDbContext.Teams.Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<Team> entities)
+        {
+            _appDbContext.Teams.RemoveRange(entities);
         }
     }
 }

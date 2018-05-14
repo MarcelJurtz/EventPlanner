@@ -1,11 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Planner.Models.Repository
+﻿namespace Planner.Models.Repository
 {
-    interface ITeamAffiliationRepository
+    interface ITeamAffiliationRepository : IRepository<TeamAffiliation>
     {
-        IEnumerable<TeamAffiliation> TeamAffiliations { get; }
-        void AddTeamAffiliation(TeamAffiliation teamAffiliation);
-        void RemoveTeamAffiliation(TeamAffiliation teamAffiliation);
     }
 }
