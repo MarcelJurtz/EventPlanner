@@ -1,0 +1,48 @@
+﻿@model EventEditViewModel
+
+<h3>Neuen Eintrag hinzufügen</h3>
+<form asp-action="Index" method="post" role="form">
+    <div class="form-group">
+        <label asp-for="CurrentEvent.Designation" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.Designation" class="form-control" />
+            <span asp-validation-for="CurrentEvent.Designation" class="text-danger"></span>
+        </div>
+        <label asp-for="CurrentEvent.Location" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.Location" class="form-control" />
+            <span asp-validation-for="CurrentEvent.Location" text-danger"></span>
+        </div>
+        <label asp-for="CurrentEvent.Start" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.Start" class="form-control" />
+            <span asp-validation-for="CurrentEvent.Start" class="text-danger"></span>
+        </div>
+        <label asp-for="CurrentEvent.End" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.End" class="form-control" />
+            <span asp-validation-for="CurrentEvent.End" class="text-danger"></span>
+        </div>
+        <label asp-for="CurrentEvent.MeetingLocation" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.MeetingLocation" class="form-control" />
+            <span asp-validation-for="CurrentEvent.MeetingLocation" class="text-danger"></span>
+        </div>
+        <label asp-for="CurrentEvent.MeetingTime" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.MeetingTime" class="form-control" />
+            <span asp-validation-for="CurrentEvent.MeetingTime" class="text-danger"></span>
+        </div>
+        <!-- Team Selection -->
+        <label asp-for="CurrentEvent.Description" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.Description" class="form-control" />
+            <span asp-validation-for="CurrentEvent.Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Speichern" />
+        </div>
+    </div>
+</form>

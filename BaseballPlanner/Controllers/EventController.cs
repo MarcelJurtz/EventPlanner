@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Planner.Models.Repository;
 using Planner.ViewModels;
@@ -10,6 +7,7 @@ using Planner.ViewModels;
 
 namespace Planner.Controllers
 {
+    [Authorize]
     public class EventController : Controller
     {
         private readonly IEventRepository _eventRepository;
@@ -24,13 +22,20 @@ namespace Planner.Controllers
         }
 
         // ActionResults
-        public ViewResult List() // Action
+        public ViewResult Index() // Action
         {
             EventListViewModel viewModel = new EventListViewModel();
             viewModel.Events = _eventRepository.GetAll();
             return View(viewModel); // View to Show -> Render default view for this method action
             // Default View: Controller will search in View-Subfolder for View with same name as the controller
             // Passing Parameters to View results in a strongly typed view. Alternative: Razor / ViewBag-Property
+        }
+
+        public ViewResult Add()
+        {
+            EventEditViewModel viewModel = new EventEditViewModel();
+            viewModel.CurrentEvent = new Models.Event();
+            return View(viewModel);
         }
     }
 }

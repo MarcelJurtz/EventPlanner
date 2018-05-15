@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
 using Planner.Models.Repository;
 using Planner.ViewModels;
 
 namespace BaseballPlanner.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class TeamRoleController : Controller
     {
         private readonly ITeamRoleRepository _teamRoleRepository;

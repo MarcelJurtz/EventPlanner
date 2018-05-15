@@ -1,11 +1,40 @@
 ﻿@model TeamRoleViewModel
 
-<h2>Aufgabenverteilung</h2>
+<h2>Aufgabenverteilung - Team</h2>
 
+@if (Model.Roles.Count() > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordred table-striped">
+                <thead>
+                    <tr>
+                        <th>Bezeichnung</th>
+                        <th>Bearbeiten</th>
+
+                        <th>Löschen</th>
+                </thead>
+                <tbody>
+                    @foreach (var role in Model.Roles)
+                    {
+                        <tr>
+                            <td>@role.Designation</td>
+                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><!--<span class="glyphicon glyphicon-pencil"></span>--><i class="fas fa-pencil-alt"></i></button></p></td>
+                            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><!--<span class="glyphicon glyphicon-trash"></span>--><i class="fas fa-trash-alt"></i></button></p></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}
+
+<h3>Neuen Eintrag hinzufügen</h3>
 <form asp-action="Index" method="post" role="form">
-
-    @*<div asp-validation-summary="All" class="text-danger"></div>*@
-
     <div class="form-group">
         <label asp-for="Role.Designation" class="col-md-2 control-label"></label>
         <div class="col-md-5">
@@ -19,24 +48,3 @@
         </div>
     </div>
 </form>
-
-@if (Model.Roles.Count() > 0)
-{
-<table>
-    <thead>
-        <tr>
-            <td>Bezeichnung</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var role in Model.Roles)
-        {
-            <tr><td>@role.Designation</td></tr>
-        }
-    </tbody>
-</table>
-}
-else
-{
-    <p>Keine Einträge vorhanden</p>
-}
