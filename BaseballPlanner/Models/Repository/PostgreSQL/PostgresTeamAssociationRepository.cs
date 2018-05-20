@@ -14,16 +14,20 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public void Add(TeamAssociation entity)
+        public void Add(TeamAssociation entity, bool commit = true)
         {
             _appDbContext.TeamAffiliations.Add(entity);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
-        public void AddRange(IEnumerable<TeamAssociation> entities)
+        public void AddRange(IEnumerable<TeamAssociation> entities, bool commit = true)
         {
             _appDbContext.TeamAffiliations.AddRange(entities);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
         public IEnumerable<TeamAssociation> Find(Expression<Func<TeamAssociation, bool>> predicate)
@@ -41,15 +45,24 @@ namespace Planner.Models.Repository.PostgreSQL
             return _appDbContext.TeamAffiliations;
         }
 
-        public void Remove(TeamAssociation entity)
+        public void Remove(TeamAssociation entity, bool commit = true)
         {
             _appDbContext.TeamAffiliations.Remove(entity);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
-        public void RemoveRange(IEnumerable<TeamAssociation> entities)
+        public void RemoveRange(IEnumerable<TeamAssociation> entities, bool commit = true)
         {
             _appDbContext.TeamAffiliations.RemoveRange(entities);
+
+            if (commit)
+                CommitChanges();
+        }
+
+        public void CommitChanges()
+        {
             _appDbContext.SaveChanges();
         }
     }

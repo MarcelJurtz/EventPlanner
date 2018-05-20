@@ -10,10 +10,12 @@ namespace Planner.Models.Repository
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
-        void Add(TEntity entity);
-        void AddRange(IEnumerable<TEntity> entities);
+        void Add(TEntity entity, bool commit = true);
+        void AddRange(IEnumerable<TEntity> entities, bool commit = true);
 
-        void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity, bool commit = true);
+        void RemoveRange(IEnumerable<TEntity> entities, bool commit = true);
+
+        void CommitChanges();
     }
 }

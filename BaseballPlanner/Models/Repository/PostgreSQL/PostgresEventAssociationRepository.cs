@@ -14,16 +14,20 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = appDbContext;
         }
 
-        public void Add(EventAssociation entity)
+        public void Add(EventAssociation entity, bool commit = true)
         {
             _appDbContext.EventAssociations.Add(entity);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
-        public void AddRange(IEnumerable<EventAssociation> entities)
+        public void AddRange(IEnumerable<EventAssociation> entities, bool commit = true)
         {
             _appDbContext.EventAssociations.AddRange(entities);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
         public IEnumerable<EventAssociation> Find(Expression<Func<EventAssociation, bool>> predicate)
@@ -41,15 +45,24 @@ namespace Planner.Models.Repository.PostgreSQL
             return _appDbContext.EventAssociations;
         }
 
-        public void Remove(EventAssociation entity)
+        public void Remove(EventAssociation entity, bool commit = true)
         {
             _appDbContext.EventAssociations.Remove(entity);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
-        public void RemoveRange(IEnumerable<EventAssociation> entities)
+        public void RemoveRange(IEnumerable<EventAssociation> entities, bool commit = true)
         {
             _appDbContext.EventAssociations.RemoveRange(entities);
+
+            if (commit)
+                CommitChanges();
+        }
+
+        public void CommitChanges()
+        {
             _appDbContext.SaveChanges();
         }
     }

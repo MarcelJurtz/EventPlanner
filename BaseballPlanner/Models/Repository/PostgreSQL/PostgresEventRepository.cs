@@ -14,16 +14,20 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext = context;
         }
 
-        public void Add(Event entity)
+        public void Add(Event entity, bool commit = true)
         {
             _appDbContext.Events.Add(entity);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
-        public void AddRange(IEnumerable<Event> entities)
+        public void AddRange(IEnumerable<Event> entities, bool commit = true)
         {
             _appDbContext.Events.AddRange(entities);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
         public IEnumerable<Event> Find(Expression<Func<Event, bool>> predicate)
@@ -41,15 +45,24 @@ namespace Planner.Models.Repository.PostgreSQL
             return _appDbContext.Events;
         }
 
-        public void Remove(Event entity)
+        public void Remove(Event entity, bool commit = true)
         {
             _appDbContext.Events.Remove(entity);
-            _appDbContext.SaveChanges();
+
+            if (commit)
+                CommitChanges();
         }
 
-        public void RemoveRange(IEnumerable<Event> entities)
+        public void RemoveRange(IEnumerable<Event> entities, bool commit = true)
         {
             _appDbContext.Events.RemoveRange(entities);
+
+            if (commit)
+                CommitChanges();
+        }
+
+        public void CommitChanges()
+        {
             _appDbContext.SaveChanges();
         }
     }
