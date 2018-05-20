@@ -13,6 +13,11 @@
             <input asp-for="CurrentEvent.Location" class="form-control" />
             <span asp-validation-for="CurrentEvent.Location" text-danger"></span>
         </div>
+        <label asp-for="CurrentEvent.Description" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <textarea rows="5" asp-for="CurrentEvent.Description" class="form-control"></textarea>
+            <span asp-validation-for="CurrentEvent.Description" class="text-danger"></span>
+        </div>
         <label asp-for="CurrentEvent.Start" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.Start" class="form-control" />
@@ -34,11 +39,7 @@
             <span asp-validation-for="CurrentEvent.MeetingTime" class="text-danger"></span>
         </div>
         <!-- Team Selection -->
-        <label asp-for="CurrentEvent.Description" class="col-md-2 control-label"></label>
-        <div class="col-md-5">
-            <input asp-for="CurrentEvent.Description" class="form-control" />
-            <span asp-validation-for="CurrentEvent.Description" class="text-danger"></span>
-        </div>
+
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
