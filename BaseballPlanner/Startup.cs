@@ -74,10 +74,8 @@ namespace Planner
 
             // Transient defines that a new instance is returned for each request
             services.AddTransient<IEventRepository, PostgresEventRepository>();
-            services.AddTransient<IEventRoleRepository, PostgresEventRoleRepository>();
             services.AddTransient<ITeamRepository, PostgresTeamRepository>();
-            services.AddTransient<ITeamRoleRepository, PostgresTeamRoleRepository>();
-            services.AddTransient<ITeamAffiliationRepository, PostgresTeamAffiliationRepository>();
+            services.AddTransient<ITeamAssociationRepository, PostgresTeamAssociationRepository>();
 
             services.AddMvc();
         }
@@ -97,7 +95,11 @@ namespace Planner
 
             app.UseAuthentication();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

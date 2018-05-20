@@ -12,9 +12,26 @@ namespace Planner.Models
         }
 
         public DbSet<Event> Events { get; set; }
-        public DbSet<EventRole> EventRoles { get; set; }
+        public DbSet<EventAssociation> EventAssociations { get; set; }
+        public DbSet<EventParticipation> EventParticipations { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamAffiliation> TeamAffiliations { get; set; }
-        public DbSet<TeamRole> TeamRoles { get; set; }
+        public DbSet<TeamAssociation> TeamAffiliations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Team>()
+                .HasIndex(t => t.Designation)
+                .IsUnique();
+
+            builder.Entity<TeamAssociation>()
+                .HasIndex(t => new { t.UserId, t.TeamId, t.Role })
+                .IsUnique();
+
+            builder.Entity<EventAssociation>()
+                .HasIndex(e => new { e.TeamId, e.EventId })
+                .IsUnique();
+
+            base.OnModelCreating(builder);
+        }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model Event
+<h2>@Model.Designation</h2>
+
+<p>Teilnahme am Event bearbeiten</p>
+
+<form asp-action="Index" asp-controller="Event">
+    <div class="col-md-10">
+        @*<input asp-for="SelectedRole" type="radio" value="@item.Id" />*@
+        <label>
+            <input type="radio" value="Ich bin noch unschlüssig" />
+            Ich bin noch unschlüssig
+        </label>
+        <br />
+        <label>
+            <input type="radio" value="Ich nehme Teil" />
+            Ich nehme Teil
+        </label>
+        <br />
+        <label>
+            <input type="radio" value="Ich kann leider nicht dabei sein" />
+            Ich kann leider nicht dabei sein
+        </label>
+    </div>
+    <input type="submit" value="Speichern" />
+</form>
+

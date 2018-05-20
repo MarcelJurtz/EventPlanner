@@ -2,52 +2,55 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
-    public class PostgresTeamAffiliationRepository : ITeamAffiliationRepository
+    public class PostgresTeamAssociationRepository : ITeamAssociationRepository
     {
         private readonly AppDbContext _appDbContext;
 
-        public PostgresTeamAffiliationRepository(AppDbContext context)
+        public PostgresTeamAssociationRepository(AppDbContext context)
         {
             _appDbContext = context;
         }
 
-        public void Add(TeamAffiliation entity)
+        public void Add(TeamAssociation entity)
         {
             _appDbContext.TeamAffiliations.Add(entity);
+            _appDbContext.SaveChanges();
         }
 
-        public void AddRange(IEnumerable<TeamAffiliation> entities)
+        public void AddRange(IEnumerable<TeamAssociation> entities)
         {
             _appDbContext.TeamAffiliations.AddRange(entities);
+            _appDbContext.SaveChanges();
         }
 
-        public IEnumerable<TeamAffiliation> Find(Expression<Func<TeamAffiliation, bool>> predicate)
+        public IEnumerable<TeamAssociation> Find(Expression<Func<TeamAssociation, bool>> predicate)
         {
             return _appDbContext.TeamAffiliations.Where(predicate.Compile()).ToList();
         }
 
-        public TeamAffiliation Get(int id)
+        public TeamAssociation Get(int id)
         {
             return _appDbContext.TeamAffiliations.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<TeamAffiliation> GetAll()
+        public IEnumerable<TeamAssociation> GetAll()
         {
             return _appDbContext.TeamAffiliations;
         }
 
-        public void Remove(TeamAffiliation entity)
+        public void Remove(TeamAssociation entity)
         {
             _appDbContext.TeamAffiliations.Remove(entity);
+            _appDbContext.SaveChanges();
         }
 
-        public void RemoveRange(IEnumerable<TeamAffiliation> entities)
+        public void RemoveRange(IEnumerable<TeamAssociation> entities)
         {
             _appDbContext.TeamAffiliations.RemoveRange(entities);
+            _appDbContext.SaveChanges();
         }
     }
 }

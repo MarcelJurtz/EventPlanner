@@ -13,7 +13,7 @@ namespace Planner.Models
 
         [DisplayName("Bezeichnung")]
         [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Designation { get; set; }
 
         [StringLength(500)]
@@ -24,16 +24,11 @@ namespace Planner.Models
 
         [Required(ErrorMessage = "Bitte geben Sie einen Startzeitpunkt an")]
         public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string MeetingLocation { get; set; }
         public DateTime MeetingTime { get; set; }
-
-        public IEnumerable<Team> Teams { get; set; }
-
-        public Administrator CreatedBy { get; set; }
-        public Administrator ModifiedBy { get; set; }
 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
