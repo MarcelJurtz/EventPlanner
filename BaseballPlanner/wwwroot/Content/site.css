@@ -10,6 +10,7 @@ body {
     background-image: url('/images/pattern.png');
     background-repeat: repeat;
     font-family: 'Source Sans Pro', sans-serif;
+    padding-bottom: 100px; /* Prevent Footer Overlay */
 }
 
 .login-header {
@@ -25,10 +26,6 @@ body {
 l {
     padding: 9px;
     color: #333;
-}
-
-footer {
-    margin: 50px 0;
 }
 
 .navbar {
@@ -84,8 +81,16 @@ footer {
     color: #44A72A;
 }
 
+.primarybg {
+    background-color: #44A72A;
+}
+
 .secondary {
     color: #E3001B;
+}
+
+.secondarybg {
+    background-color: #E3001B;
 }
 
 .caption {
@@ -114,10 +119,6 @@ footer {
         padding: 9px;
         color: #333;
     }
-
-footer {
-    margin: 50px 0;
-}
 
 header {
     background-color: #E3001B;

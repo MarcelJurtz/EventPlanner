@@ -3,42 +3,91 @@
 <h3>Neuen Eintrag hinzufügen</h3>
 <form asp-action="Add" method="post" role="form">
     <div class="form-group">
+        <!-- Bezeichnung -->
         <label asp-for="CurrentEvent.Designation" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.Designation" class="form-control" />
             <span asp-validation-for="CurrentEvent.Designation" class="text-danger"></span>
         </div>
+
+        <!-- Ort -->
         <label asp-for="CurrentEvent.Location" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.Location" class="form-control" />
             <span asp-validation-for="CurrentEvent.Location" text-danger"></span>
         </div>
+
+        <!-- Beschreibung -->
         <label asp-for="CurrentEvent.Description" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <textarea rows="5" asp-for="CurrentEvent.Description" class="form-control"></textarea>
             <span asp-validation-for="CurrentEvent.Description" class="text-danger"></span>
         </div>
+
+        <!-- Start -->
         <label asp-for="CurrentEvent.Start" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.Start" class="form-control" />
             <span asp-validation-for="CurrentEvent.Start" class="text-danger"></span>
         </div>
+
+        <!-- Ende -->
         <label asp-for="CurrentEvent.End" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.End" class="form-control" />
             <span asp-validation-for="CurrentEvent.End" class="text-danger"></span>
         </div>
+
+        <!-- Treffpunkt -->
         <label asp-for="CurrentEvent.MeetingLocation" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.MeetingLocation" class="form-control" />
             <span asp-validation-for="CurrentEvent.MeetingLocation" class="text-danger"></span>
         </div>
+
+        <!-- Treffpunkt Uhrzeit -->
         <label asp-for="CurrentEvent.MeetingTime" class="col-md-2 control-label"></label>
         <div class="col-md-5">
             <input asp-for="CurrentEvent.MeetingTime" class="form-control" />
             <span asp-validation-for="CurrentEvent.MeetingTime" class="text-danger"></span>
         </div>
-        <!-- Team Selection -->
+
+        <!-- Sitzplätze -->
+        <label asp-for="CurrentEvent.SeatsRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.SeatsRequired" class="form-control" />
+            <span asp-validation-for="CurrentEvent.SeatsRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Spieler -->
+        <label asp-for="CurrentEvent.PlayersRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.PlayersRequired" class="form-control" />
+            <span asp-validation-for="CurrentEvent.PlayersRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Coaches -->
+        <label asp-for="CurrentEvent.CoachesRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.CoachesRequired" class="form-control" />
+            <span asp-validation-for="CurrentEvent.CoachesRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Scorer -->
+        <label asp-for="CurrentEvent.ScorersRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.ScorersRequired" class="form-control" />
+            <span asp-validation-for="CurrentEvent.ScorersRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Umpire -->
+        <label asp-for="CurrentEvent.UmpiresRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CurrentEvent.UmpiresRequired" class="form-control" />
+            <span asp-validation-for="CurrentEvent.UmpiresRequired" class="text-danger"></span>
+        </div>
+
+        <!-- TODO Team Selection -->
 
     </div>
     <div class="form-group">

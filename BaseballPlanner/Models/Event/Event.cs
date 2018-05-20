@@ -13,10 +13,15 @@ namespace Planner.Models
         private string _designation;
         private string _description;
         private string _location;
-        private DateTime _start;
+        private DateTime _start = DateTime.Today;
         private DateTime? _end;
         private string _meetingLocation;
-        private DateTime _meetingTime;
+        private DateTime _meetingTime = DateTime.Today;
+        private int _seatsRequired { get; set; }
+        private int _playersRequired { get; set; }
+        private int _coachesRequired { get; set; }
+        private int _scorersRequired { get; set; }
+        private int _umpiresRequired { get; set; }
 
         public Event()
         {
@@ -35,7 +40,7 @@ namespace Planner.Models
             get { return _designation; }
             set
             {
-                if(_designation != value)
+                if (_designation != value)
                 {
                     _designation = value;
                     NotifyPropertyChanged();
@@ -50,7 +55,7 @@ namespace Planner.Models
             get { return _description; }
             set
             {
-                if(_description != value)
+                if (_description != value)
                 {
                     _description = value;
                     NotifyPropertyChanged();
@@ -80,7 +85,7 @@ namespace Planner.Models
             get { return _start; }
             set
             {
-                if(_start != value)
+                if (_start != value)
                 {
                     _start = value;
                     NotifyPropertyChanged();
@@ -94,7 +99,7 @@ namespace Planner.Models
             get { return _end; }
             set
             {
-                if(_end != value)
+                if (_end != value)
                 {
                     _end = value;
                     NotifyPropertyChanged();
@@ -109,7 +114,7 @@ namespace Planner.Models
             get { return _meetingLocation; }
             set
             {
-                if(_meetingLocation != value)
+                if (_meetingLocation != value)
                 {
                     _meetingLocation = value;
                     NotifyPropertyChanged();
@@ -126,6 +131,76 @@ namespace Planner.Models
                 if (_meetingTime != value)
                 {
                     _meetingTime = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [DisplayName("Sitzplätze benötigt")]
+        public int SeatsRequired
+        {
+            get { return _seatsRequired; }
+            set
+            {
+                if (_seatsRequired != value)
+                {
+                    _seatsRequired = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [DisplayName("Spieler benötigt")]
+        public int PlayersRequired
+        {
+            get { return _playersRequired; }
+            set
+            {
+                if (_playersRequired != value)
+                {
+                    _playersRequired = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [DisplayName("Coaches benötigt")]
+        public int CoachesRequired
+        {
+            get { return _coachesRequired; }
+            set
+            {
+                if (_coachesRequired != value)
+                {
+                    _coachesRequired = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [DisplayName("Scorer benötigt")]
+        public int ScorersRequired
+        {
+            get { return _scorersRequired; }
+            set
+            {
+                if(_scorersRequired != value)
+                {
+                    _scorersRequired = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [DisplayName("Umpires benötigt")]
+        public int UmpiresRequired
+        {
+            get { return _umpiresRequired; }
+            set
+            {
+                if(_umpiresRequired != value)
+                {
+                    _umpiresRequired = value;
                     NotifyPropertyChanged();
                 }
             }
