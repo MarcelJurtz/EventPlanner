@@ -45,6 +45,14 @@ namespace Planner.Models.Repository.PostgreSQL
             return _appDbContext.Teams;
         }
 
+        public void Remove(int id, bool commit = true)
+        {
+            _appDbContext.Teams.Remove(_appDbContext.Teams.First(x => x.Id == id));
+
+            if (commit)
+                CommitChanges();
+        }
+
         public void Remove(Team entity, bool commit = true)
         {
             _appDbContext.Teams.Remove(entity);

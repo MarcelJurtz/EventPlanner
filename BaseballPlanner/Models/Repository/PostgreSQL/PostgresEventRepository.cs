@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
@@ -64,6 +65,23 @@ namespace Planner.Models.Repository.PostgreSQL
         public void CommitChanges()
         {
             _appDbContext.SaveChanges();
+        }
+
+        public IEnumerable<Event> GetAllForUser(int userId)
+        {
+            var teamIds = from t in _appDbContext.Teams
+                          join association in _appDbContext.TeamAssociations
+                          on t.Id equals association.TeamId
+                          where (association.UserId == userId)
+                          select t.Id;
+
+            var results = from e in _appDbContext.Events
+                          join association in _appDbContext.EventAssociations
+                          on e.Id equals association.EventId
+                          where (teamIds.Contains(association.TeamId))
+                          select e;
+
+            return results;           
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Planner.Models.Helper;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -29,10 +30,11 @@ namespace Planner.Models
             Modified = Created;
         }
 
+        [Key]
         [BindNever]
         public int Id { get; set; }
 
-        [DisplayName("Bezeichnung")]
+        [DisplayName(DisplayNames.DESIGNATION)]
         [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
         [StringLength(100)]
         public string Designation
@@ -48,7 +50,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Beschreibung")]
+        [DisplayName(DisplayNames.DESCRIPTION)]
         [StringLength(500)]
         public string Description
         {
@@ -63,7 +65,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Ort")]
+        [DisplayName(DisplayNames.LOCATION)]
         [StringLength(50)]
         public string Location
         {
@@ -78,7 +80,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Start")]
+        [DisplayName(DisplayNames.START)]
         [Required(ErrorMessage = "Bitte geben Sie einen Startzeitpunkt an")]
         public DateTime Start
         {
@@ -93,7 +95,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Ende")]
+        [DisplayName(DisplayNames.END)]
         public DateTime? End
         {
             get { return _end; }
@@ -150,7 +152,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Spieler benötigt")]
+        [DisplayName(DisplayNames.REQUIRED_PLAYERS)]
         public int PlayersRequired
         {
             get { return _playersRequired; }
@@ -164,7 +166,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Coaches benötigt")]
+        [DisplayName(DisplayNames.REQUIRED_COACHES)]
         public int CoachesRequired
         {
             get { return _coachesRequired; }
@@ -178,7 +180,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Scorer benötigt")]
+        [DisplayName(DisplayNames.REQUIRED_SCORERS)]
         public int ScorersRequired
         {
             get { return _scorersRequired; }
@@ -192,7 +194,7 @@ namespace Planner.Models
             }
         }
 
-        [DisplayName("Umpires benötigt")]
+        [DisplayName(DisplayNames.REQUIRED_UMPIRES)]
         public int UmpiresRequired
         {
             get { return _umpiresRequired; }
@@ -206,7 +208,10 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.CREATED)]
         public DateTime Created { get; set; }
+
+        [DisplayName(DisplayNames.MODIFIED)]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

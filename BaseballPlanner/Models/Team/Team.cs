@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Planner.Models.Helper;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
@@ -18,15 +20,18 @@ namespace Planner.Models
         }
 
         [Key]
+        [BindNever]
         public int Id { get; set; }
 
+        [DisplayName(DisplayNames.DESIGNATION)]
+        [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
         [StringLength(100)]
         public string Designation
         {
             get { return _designation; }
             set
             {
-                if(_designation != value)
+                if (_designation != value)
                 {
                     _designation = value;
                     NotifyPropertyChanged();
@@ -34,7 +39,10 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.CREATED)]
         public DateTime Created { get; set; }
+
+        [DisplayName(DisplayNames.MODIFIED)]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

@@ -15,7 +15,7 @@ namespace Planner.Models
         public DbSet<EventAssociation> EventAssociations { get; set; }
         public DbSet<EventParticipation> EventParticipations { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamAssociation> TeamAffiliations { get; set; }
+        public DbSet<TeamAssociation> TeamAssociations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -154,3 +154,9 @@ header {
     header a {
         text-decoration: none;
     }
+
+.button {
+    margin: 5px 15px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+}

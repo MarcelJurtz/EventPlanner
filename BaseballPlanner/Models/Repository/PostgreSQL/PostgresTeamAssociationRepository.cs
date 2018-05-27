@@ -16,7 +16,7 @@ namespace Planner.Models.Repository.PostgreSQL
 
         public void Add(TeamAssociation entity, bool commit = true)
         {
-            _appDbContext.TeamAffiliations.Add(entity);
+            _appDbContext.TeamAssociations.Add(entity);
 
             if (commit)
                 CommitChanges();
@@ -24,7 +24,7 @@ namespace Planner.Models.Repository.PostgreSQL
 
         public void AddRange(IEnumerable<TeamAssociation> entities, bool commit = true)
         {
-            _appDbContext.TeamAffiliations.AddRange(entities);
+            _appDbContext.TeamAssociations.AddRange(entities);
 
             if (commit)
                 CommitChanges();
@@ -32,22 +32,22 @@ namespace Planner.Models.Repository.PostgreSQL
 
         public IEnumerable<TeamAssociation> Find(Expression<Func<TeamAssociation, bool>> predicate)
         {
-            return _appDbContext.TeamAffiliations.Where(predicate.Compile()).ToList();
+            return _appDbContext.TeamAssociations.Where(predicate.Compile()).ToList();
         }
 
         public TeamAssociation Get(int id)
         {
-            return _appDbContext.TeamAffiliations.FirstOrDefault(x => x.Id == id);
+            return _appDbContext.TeamAssociations.FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<TeamAssociation> GetAll()
         {
-            return _appDbContext.TeamAffiliations;
+            return _appDbContext.TeamAssociations;
         }
 
         public void Remove(TeamAssociation entity, bool commit = true)
         {
-            _appDbContext.TeamAffiliations.Remove(entity);
+            _appDbContext.TeamAssociations.Remove(entity);
 
             if (commit)
                 CommitChanges();
@@ -55,7 +55,7 @@ namespace Planner.Models.Repository.PostgreSQL
 
         public void RemoveRange(IEnumerable<TeamAssociation> entities, bool commit = true)
         {
-            _appDbContext.TeamAffiliations.RemoveRange(entities);
+            _appDbContext.TeamAssociations.RemoveRange(entities);
 
             if (commit)
                 CommitChanges();

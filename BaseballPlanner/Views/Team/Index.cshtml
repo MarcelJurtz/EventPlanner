@@ -1,0 +1,58 @@
+﻿@model TeamIndexViewModel
+
+<h2>Teams</h2>
+
+<div class="btn btn-outline-primary">
+    <a asp-controller="Team"
+       asp-action="Add">
+        Eintrag hinzufügen
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
+
+@if (Model.Teams.Count() > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordred table-striped">
+                <thead>
+                    <tr>
+                        <th>Bezeichnung</th>
+                        <th>Anzahl Mitglieder</th>
+                        <th>Zuletzt bearbeitet</th>
+                        <th></th>
+                        <th></th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Teams)
+                    {
+                    <tr>
+                        <td>
+                            <a asp-controller="Team"
+                               asp-action="Edit"
+                               asp-route-id="@item.Id">@item.Designation</a>
+                        </td>
+                        <td>42</td>
+                        <td>@item.Modified</td>
+                        <td>
+                            <a asp-controller="Team"
+                               asp-action="Edit"
+                               asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
+                        </td>
+                        <td>
+                            <a asp-controller="Team"
+                               asp-action="Delete"
+                               asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}
+
