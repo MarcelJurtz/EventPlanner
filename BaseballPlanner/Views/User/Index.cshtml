@@ -1,0 +1,53 @@
+﻿@model UserIndexViewModel
+
+<h2>Benutzer</h2>
+
+@if (Model.Users.Count() > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordred table-striped">
+                <thead>
+                    <tr>
+                        <th>Benutzername</th>
+                        <th>E-Mail Adresse</th>
+                        <th>Registriert</th>
+                        <th>Berechtigung</th>
+                        <th>Teams</th>
+                        <th></th>
+                        <th></th>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="User"
+                                   asp-action="Edit"
+                                   asp-route-id="@user.Id">@user.UserName</a>
+                            </td>
+                            <td>@user.Email</td>
+                            <td>@user.Registered</td>
+                            <td>TODO, Leps Herren</td>
+                            <td>TODO, User</td>
+                            <td>
+                                <a asp-controller="User"
+                                   asp-action="Edit"
+                                   asp-route-id="@user.UserId"><i class="fas fa-pencil-alt"></i></a>
+                            </td>
+                            <td>
+                                <a asp-controller="User"
+                                   asp-action="Delete"
+                                   asp-route-id="@user.UserId"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}

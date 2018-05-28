@@ -1,0 +1,29 @@
+﻿@model UserEditViewModel
+
+<h3>Eintrag bearbeiten</h3>
+<form asp-action="Edit" method="post" role="form">
+    <div class="form-group">
+        <p>Benutzername: @Model.CurrentUser.UserName</p>
+        <p>E-Mail Adresse: @Model.CurrentUser.Email</p>
+
+        <h3>Teams</h3>
+        <div class="pre-scrollable border border-primary">
+            @foreach (Team team in Model.Teams)
+            {
+                <label><input type="checkbox" name="selectedTeams" />&nbsp;@team.Designation</label><br />
+            }
+        </div>
+
+        <h3>Rolle</h3>
+
+        <label><input type="radio" name="selectedRole" checked />&nbsp;Benutzer</label><br/>
+        <label><input type="radio" name="selectedRole" />&nbsp;Administrator</label>
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Speichern" />
+        </div>
+    </div>
+</form>
+

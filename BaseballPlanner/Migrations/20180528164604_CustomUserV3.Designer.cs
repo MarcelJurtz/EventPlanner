@@ -11,9 +11,10 @@ using System;
 namespace Planner.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180528164604_CustomUserV3")]
+    partial class CustomUserV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -302,8 +303,6 @@ namespace Planner.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<DateTime>("Registered");
 
                     b.Property<string>("SecurityStamp");
 

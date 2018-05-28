@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Planner.Models;
 using Planner.ViewModels;
 using System.Threading.Tasks;
 
@@ -9,10 +10,10 @@ namespace BaseballPlanner.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -64,7 +65,7 @@ namespace BaseballPlanner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser() { UserName = viewModel.Username };
+                var user = new User() { UserName = viewModel.Username };
                 var result = await _userManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)

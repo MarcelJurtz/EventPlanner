@@ -32,7 +32,7 @@ namespace Planner
                 options.UseNpgsql(_configurationRoot.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -71,6 +71,7 @@ namespace Planner
             services.AddTransient<IEventRepository, PostgresEventRepository>();
             services.AddTransient<ITeamRepository, PostgresTeamRepository>();
             services.AddTransient<ITeamAssociationRepository, PostgresTeamAssociationRepository>();
+            services.AddTransient<IUserRepository, PostgresUserRepository>();
 
             services.AddMvc();
         }
