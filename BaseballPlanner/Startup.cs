@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Planner.Models;
+using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.Models.Repository.PostgreSQL;
 using System;
+using System.Threading.Tasks;
 
 namespace Planner
 {
@@ -28,7 +30,8 @@ namespace Planner
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => {
+            services.AddDbContext<AppDbContext>(options =>
+            {
                 options.UseNpgsql(_configurationRoot.GetConnectionString("DefaultConnection"));
             });
 
@@ -79,7 +82,7 @@ namespace Planner
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();

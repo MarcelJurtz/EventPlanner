@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
 using System.Linq;
@@ -6,6 +8,7 @@ using System.Net;
 
 namespace BaseballPlanner.Controllers
 {
+    [Authorize(Roles = RoleNames.ROLE_ADMIN)]
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
+using Planner.Models.Helper;
 using Planner.ViewModels;
 using System.Threading.Tasks;
 
@@ -27,6 +28,7 @@ namespace BaseballPlanner.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -70,6 +72,8 @@ namespace BaseballPlanner.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, RoleNames.ROLE_MEMBER);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -83,5 +87,9 @@ namespace BaseballPlanner.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

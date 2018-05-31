@@ -13,6 +13,6 @@ namespace Planner.Models
         public int UserId { get; set; }
 
         [DisplayName("Registriert")]
-        public DateTime Registered { get; set; }
+        public DateTime Registered { get; set; } = DateTime.Now;
     }
 }
