@@ -7,5 +7,6 @@ namespace Planner.ViewModels
     {
         public User CurrentUser { get; set; }
         public IEnumerable<Team> Teams { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

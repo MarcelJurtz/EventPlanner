@@ -11,15 +11,15 @@ namespace Planner.Models.Helper
         public static async Task CreateRoles(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             //adding custom roles
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             foreach (var roleName in RoleNames.ROLES)
             {
-                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                var roleExist = await roleManager.RoleExistsAsync(roleName);
 
                 if (!roleExist)
-                    await RoleManager.CreateAsync(new IdentityRole(roleName));
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
             }
 
             // create default admin user for initial configuration
@@ -30,12 +30,12 @@ namespace Planner.Models.Helper
             };
 
             string password = configuration.GetSection("UserSettings")["Password"];
-            var user = await UserManager.FindByEmailAsync(configuration.GetSection("UserSettings")["Mail"]);
+            var user = await userManager.FindByEmailAsync(configuration.GetSection("UserSettings")["Mail"]);
             if (user == null)
             {
-                var createPowerUser = await UserManager.CreateAsync(defaultAdmin, password);
+                var createPowerUser = await userManager.CreateAsync(defaultAdmin, password);
                 if (createPowerUser.Succeeded)
-                    await UserManager.AddToRoleAsync(defaultAdmin, RoleNames.ROLE_ADMIN);
+                    await userManager.AddToRoleAsync(defaultAdmin, RoleNames.ROLE_ADMIN);
             }
         }
     }

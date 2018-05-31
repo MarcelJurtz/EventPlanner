@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
@@ -11,11 +13,13 @@ namespace BaseballPlanner.Controllers
     [Authorize(Roles = RoleNames.ROLE_ADMIN)]
     public class UserController : Controller
     {
+        private UserManager<User> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly ITeamRepository _teamRepository;
 
-        public UserController(IUserRepository userRepository, ITeamRepository teamRepository)
+        public UserController(UserManager<User> userManager, IUserRepository userRepository, ITeamRepository teamRepository)
         {
+            _userManager = userManager;
             _userRepository = userRepository;
             _teamRepository = teamRepository;
         }
@@ -59,7 +63,11 @@ namespace BaseballPlanner.Controllers
                 return StatusCode((int)HttpStatusCode.NotFound);
 
             // Save Teams
+
+
             // Save Role
+            if (viewModel.IsAdmin)
+                _userManager.AddToRoleAsync(viewModel.CurrentUser, RoleNames.ROLE_ADMIN); // TODO
 
             _userRepository.CommitChanges();
 
