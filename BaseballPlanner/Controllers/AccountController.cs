@@ -64,15 +64,15 @@ namespace BaseballPlanner.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(LoginViewModel viewModel)
+        public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 var user = new User() {
                     UserName = viewModel.Username,
-                    Registered = DateTime.Now
-                    //SecurityStamp = Guid.NewGuid().ToString()
-                }; // TODO EMAIL
+                    Registered = DateTime.Now,
+                    Email = viewModel.Mail
+                };
                 
                 var result = await _userManager.CreateAsync(user, viewModel.Password);
 
