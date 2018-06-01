@@ -14,5 +14,11 @@
         public const string REQUIRED_COACHES = "Coaches benötigt";
         public const string REQUIRED_UMPIRES = "Umpire benötigt";
         public const string REQUIRED_SCORERS = "Scorer benötigt";
+
+        public const string IS_PLAYER = "Ist Spieler";
+        public const string IS_COACH = "Ist Coach";
+        public const string IS_SCORER = "Ist Scorer";
+        public const string IS_UMPIRE = "Ist Umpire";
+        public const string NOTE = "Bemerkung";
     }
 }

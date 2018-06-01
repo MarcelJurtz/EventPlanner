@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Planner.Models.Helper;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,8 +22,10 @@ namespace Planner.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         [Key]
+        [Column("id")]
         public int Id { get; set; }
 
+        [Column("user_id")]
         public int UserId
         {
             get { return _userId; }
@@ -37,6 +40,7 @@ namespace Planner.Models
         }
 
         [ForeignKey(nameof(Event))]
+        [Column("event_id")]
         public int EventId
         {
             get { return _eventId; }
@@ -50,6 +54,7 @@ namespace Planner.Models
             }
         }
 
+        [NotMapped]
         public Event Event
         {
             get { return _event; }
@@ -63,6 +68,7 @@ namespace Planner.Models
             }
         }
 
+        [Column("seats")]
         public int Seats
         {
             get { return _seats; }
@@ -76,6 +82,8 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.IS_PLAYER)]
+        [Column("is_player")]
         public bool IsPlayer
         {
             get { return _isPlayer; }
@@ -89,6 +97,8 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.IS_COACH)]
+        [Column("is_coach")]
         public bool IsCoach
         {
             get { return _isCoach; }
@@ -102,6 +112,8 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.IS_UMPIRE)]
+        [Column("is_umpire")]
         public bool IsUmpire
         {
             get { return _isUmpire; }
@@ -115,6 +127,8 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.IS_SCORER)]
+        [Column("is_scorer")]
         public bool IsScorer
         {
             get { return _isScorer; }
@@ -128,6 +142,8 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.NOTE)]
+        [Column("note")]
         [StringLength(100)]
         public string Note
         {
@@ -142,7 +158,12 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.CREATED)]
+        [Column("created")]
         public DateTime Created { get; set; }
+
+        [DisplayName(DisplayNames.MODIFIED)]
+        [Column("modified")]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

@@ -3,6 +3,7 @@ using Planner.Models.Helper;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace Planner.Models
@@ -25,12 +26,13 @@ namespace Planner.Models
         private int _umpiresRequired { get; set; }
 
         [Key]
-        [BindNever]
+        [Column("id")]
         public int Id { get; set; }
 
         [DisplayName(DisplayNames.DESIGNATION)]
         [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
         [StringLength(100)]
+        [Column("designation")]
         public string Designation
         {
             get { return _designation; }
@@ -46,6 +48,7 @@ namespace Planner.Models
 
         [DisplayName(DisplayNames.DESCRIPTION)]
         [StringLength(500)]
+        [Column("description")]
         public string Description
         {
             get { return _description; }
@@ -61,6 +64,7 @@ namespace Planner.Models
 
         [DisplayName(DisplayNames.LOCATION)]
         [StringLength(50)]
+        [Column("location")]
         public string Location
         {
             get { return _location; }
@@ -76,6 +80,7 @@ namespace Planner.Models
 
         [DisplayName(DisplayNames.START)]
         [Required(ErrorMessage = "Bitte geben Sie einen Startzeitpunkt an")]
+        [Column("start")]
         public DateTime Start
         {
             get { return _start; }
@@ -90,6 +95,7 @@ namespace Planner.Models
         }
 
         [DisplayName(DisplayNames.END)]
+        [Column("end")]
         public DateTime? End
         {
             get { return _end; }
@@ -105,6 +111,7 @@ namespace Planner.Models
 
         [DisplayName("Treffpunkt")]
         [StringLength(100)]
+        [Column("meeting_location")]
         public string MeetingLocation
         {
             get { return _meetingLocation; }
@@ -119,6 +126,7 @@ namespace Planner.Models
         }
 
         [DisplayName("Treffpunkt Uhrzeit")]
+        [Column("meeting_time")]
         public DateTime MeetingTime
         {
             get { return _meetingTime; }
@@ -133,6 +141,7 @@ namespace Planner.Models
         }
 
         [DisplayName("Sitzplätze benötigt")]
+        [Column("seats_required")]
         public int SeatsRequired
         {
             get { return _seatsRequired; }
@@ -147,6 +156,7 @@ namespace Planner.Models
         }
 
         [DisplayName(DisplayNames.REQUIRED_PLAYERS)]
+        [Column("players_required")]
         public int PlayersRequired
         {
             get { return _playersRequired; }
@@ -161,6 +171,7 @@ namespace Planner.Models
         }
 
         [DisplayName(DisplayNames.REQUIRED_COACHES)]
+        [Column("coaches_required")]
         public int CoachesRequired
         {
             get { return _coachesRequired; }
@@ -175,6 +186,7 @@ namespace Planner.Models
         }
 
         [DisplayName(DisplayNames.REQUIRED_SCORERS)]
+        [Column("scorers_required")]
         public int ScorersRequired
         {
             get { return _scorersRequired; }
@@ -189,6 +201,7 @@ namespace Planner.Models
         }
 
         [DisplayName(DisplayNames.REQUIRED_UMPIRES)]
+        [Column("umpires_required")]
         public int UmpiresRequired
         {
             get { return _umpiresRequired; }
@@ -203,9 +216,11 @@ namespace Planner.Models
         }
 
         [DisplayName(DisplayNames.CREATED)]
+        [Column("created")]
         public DateTime Created { get; set; }
 
         [DisplayName(DisplayNames.MODIFIED)]
+        [Column("modified")]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

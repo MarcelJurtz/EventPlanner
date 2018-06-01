@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Planner.Models.Helper;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,9 +17,11 @@ namespace Planner.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         [Key]
+        [Column("id")]
         public int Id { get; set; }
 
         [ForeignKey(nameof(Team))]
+        [Column("team_id")]
         public int TeamId
         {
             get { return _teamId; }
@@ -32,6 +35,7 @@ namespace Planner.Models
             }
         }
 
+        [NotMapped]
         public Team Team
         {
             get { return _team; }
@@ -46,6 +50,7 @@ namespace Planner.Models
         }
 
         [ForeignKey(nameof(Event))]
+        [Column("event_id")]
         public int EventId
         {
             get { return _eventId; }
@@ -59,6 +64,7 @@ namespace Planner.Models
             }
         }
 
+        [NotMapped]
         public Event Event
         {
             get { return _event; }
@@ -72,7 +78,12 @@ namespace Planner.Models
             }
         }
 
+        [DisplayName(DisplayNames.CREATED)]
+        [Column("created")]
         public DateTime Created { get; set; }
+
+        [DisplayName(DisplayNames.MODIFIED)]
+        [Column("modified")]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

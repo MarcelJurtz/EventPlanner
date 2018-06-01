@@ -10,9 +10,11 @@ namespace Planner.Models
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("user_id")]
         public int UserId { get; set; }
 
         [DisplayName("Registriert")]
+        [Column("registered")]
         public DateTime Registered { get; set; }
     }
 }

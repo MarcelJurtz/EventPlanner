@@ -15,12 +15,13 @@ namespace Planner.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         [Key]
-        //[BindNever]
+        [Column("id")]
         public int Id { get; set; }
 
         [DisplayName(DisplayNames.DESIGNATION)]
         [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
         [StringLength(100)]
+        [Column("designation")]
         public string Designation
         {
             get { return _designation; }
@@ -38,9 +39,11 @@ namespace Planner.Models
         public bool Selected { get; set; }
 
         [DisplayName(DisplayNames.CREATED)]
+        [Column("created")]
         public DateTime Created { get; set; }
 
         [DisplayName(DisplayNames.MODIFIED)]
+        [Column("modified")]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
