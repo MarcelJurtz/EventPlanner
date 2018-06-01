@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace BaseballPlanner.Controllers
@@ -67,12 +68,18 @@ namespace BaseballPlanner.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User() { UserName = viewModel.Username };
+                var user = new User() {
+                    UserName = viewModel.Username,
+                    Registered = DateTime.Now
+                    //SecurityStamp = Guid.NewGuid().ToString()
+                }; // TODO EMAIL
+                
                 var result = await _userManager.CreateAsync(user, viewModel.Password);
 
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, RoleNames.ROLE_MEMBER);
+                    await _userManager.UpdateAsync(user);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

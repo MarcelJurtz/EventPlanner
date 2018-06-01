@@ -2,27 +2,27 @@
 
 <h3>Eintrag bearbeiten</h3>
 <form asp-action="Edit" method="post" role="form">
+    @Html.AntiForgeryToken()
     <div class="form-group">
         <p>Benutzername: @Model.CurrentUser.UserName</p>
         <p>E-Mail Adresse: @Model.CurrentUser.Email</p>
 
         <h3>Teams</h3>
-        <div class="pre-scrollable border border-primary">
-            @foreach (Team team in Model.Teams)
+        <div class="pre-scrollable border border-primary padding">
+            @for (int i = 0; i < Model.AllTeams.Count(); i++)
             {
-                <label><input type="checkbox" name="selectedTeams" />&nbsp;@team.Designation</label><br />
+                <input asp-for="@Model.AllTeams[i].Selected" />
+                <label asp-for="@Model.AllTeams[i].Designation">@Model.AllTeams[i].Designation</label>
+                @Html.HiddenFor(m => m.AllTeams[i].Designation);
+                @Html.HiddenFor(m => m.AllTeams[i].Created);
+                @Html.HiddenFor(m => m.AllTeams[i].Modified);
+                @Html.HiddenFor(m => m.AllTeams[i].Id);
+                <br />
             }
         </div>
 
         <h3>Rolle</h3>
-
-        @*<label><input type="checkbox" name="selectedRole" checked />&nbsp;Ist Administrator</label><br />*@
-        <label asp-for="IsAdmin" class="col-md-2 control-label"></label>
-        <div class="col-md-5">
-            <input asp-for="IsAdmin" class="form-control" />
-            <span asp-validation-for="IsAdmin" class="text-danger"></span>
-        </div>
-
+        <label><input asp-for="IsAdmin" />&nbsp;Ist Administrator</label>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">

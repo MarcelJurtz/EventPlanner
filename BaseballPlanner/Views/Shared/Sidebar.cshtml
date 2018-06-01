@@ -1,24 +1,27 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using Planner.Models.Helper
 
 <div class="sidebar">
     <h2>Menü</h2>
 
-    @if (User.IsInRole("administrator"))
+    @if (User.IsInRole(RoleNames.ROLE_ADMIN))
     {
         <ul>
             <li>
                 Administration
                 <ul>
-                    <li>Teams</li>
-                    <li>Benutzer</li>
-                    <li>Events</li>
                     <li>
-                        Einstellungen
-                        <ul>
-                            <li>Teamrollen</li>
-                            <li>Eventrollen</li>
-                        </ul>
+                        <a asp-controller="Team"
+                        asp-action="Index">Teams</a>
+                    </li>
+                    <li>
+                        <a asp-controller="User"
+                           asp-action="Index">Benutzer</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Event"
+                           asp-action="Index">Events</a>
                     </li>
                 </ul>
             </li>
@@ -26,12 +29,16 @@
     }
 
     <ul>
-        <li>Meine Events</li>
+        <li>
+            <a asp-controller="Event"
+               asp-action="Index"
+               asp-route-id="userid">Teams</a> <!-- TODO UserId -->
+        </li>
         <li>Offene Events</li>
         <li>Einstellungen</li>
     </ul>
 
     <ul>
-        <li>Abmelden</li>
+        <li><a id="loginLink" asp-controller="Account" asp-action="Login">Abmelden</a></li>
     </ul>
 </div>

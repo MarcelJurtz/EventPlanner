@@ -20,12 +20,6 @@ namespace Planner.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public EventParticipation()
-        {
-            Created = DateTime.Now;
-            Modified = Created;
-        }
-
         [Key]
         public int Id { get; set; }
 

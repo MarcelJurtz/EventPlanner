@@ -7,6 +7,7 @@ using Planner.Models.Repository;
 using Planner.ViewModels;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace BaseballPlanner.Controllers
 {
@@ -16,12 +17,14 @@ namespace BaseballPlanner.Controllers
         private UserManager<User> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly ITeamRepository _teamRepository;
+        private readonly ITeamAssociationRepository _teamAssociationRepository;
 
-        public UserController(UserManager<User> userManager, IUserRepository userRepository, ITeamRepository teamRepository)
+        public UserController(UserManager<User> userManager, IUserRepository userRepository, ITeamRepository teamRepository, ITeamAssociationRepository teamAssociationRepository)
         {
             _userManager = userManager;
             _userRepository = userRepository;
             _teamRepository = teamRepository;
+            _teamAssociationRepository = teamAssociationRepository;
         }
 
         public IActionResult Index()
@@ -31,7 +34,7 @@ namespace BaseballPlanner.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             UserEditViewModel viewModel = new UserEditViewModel();
 
@@ -39,7 +42,14 @@ namespace BaseballPlanner.Controllers
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
             viewModel.CurrentUser = _userRepository.Find(x => x.UserId == id).FirstOrDefault();
-            viewModel.Teams = _teamRepository.GetAll();
+            viewModel.AllTeams = _teamRepository.GetAll().ToList();
+
+            var associations = _teamAssociationRepository.Find(x => x.UserId == id);
+            foreach(var team in viewModel.AllTeams)
+            {
+                team.Selected = associations.FirstOrDefault(x => x.TeamId == team.Id) != null;
+            }
+            viewModel.IsAdmin = await _userManager.IsInRoleAsync(viewModel.CurrentUser, RoleNames.ROLE_ADMIN);
 
             if (viewModel.CurrentUser == null)
                 return StatusCode((int)HttpStatusCode.NotFound);
@@ -49,7 +59,7 @@ namespace BaseballPlanner.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int? id, UserEditViewModel viewModel)
+        public async Task<IActionResult> Edit(int? id, UserEditViewModel viewModel)
         {
             if (!ModelState.IsValid)
                 return View(viewModel);
@@ -63,13 +73,16 @@ namespace BaseballPlanner.Controllers
                 return StatusCode((int)HttpStatusCode.NotFound);
 
             // Save Teams
+            _teamAssociationRepository.Update((int)id, viewModel.AllTeams);
 
+            // Save / Remove Role
+            bool userHasRole = await _userManager.IsInRoleAsync(found, RoleNames.ROLE_ADMIN);
+            if (viewModel.IsAdmin && !userHasRole)
+                await _userManager.AddToRoleAsync(found, RoleNames.ROLE_ADMIN);
+            else if (!viewModel.IsAdmin && userHasRole)
+                await _userManager.RemoveFromRoleAsync(found, RoleNames.ROLE_ADMIN);
 
-            // Save Role
-            if (viewModel.IsAdmin)
-                _userManager.AddToRoleAsync(viewModel.CurrentUser, RoleNames.ROLE_ADMIN); // TODO
-
-            _userRepository.CommitChanges();
+            await _userManager.UpdateAsync(found);
 
             return RedirectToAction("Index", "User");
         }

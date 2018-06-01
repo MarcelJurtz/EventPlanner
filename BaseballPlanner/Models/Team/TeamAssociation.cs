@@ -15,12 +15,6 @@ namespace Planner.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public TeamAssociation()
-        {
-            Created = DateTime.Now;
-            Modified = Created;
-        }
-
         [Key]
         public int Id { get; set; }
 

@@ -24,12 +24,6 @@ namespace Planner.Models
         private int _scorersRequired { get; set; }
         private int _umpiresRequired { get; set; }
 
-        public Event()
-        {
-            Created = DateTime.Now;
-            Modified = Created;
-        }
-
         [Key]
         [BindNever]
         public int Id { get; set; }

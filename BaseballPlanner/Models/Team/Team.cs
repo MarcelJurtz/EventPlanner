@@ -3,6 +3,7 @@ using Planner.Models.Helper;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace Planner.Models
@@ -13,14 +14,8 @@ namespace Planner.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Team()
-        {
-            Created = DateTime.Now;
-            Modified = Created;
-        }
-
         [Key]
-        [BindNever]
+        //[BindNever]
         public int Id { get; set; }
 
         [DisplayName(DisplayNames.DESIGNATION)]
@@ -38,6 +33,9 @@ namespace Planner.Models
                 }
             }
         }
+
+        [NotMapped]
+        public bool Selected { get; set; }
 
         [DisplayName(DisplayNames.CREATED)]
         public DateTime Created { get; set; }

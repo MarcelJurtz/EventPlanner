@@ -164,3 +164,7 @@ header {
 .border {
     border: 1px solid red;
 }
+
+.padding {
+    padding: 15px;
+}
