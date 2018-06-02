@@ -1,0 +1,26 @@
+﻿@model EventDeleteViewModel
+
+<h2>Event Löschen</h2>
+
+<form asp-action="ConfirmDelete" method="post" role="form">
+    <p>
+        Möchten Sie das Event '@Model.SelectedEvent.Designation' wirklich löschen?
+        @if (Model.ParticipatingUsers == 0)
+        {
+            <span>Es sind noch keine Zu- oder Absagen vorhanden.</span>
+        }
+        else
+        {
+            <span>Es sind @Model.ParticipatingUsers Zu- oder Absagen vorhanden.</span>
+        }
+    </p>
+    <div class="form-group">
+        <div class="col-md-5">
+            <a class="btn btn-primary"
+               role="button"
+               asp-controller="Event"
+               asp-action="Administrate">Nein</a>
+            <input type="submit" class="btn btn-danger" value="Ja" />
+        </div>
+    </div>
+</form>
