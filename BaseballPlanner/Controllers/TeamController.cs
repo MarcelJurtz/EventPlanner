@@ -41,7 +41,7 @@ namespace BaseballPlanner.Controllers
 
             _teamRepository.Add(viewModel.CurrentTeam);
 
-            return RedirectToAction("Index", "Team");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int? id)
@@ -76,14 +76,14 @@ namespace BaseballPlanner.Controllers
             found.Designation = viewModel.CurrentTeam.Designation;
             _teamRepository.CommitChanges();
 
-            return RedirectToAction("Index", "Team");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
             _teamRepository.Remove(id);
 
-            return RedirectToAction("Index", "Team");
+            return RedirectToAction("Index");
         }
     }
 }

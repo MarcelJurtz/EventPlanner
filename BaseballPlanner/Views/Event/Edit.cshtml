@@ -1,0 +1,100 @@
+﻿@model Planner.Models.Event
+<h2>Event Bearbeiten</h2>
+
+<form asp-action="Edit" method="post" role="form">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <!-- Bezeichnung -->
+        <label asp-for="Designation" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Designation" class="form-control" />
+            <span asp-validation-for="Designation" class="text-danger"></span>
+        </div>
+
+        <!-- Ort -->
+        <label asp-for="Location" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" text-danger"></span>
+        </div>
+
+        <!-- Beschreibung -->
+        <label asp-for="Description" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <textarea rows="5" asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Start -->
+        <label asp-for="Start" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Start" class="form-control" />
+            <span asp-validation-for="Start" class="text-danger"></span>
+        </div>
+
+        <!-- Ende -->
+        <label asp-for="End" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="End" class="form-control" />
+            <span asp-validation-for="End" class="text-danger"></span>
+        </div>
+
+        <!-- Treffpunkt -->
+        <label asp-for="MeetingLocation" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="MeetingLocation" class="form-control" />
+            <span asp-validation-for="MeetingLocation" class="text-danger"></span>
+        </div>
+
+        <!-- Treffpunkt Uhrzeit -->
+        <label asp-for="MeetingTime" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="MeetingTime" class="form-control" />
+            <span asp-validation-for="MeetingTime" class="text-danger"></span>
+        </div>
+
+        <!-- Sitzplätze -->
+        <label asp-for="SeatsRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="SeatsRequired" class="form-control" />
+            <span asp-validation-for="SeatsRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Spieler -->
+        <label asp-for="PlayersRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="PlayersRequired" class="form-control" />
+            <span asp-validation-for="PlayersRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Coaches -->
+        <label asp-for="CoachesRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="CoachesRequired" class="form-control" />
+            <span asp-validation-for="CoachesRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Scorer -->
+        <label asp-for="ScorersRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="ScorersRequired" class="form-control" />
+            <span asp-validation-for="ScorersRequired" class="text-danger"></span>
+        </div>
+
+        <!-- Umpire -->
+        <label asp-for="UmpiresRequired" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="UmpiresRequired" class="form-control" />
+            <span asp-validation-for="UmpiresRequired" class="text-danger"></span>
+        </div>
+
+        <!-- TODO Team Selection -->
+
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Speichern" />
+        </div>
+    </div>
+</form>
+

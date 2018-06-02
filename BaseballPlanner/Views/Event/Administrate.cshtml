@@ -1,0 +1,51 @@
+﻿@model EventListViewModel
+
+<h2>Events</h2>
+
+@if (Model.Events.Count() > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordred table-striped">
+                <thead>
+                    <tr>
+                        <th>Bezeichnung</th>
+                        <th>Ort</th>
+                        <th>Start</th>
+                        <th>Treffpunkt</th>
+                        <th>Bearbeiten</th>
+                        <th>Löschen</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Events)
+                    {
+                    <tr>
+                        <td>
+                            <a asp-controller="Event"
+                               asp-action="Edit"
+                               asp-route-id="@item.Id">@item.Designation</a>
+                        </td>
+                        <td>@item.Location</td>
+                        <td>@item.Start</td>
+                        <td>@item.MeetingLocation (@item.MeetingTime)</td>
+                        <td>
+                            <a asp-controller="Event"
+                               asp-action="Edit"
+                               asp-route-id="@item.Id"><i class="fas fa-pencil-alt"></i></a>
+                        </td>
+                        <td>
+                            <a asp-controller="Event"
+                               asp-action="Delete"
+                               asp-route-id="@item.Id"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}

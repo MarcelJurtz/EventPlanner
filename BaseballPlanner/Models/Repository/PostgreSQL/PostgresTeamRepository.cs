@@ -69,6 +69,12 @@ namespace Planner.Models.Repository.PostgreSQL
                 CommitChanges();
         }
 
+        public IEnumerable<Team> GetForUser(int userId)
+        {
+            var teamIds = _appDbContext.TeamAssociations.Where(x => x.UserId == userId).Select(x => x.TeamId);
+            return _appDbContext.Teams.Where(t => teamIds.Contains(t.Id));
+        }
+
         public void CommitChanges()
         {
             _appDbContext.SaveChanges();
