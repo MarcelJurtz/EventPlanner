@@ -6,6 +6,7 @@ using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -21,15 +22,18 @@ namespace Planner.Controllers
         private readonly IEventRepository _eventRepository;
         private readonly ITeamRepository _teamRepository;
         private readonly IEventParticipationRepository _participationRepository;
+        private readonly IEventAssociationRepository _eventAssociationRepository;
         private readonly UserManager<User> _userManager;
 
         // Constructor parameters will be injected 
         // because the objects have been registered in startup.cs
-        public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository, UserManager<User> usermanager)
+        public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository, 
+            IEventAssociationRepository eventAssociationRepository, UserManager<User> usermanager)
         {
             _eventRepository = eventRepository;
             _teamRepository = teamRepository;
             _participationRepository = participationRepository;
+            _eventAssociationRepository = eventAssociationRepository;
             _userManager = usermanager;
         }
 
@@ -50,6 +54,7 @@ namespace Planner.Controllers
         {
             EventEditViewModel viewModel = new EventEditViewModel();
             viewModel.CurrentEvent = new Models.Event();
+            viewModel.Teams = _teamRepository.GetAll().ToList();
             return View(viewModel);
         }
 
@@ -60,9 +65,26 @@ namespace Planner.Controllers
                 return View(viewModel);
 
             viewModel.CurrentEvent.Created = DateTime.Now;
+
             _eventRepository.Add(viewModel.CurrentEvent);
 
-            return RedirectToAction("Index", "Event");
+            var associations = new List<EventAssociation>();
+            var date = DateTime.Now;
+            foreach(var team in viewModel.Teams)
+            {
+                if (team.Selected)
+                    associations.Add(new EventAssociation()
+                    {
+                        Created = date,
+                        Modified = date,
+                        TeamId = team.Id,
+                        EventId = viewModel.CurrentEvent.Id
+                    });
+            }
+
+            _eventAssociationRepository.AddRange(associations);
+
+            return RedirectToAction("Administrate");
         }
 
         public IActionResult Participate(int id)
@@ -91,20 +113,29 @@ namespace Planner.Controllers
             if (id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
-            Event e = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
-            if (e == null)
+            EventEditViewModel viewModel = new EventEditViewModel();
+            viewModel.CurrentEvent = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
+            if (viewModel.CurrentEvent == null)
                 return StatusCode((int)HttpStatusCode.NotFound);
 
-            return View(e);
+            viewModel.Teams = _teamRepository.GetAll().ToList();
+
+            var associations = _eventAssociationRepository.Find(x => x.EventId == id);
+            foreach (var team in viewModel.Teams)
+            {
+                team.Selected = associations.FirstOrDefault(x => x.TeamId == team.Id) != null;
+            }
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
-        public IActionResult Edit(int? id, Event e)
+        public IActionResult Edit(int? id, EventEditViewModel viewModel)
         {
             if (!ModelState.IsValid)
-                return View(e);
+                return View(viewModel);
 
             if (id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
@@ -112,22 +143,24 @@ namespace Planner.Controllers
             var entry = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
 
             // Update
-            entry.Designation = e.Designation;
-            entry.Description = e.Description;
-            entry.Location = e.Location;
-            entry.Start = e.Start;
-            entry.End = e.End;
-            entry.MeetingLocation = e.MeetingLocation;
-            entry.MeetingTime = e.MeetingTime;
-            entry.SeatsRequired = e.SeatsRequired;
-            entry.PlayersRequired = e.PlayersRequired;
-            entry.CoachesRequired = e.CoachesRequired;
-            entry.ScorersRequired = e.ScorersRequired;
-            entry.UmpiresRequired = e.UmpiresRequired;
+            entry.Designation = viewModel.CurrentEvent.Designation;
+            entry.Description = viewModel.CurrentEvent.Description;
+            entry.Location = viewModel.CurrentEvent.Location;
+            entry.Start = viewModel.CurrentEvent.Start;
+            entry.End = viewModel.CurrentEvent.End;
+            entry.MeetingLocation = viewModel.CurrentEvent.MeetingLocation;
+            entry.MeetingTime = viewModel.CurrentEvent.MeetingTime;
+            entry.SeatsRequired = viewModel.CurrentEvent.SeatsRequired;
+            entry.PlayersRequired = viewModel.CurrentEvent.PlayersRequired;
+            entry.CoachesRequired = viewModel.CurrentEvent.CoachesRequired;
+            entry.ScorersRequired = viewModel.CurrentEvent.ScorersRequired;
+            entry.UmpiresRequired = viewModel.CurrentEvent.UmpiresRequired;
+
+            _eventAssociationRepository.Update(entry.Id, viewModel.Teams);
 
             _eventRepository.CommitChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Administrate");
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]

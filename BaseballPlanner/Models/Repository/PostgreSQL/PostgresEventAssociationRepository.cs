@@ -61,6 +61,32 @@ namespace Planner.Models.Repository.PostgreSQL
                 CommitChanges();
         }
 
+        public void Update(int eventId, IEnumerable<Team> teams)
+        {
+            var teamAssociations = _appDbContext.EventAssociations.Where(x => x.EventId == eventId);
+            foreach (var team in teams)
+            {
+                var association = teamAssociations.FirstOrDefault(x => x.TeamId == team.Id);
+
+                if (association != null && !team.Selected)
+                    _appDbContext.EventAssociations.Remove(association);
+
+                else if (association == null && team.Selected)
+                {
+                    var date = DateTime.Now;
+                    association = new EventAssociation()
+                    {
+                        Created = date,
+                        Modified = date,
+                        TeamId = team.Id,
+                        EventId = eventId
+                    };
+                    _appDbContext.EventAssociations.Add(association);
+                }
+            }
+            CommitChanges();
+        }
+
         public void CommitChanges()
         {
             _appDbContext.SaveChanges();

@@ -87,7 +87,20 @@
             <span asp-validation-for="CurrentEvent.UmpiresRequired" class="text-danger"></span>
         </div>
 
-        <!-- TODO Team Selection -->
+        <!-- Team Selection -->
+        <h3>Freigabe für Teams</h3>
+        <div class="pre-scrollable border border-primary padding">
+            @for (int i = 0; i < Model.Teams.Count(); i++)
+            {
+                <input asp-for="@Model.Teams[i].Selected" />
+                <label asp-for="@Model.Teams[i].Designation">@Model.Teams[i].Designation</label>
+                @Html.HiddenFor(m => m.Teams[i].Designation);
+                @Html.HiddenFor(m => m.Teams[i].Created);
+                @Html.HiddenFor(m => m.Teams[i].Modified);
+                @Html.HiddenFor(m => m.Teams[i].Id);
+                <br />
+            }
+        </div>
 
     </div>
     <div class="form-group">

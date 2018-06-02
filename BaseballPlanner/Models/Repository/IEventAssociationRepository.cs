@@ -1,6 +1,9 @@
-﻿namespace Planner.Models.Repository
+﻿using System.Collections.Generic;
+
+namespace Planner.Models.Repository
 {
-    interface IEventAssociationRepository : IRepository<EventAssociation>
+    public interface IEventAssociationRepository : IRepository<EventAssociation>
     {
+        void Update(int eventId, IEnumerable<Team> teams);
     }
 }

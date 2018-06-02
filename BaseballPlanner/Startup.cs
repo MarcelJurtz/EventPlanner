@@ -72,6 +72,7 @@ namespace Planner
 
             // Transient defines that a new instance is returned for each request
             services.AddTransient<IEventRepository, PostgresEventRepository>();
+            services.AddTransient<IEventAssociationRepository, PostgresEventAssociationRepository>();
             services.AddTransient<ITeamRepository, PostgresTeamRepository>();
             services.AddTransient<ITeamAssociationRepository, PostgresTeamAssociationRepository>();
             services.AddTransient<IUserRepository, PostgresUserRepository>();
