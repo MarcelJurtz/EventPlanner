@@ -1,0 +1,26 @@
+﻿@model TeamDeleteViewModel
+
+<h2>Team Löschen</h2>
+
+<form asp-action="Delete" method="post" role="form">
+    <p>
+        Möchten Sie das Tam '@Model.Team.Designation' wirklich löschen?
+        @if (Model.TeamAssociationCount == 0)
+        {
+            <span>Es sind noch keine Mitglieder vorhanden.</span>
+        }
+        else
+        {
+            <span>Es sind @Model.TeamAssociationCount Mitglieder vorhanden.</span>
+        }
+    </p>
+    <div class="form-group">
+        <div class="col-md-5">
+            <a class="btn btn-primary"
+               role="button"
+               asp-controller="Team"
+               asp-action="Index">Nein</a>
+            <input type="submit" class="btn btn-danger" value="Ja" />
+        </div>
+    </div>
+</form>

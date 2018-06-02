@@ -3,6 +3,6 @@
     public class EventDeleteViewModel
     {
         public Models.Event SelectedEvent { get; set; }
-        public int ParticipatingUsers { get; set; }
+        public int UserParticipationCount { get; set; }
     }
 }

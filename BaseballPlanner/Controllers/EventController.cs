@@ -142,18 +142,15 @@ namespace Planner.Controllers
 
             EventDeleteViewModel viewModel = new EventDeleteViewModel();
             viewModel.SelectedEvent = e;
-            viewModel.ParticipatingUsers = _participationRepository.Find(x => x.EventId == e.Id).Count();
+            viewModel.UserParticipationCount = _participationRepository.Find(x => x.EventId == e.Id).Count();
 
             return View(viewModel);
         }
 
         [HttpPost]
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
-        public IActionResult ConfirmDelete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-                return StatusCode((int)HttpStatusCode.BadRequest);
-
             Event e = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
             if (e == null)
                 return StatusCode((int)HttpStatusCode.NotFound);

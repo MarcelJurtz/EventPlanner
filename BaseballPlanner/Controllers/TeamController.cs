@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
+using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
 using System.Linq;
@@ -7,13 +9,16 @@ using System.Net;
 
 namespace BaseballPlanner.Controllers
 {
+    [Authorize(Roles = RoleNames.ROLE_ADMIN)]
     public class TeamController : Controller
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly ITeamAssociationRepository _teamAssociationRepository;
 
-        public TeamController(ITeamRepository teamRepository)
+        public TeamController(ITeamRepository teamRepository, ITeamAssociationRepository teamAssociationRepository)
         {
             _teamRepository = teamRepository;
+            _teamAssociationRepository = teamAssociationRepository;
         }
 
         public ViewResult Index()
@@ -79,9 +84,34 @@ namespace BaseballPlanner.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleNames.ROLE_ADMIN)]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            Team team = _teamRepository.Find(x => x.Id == id).FirstOrDefault();
+            if (team == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            TeamDeleteViewModel viewModel = new TeamDeleteViewModel();
+            viewModel.Team = team;
+            viewModel.TeamAssociationCount = _teamAssociationRepository.Find(x => x.TeamId == team.Id).Count();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = RoleNames.ROLE_ADMIN)]
         public IActionResult Delete(int id)
         {
-            _teamRepository.Remove(id);
+            Team team = _teamRepository.Find(x => x.Id == id).FirstOrDefault();
+            if (team == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var associations = _teamAssociationRepository.Find(x => x.TeamId == id);
+            _teamAssociationRepository.RemoveRange(associations);
+            _teamRepository.Remove(team);
 
             return RedirectToAction("Index");
         }
