@@ -87,16 +87,45 @@ namespace Planner.Controllers
             return RedirectToAction("Administrate");
         }
 
-        public IActionResult Participate(int id)
+        public async Task<IActionResult> Participate(int? id)
         {
-            Models.Event e = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
+            if(id == null)
+                return StatusCode((int)HttpStatusCode.BadRequest);
 
-            // TODO Authentication
+            Event_ParticipateViewModel viewModel = new Event_ParticipateViewModel();
+            viewModel.CurrentEvent = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
 
-            if (e != null)
-                return View(e);
+            if (viewModel.CurrentEvent == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var user = await _userManager.GetUserAsync(this.User);
+            var participation = _participationRepository.Find(x => x.EventId == id && x.UserId == user.UserId).FirstOrDefault();
+
+            if(participation != null)
+            {
+                viewModel.Yes = participation.AnswerYes;
+                viewModel.No = participation.AnswerNo;
+                viewModel.Maybe = !viewModel.Yes && !viewModel.No;
+                viewModel.Note = participation.Note;
+            }
+
+            if (viewModel.CurrentEvent != null)
+                return View(viewModel);
             else
                 return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Participate(int? id, Event_ParticipateViewModel viewModel)
+        {
+            if (id == null)
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            var user = await _userManager.GetUserAsync(this.User);
+
+            _participationRepository.Update((int)id, user.UserId, viewModel.Yes, viewModel.No, viewModel.Note);
+
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]

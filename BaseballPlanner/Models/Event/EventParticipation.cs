@@ -12,6 +12,8 @@ namespace Planner.Models
         private int _userId;
         private int _eventId;
         private Event _event;
+        private bool _answerYes;
+        private bool _answerNo;
         private int _seats;
         private bool _isPlayer;
         private bool _isCoach;
@@ -63,6 +65,34 @@ namespace Planner.Models
                 if(_event != value)
                 {
                     _event = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [Column("answer_yes")]
+        public bool AnswerYes
+        {
+            get { return _answerYes; }
+            set
+            {
+                if(_answerYes != value)
+                {
+                    _answerYes = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        [Column("answer_no")]
+        public bool AnswerNo
+        {
+            get { return _answerNo; }
+            set
+            {
+                if (_answerNo != value)
+                {
+                    _answerNo = value;
                     NotifyPropertyChanged();
                 }
             }

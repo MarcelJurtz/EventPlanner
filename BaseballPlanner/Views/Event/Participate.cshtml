@@ -1,26 +1,64 @@
-﻿@model Event
-<h2>@Model.Designation</h2>
+﻿@model Event_ParticipateViewModel
 
-<p>Teilnahme am Event bearbeiten</p>
+<h2>Teilnahme am Event bearbeiten</h2>
 
-<form asp-action="Index" asp-controller="Event">
-    <div class="col-md-10">
-        @*<input asp-for="SelectedRole" type="radio" value="@item.Id" />*@
-        <label>
-            <input type="radio" value="Ich bin noch unschlüssig" />
-            Ich bin noch unschlüssig
-        </label>
-        <br />
-        <label>
-            <input type="radio" value="Ich nehme Teil" />
-            Ich nehme Teil
-        </label>
-        <br />
-        <label>
-            <input type="radio" value="Ich kann leider nicht dabei sein" />
-            Ich kann leider nicht dabei sein
-        </label>
+<form asp-action="Participate" asp-controller="Event">
+    <div class="col-md-10 form-group">
+
+    <!-- Event Information -->
+    <p>
+        @Model.CurrentEvent.Designation
+    </p>
+    <p>
+        @Model.CurrentEvent.Description
+    </p>
+    <p>Von @Model.CurrentEvent.Start bis @Model.CurrentEvent.End</p>
+    <p>Treffpunkt: @Model.CurrentEvent.MeetingLocation, @Model.CurrentEvent.MeetingTime</p>
+    <p>
+        @if (Model.CurrentEvent.PlayersRequired > 0)
+        {
+            <span>Spieler benötigt: @Model.CurrentEvent.PlayersRequired</span><br />
+        }
+
+        @if (@Model.CurrentEvent.CoachesRequired > 0)
+        {
+            <span>Coaches benötigt: @Model.CurrentEvent.CoachesRequired</span><br />
+        }
+
+        @if (Model.CurrentEvent.UmpiresRequired > 0)
+        {
+            <span>Umpires benötigt: @Model.CurrentEvent.UmpiresRequired</span><br />
+        }
+
+        @if (@Model.CurrentEvent.ScorersRequired > 0)
+        {
+            <span>Scorer benötigt: @Model.CurrentEvent.ScorersRequired</span>
+        }
+
+    </p>
+
+    <input asp-for="Yes" />
+    <label asp-for="Yes"></label>
+    <br />
+
+    <input asp-for="No" />
+    <label asp-for="No"></label>
+    <br />
+
+    <input asp-for="Maybe" />
+    <label asp-for="Maybe"></label>
+    <br />
+
+    <!-- Bemerkung -->
+    <label asp-for="Note" class="control-label"></label>
+    <textarea rows="5" asp-for="Note" class="form-control"></textarea>
+    <span asp-validation-for="Note" class="text-danger"></span>
+    
     </div>
-    <input type="submit" value="Speichern" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Speichern" />
+        </div>
+    </div>
 </form>
 
