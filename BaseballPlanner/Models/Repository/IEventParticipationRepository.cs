@@ -1,7 +1,9 @@
-﻿namespace Planner.Models.Repository
+﻿using Planner.ViewModels;
+
+namespace Planner.Models.Repository
 {
     public interface IEventParticipationRepository : IRepository<EventParticipation>
     {
-        void Update(int eventId, int userId, bool yes, bool no, string note);
+        void Update(int eventId, int userId, EventParticipateViewModel viewModel);
     }
 }

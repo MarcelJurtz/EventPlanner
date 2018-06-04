@@ -92,7 +92,7 @@ namespace Planner.Controllers
             if(id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
-            Event_ParticipateViewModel viewModel = new Event_ParticipateViewModel();
+            EventParticipateViewModel viewModel = new EventParticipateViewModel();
             viewModel.CurrentEvent = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
 
             if (viewModel.CurrentEvent == null)
@@ -101,13 +101,30 @@ namespace Planner.Controllers
             var user = await _userManager.GetUserAsync(this.User);
             var participation = _participationRepository.Find(x => x.EventId == id && x.UserId == user.UserId).FirstOrDefault();
 
-            if(participation != null)
+            viewModel.DisplayIsPlayer = viewModel.CurrentEvent.PlayersRequired > 0;
+            viewModel.DisplayIsCoach = viewModel.CurrentEvent.CoachesRequired > 0;
+            viewModel.DisplayIsUmpire = viewModel.CurrentEvent.UmpiresRequired > 0;
+            viewModel.DisplayIsScorer = viewModel.CurrentEvent.ScorersRequired > 0;
+            viewModel.DisplayHasSeats = viewModel.CurrentEvent.SeatsRequired > 0;
+
+            if (participation != null)
             {
-                viewModel.Yes = participation.AnswerYes;
-                viewModel.No = participation.AnswerNo;
-                viewModel.Maybe = !viewModel.Yes && !viewModel.No;
+                viewModel.ParticipateYes = participation.AnswerYes;
+                viewModel.ParticipateNo = participation.AnswerNo;
+                viewModel.ParticipateMaybe = !viewModel.ParticipateYes && !viewModel.ParticipateNo;
                 viewModel.Note = participation.Note;
+                viewModel.IsPlayer = participation.IsPlayer;
+                viewModel.IsCoach = participation.IsCoach;
+                viewModel.IsUmpire = participation.IsUmpire;
+                viewModel.IsScorer = participation.IsScorer;
+                viewModel.HasSeats = participation.Seats;
             }
+            else
+            {
+                viewModel.ParticipateMaybe = true;
+            }
+
+            
 
             if (viewModel.CurrentEvent != null)
                 return View(viewModel);
@@ -116,14 +133,14 @@ namespace Planner.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Participate(int? id, Event_ParticipateViewModel viewModel)
+        public async Task<IActionResult> Participate(int? id, EventParticipateViewModel viewModel)
         {
             if (id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
             var user = await _userManager.GetUserAsync(this.User);
 
-            _participationRepository.Update((int)id, user.UserId, viewModel.Yes, viewModel.No, viewModel.Note);
+            _participationRepository.Update((int)id, user.UserId,viewModel);
 
             return RedirectToAction("Index");
         }

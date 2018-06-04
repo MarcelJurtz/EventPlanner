@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Planner.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -61,7 +62,7 @@ namespace Planner.Models.Repository.PostgreSQL
                 CommitChanges();
         }
 
-        public void Update(int eventId, int userId, bool yes, bool no, string note)
+        public void Update(int eventId, int userId, EventParticipateViewModel viewModel)
         {
             var date = DateTime.Now;
             EventParticipation p = _appDbContext.EventParticipations.Where(x => x.EventId == eventId && x.UserId == userId).FirstOrDefault();
@@ -77,14 +78,14 @@ namespace Planner.Models.Repository.PostgreSQL
 
             p.Modified = date;
 
-            p.AnswerYes = yes;
-            p.AnswerNo = no;
-            p.Note = note;
-
-            //p.IsPlayer = participation.IsPlayer;
-            //p.IsCoach = participation.IsCoach;
-            //p.IsScorer = participation.IsScorer;
-            //p.IsUmpire = participation.IsUmpire;
+            p.AnswerYes = viewModel.ParticipateYes;
+            p.AnswerNo = viewModel.ParticipateNo;
+            p.Note = viewModel.Note;
+            p.IsPlayer = viewModel.IsPlayer;
+            p.IsCoach = viewModel.IsCoach;
+            p.IsScorer = viewModel.IsScorer;
+            p.IsUmpire = viewModel.IsUmpire;
+            p.Seats = viewModel.HasSeats;
 
             CommitChanges();
         }

@@ -1,59 +1,96 @@
-﻿@model Event_ParticipateViewModel
+﻿@model EventParticipateViewModel
 
 <h2>Teilnahme am Event bearbeiten</h2>
 
 <form asp-action="Participate" asp-controller="Event">
     <div class="col-md-10 form-group">
 
-    <!-- Event Information -->
-    <p>
-        @Model.CurrentEvent.Designation
-    </p>
-    <p>
-        @Model.CurrentEvent.Description
-    </p>
-    <p>Von @Model.CurrentEvent.Start bis @Model.CurrentEvent.End</p>
-    <p>Treffpunkt: @Model.CurrentEvent.MeetingLocation, @Model.CurrentEvent.MeetingTime</p>
-    <p>
-        @if (Model.CurrentEvent.PlayersRequired > 0)
+        <!-- Event Information -->
+        <p>
+            @Model.CurrentEvent.Designation
+        </p>
+        <p>
+            @Model.CurrentEvent.Description
+        </p>
+        <p>Von @Model.CurrentEvent.Start bis @Model.CurrentEvent.End</p>
+        <p>Treffpunkt: @Model.CurrentEvent.MeetingLocation, @Model.CurrentEvent.MeetingTime</p>
+        <p>
+            @if (Model.CurrentEvent.PlayersRequired > 0)
+            {
+                <span>Spieler benötigt: @Model.CurrentEvent.PlayersRequired</span><br />
+            }
+
+            @if (@Model.CurrentEvent.CoachesRequired > 0)
+            {
+                <span>Coaches benötigt: @Model.CurrentEvent.CoachesRequired</span><br />
+            }
+
+            @if (Model.CurrentEvent.UmpiresRequired > 0)
+            {
+                <span>Umpires benötigt: @Model.CurrentEvent.UmpiresRequired</span><br />
+            }
+
+            @if (@Model.CurrentEvent.ScorersRequired > 0)
+            {
+                <span>Scorer benötigt: @Model.CurrentEvent.ScorersRequired</span>
+            }
+
+        </p>
+
+        <input asp-for="ParticipateYes" />
+        <label asp-for="ParticipateYes"></label>
+        <br />
+
+        <input asp-for="ParticipateNo" />
+        <label asp-for="ParticipateNo"></label>
+        <br />
+
+        <input asp-for="ParticipateMaybe" />
+        <label asp-for="ParticipateMaybe"></label>
+        <br />
+
+        @if (Model.DisplayIsPlayer)
         {
-            <span>Spieler benötigt: @Model.CurrentEvent.PlayersRequired</span><br />
+            <input asp-for="IsPlayer" />
+            <label asp-for="IsPlayer"></label>
+            <br />
         }
 
-        @if (@Model.CurrentEvent.CoachesRequired > 0)
+        @if (Model.DisplayIsCoach)
         {
-            <span>Coaches benötigt: @Model.CurrentEvent.CoachesRequired</span><br />
+            <input asp-for="IsCoach" />
+            <label asp-for="IsCoach"></label>
+            <br />
         }
 
-        @if (Model.CurrentEvent.UmpiresRequired > 0)
+        @if (Model.DisplayIsUmpire)
         {
-            <span>Umpires benötigt: @Model.CurrentEvent.UmpiresRequired</span><br />
+            <input asp-for="IsUmpire" />
+            <label asp-for="IsUmpire"></label>
+            <br />
         }
 
-        @if (@Model.CurrentEvent.ScorersRequired > 0)
+        @if (Model.DisplayIsScorer)
         {
-            <span>Scorer benötigt: @Model.CurrentEvent.ScorersRequired</span>
+            <input asp-for="IsScorer" />
+            <label asp-for="IsScorer"></label>
+            <br />
         }
 
-    </p>
+        @if (Model.DisplayHasSeats)
+        {
+            <label asp-for="HasSeats" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="HasSeats" class="form-control" />
+                <span asp-validation-for="HasSeats" class="text-danger"></span>
+            </div>
+        }
 
-    <input asp-for="Yes" />
-    <label asp-for="Yes"></label>
-    <br />
+        <!-- Bemerkung -->
+        <label asp-for="Note" class="control-label"></label>
+        <textarea rows="5" asp-for="Note" class="form-control"></textarea>
+        <span asp-validation-for="Note" class="text-danger"></span>
 
-    <input asp-for="No" />
-    <label asp-for="No"></label>
-    <br />
-
-    <input asp-for="Maybe" />
-    <label asp-for="Maybe"></label>
-    <br />
-
-    <!-- Bemerkung -->
-    <label asp-for="Note" class="control-label"></label>
-    <textarea rows="5" asp-for="Note" class="form-control"></textarea>
-    <span asp-validation-for="Note" class="text-danger"></span>
-    
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
