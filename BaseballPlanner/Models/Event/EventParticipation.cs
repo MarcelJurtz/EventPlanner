@@ -196,6 +196,13 @@ namespace Planner.Models
         [Column("modified")]
         public DateTime Modified { get; set; }
 
+        #region Unmapped
+
+        [NotMapped]
+        public String Username { get; set; }
+
+        #endregion
+
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             Modified = DateTime.Now;

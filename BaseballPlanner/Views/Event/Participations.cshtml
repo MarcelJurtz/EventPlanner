@@ -1,0 +1,82 @@
+﻿@model EventParticipationViewModel
+
+<h2>Teilnahmen - @Model.EventDesignation</h2>
+
+@if (Model.EventParticipations.Count() > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordred table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Bemerkung</th>
+                        @if (Model.DisplayIsPlayer)
+                        {
+                            <th>Spieler</th>
+                        }
+
+                        @if (Model.DisplayIsCoach)
+                        {
+                            <th>Coach</th>
+                        }
+
+                        @if (Model.DisplayIsUmpire)
+                        {
+                            <th>Umpire</th>
+                        }
+
+                        @if (Model.DisplayIsScorer)
+                        {
+                            <th>Scorer</th>
+                        }
+
+                        @if (Model.DisplayHasSeats)
+                        {
+                            <th>Sitzplätze</th>
+                        }
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.EventParticipations)
+                    {
+                    <tr>
+                        <td>@item.Username</td>
+                        <td>@item.AnswerYes ? "Ja" : "Nein"</td>
+                        <td>@item.Note</td>
+                        @if (Model.DisplayIsPlayer)
+                        {
+                            <th>@item.IsPlayer</th>
+                        }
+
+                        @if (Model.DisplayIsCoach)
+                        {
+                            <th>@item.IsCoach</th>
+                        }
+
+                        @if (Model.DisplayIsUmpire)
+                        {
+                            <th>@item.IsUmpire</th>
+                        }
+
+                        @if (Model.DisplayIsScorer)
+                        {
+                            <th>@item.IsScorer</th>
+                        }
+
+                        @if (Model.DisplayHasSeats)
+                        {
+                            <th>@item.Seats</th>
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}
+

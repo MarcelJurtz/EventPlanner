@@ -240,5 +240,35 @@ namespace Planner.Controllers
 
             return RedirectToAction("Administrate");
         }
+
+        [Authorize(Roles = RoleNames.ROLE_ADMIN)]
+        public IActionResult Participations(int eventId)
+        {
+            //if (eventId == null)
+            //    return StatusCode((int)HttpStatusCode.BadRequest);
+
+            Event e = _eventRepository.Find(x => x.Id == eventId).FirstOrDefault();
+            if (e == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var participations = _participationRepository.Find(x => x.EventId == eventId);
+            foreach(var participation in participations)
+            {
+                //participation.Username = _userManager.Find TODO
+                participation.Username = "Test";
+            }
+
+            EventParticipationViewModel viewModel = new EventParticipationViewModel();
+
+            viewModel.EventId = e.Id;
+            viewModel.EventDesignation = e.Designation;
+            viewModel.DisplayHasSeats = e.SeatsRequired > 0;
+            viewModel.DisplayIsPlayer = e.PlayersRequired > 0;
+            viewModel.DisplayIsCoach = e.CoachesRequired > 0;
+            viewModel.DisplayIsUmpire = e.UmpiresRequired > 0;
+            viewModel.DisplayIsScorer = e.ScorersRequired > 0;
+
+            return View(viewModel);
+        }
     }
 }
