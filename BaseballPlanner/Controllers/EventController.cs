@@ -242,16 +242,16 @@ namespace Planner.Controllers
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
-        public IActionResult Participations(int eventId)
+        public IActionResult Participations(int? id)
         {
-            //if (eventId == null)
-            //    return StatusCode((int)HttpStatusCode.BadRequest);
+            if (id == null)
+                return StatusCode((int)HttpStatusCode.BadRequest);
 
-            Event e = _eventRepository.Find(x => x.Id == eventId).FirstOrDefault();
+            Event e = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
             if (e == null)
                 return StatusCode((int)HttpStatusCode.NotFound);
 
-            var participations = _participationRepository.Find(x => x.EventId == eventId);
+            var participations = _participationRepository.Find(x => x.EventId == id).ToList();
             foreach(var participation in participations)
             {
                 //participation.Username = _userManager.Find TODO
@@ -260,6 +260,7 @@ namespace Planner.Controllers
 
             EventParticipationViewModel viewModel = new EventParticipationViewModel();
 
+            viewModel.EventParticipations = participations;
             viewModel.EventId = e.Id;
             viewModel.EventDesignation = e.Designation;
             viewModel.DisplayHasSeats = e.SeatsRequired > 0;
