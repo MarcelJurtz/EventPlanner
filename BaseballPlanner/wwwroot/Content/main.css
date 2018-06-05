@@ -1,0 +1,80 @@
+body {
+  min-height: 100%;
+  /*padding-bottom: @footerSpacing;*/
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.login-header {
+  margin: 0 auto;
+}
+.login-header img {
+  display: block;
+  margin: 0 auto;
+  max-width: 128px;
+}
+h1 {
+  font-family: 'Lobster 1.3', sans-serif;
+}
+.primary {
+  color: #44A72A;
+}
+.primarybg {
+  background-color: #44A72A;
+}
+.secondary {
+  color: #E3001B;
+}
+.secondarybg {
+  background-color: #E3001B;
+}
+.navbar-inverse {
+  background-color: #E3001B;
+}
+.navbar {
+  background-color: #E3001B;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.navbar h1 {
+  display: inline;
+  float: left;
+  color: #44A72A;
+  font-size: 2.5em;
+}
+.navbar img {
+  float: left;
+  max-width: 128px;
+  margin-right: 25px;
+  padding: 10px;
+}
+.navbar ul {
+  float: right;
+  list-style-type: none;
+  vertical-align: middle;
+}
+.navbar ul li {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.navbar a {
+  text-decoration: none;
+}
+.navbar-nav {
+  flex-direction: row;
+}
+.clearleft {
+  clear: left;
+}
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -80px;
+}
+.page-footer,
+.page-wrap:after {
+  height: 80px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}

@@ -4,10 +4,10 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>SportsPlanner</AssemblyName>
     <RootNamespace>Planner</RootNamespace>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="dotless" Version="1.6.4" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
@@ -17,6 +17,12 @@
   
 <ItemGroup> 
   <Content Include="node_modules\**\*" CopyToPublishDirectory="PreserveNewest" />
+</ItemGroup>
+
+  
+<ItemGroup>
+  <Content Include="Styles\leps.less" />
+  <Content Include="Styles\main.less" />
 </ItemGroup>
 
 </Project>

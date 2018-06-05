@@ -5,24 +5,6 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
-body {
-    /*padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    background-image: url('/images/pattern.png');
-    background-repeat: repeat;
-    font-family: 'Source Sans Pro', sans-serif;
-    padding-bottom: 100px; /* Prevent Footer Overlay */
-}
-
-.login-header {
-    margin: 0 auto;
-}
-
-.login-header img {
-    display: block;
-    margin: 0 auto;
-    max-width: 128px;
-}
-
 l {
     padding: 9px;
     color: #333;
@@ -30,15 +12,6 @@ l {
 
 .navbar {
     background-image: none;
-}
-
-.navbar-header h1 {
-    display: inline;
-}
-
-.navbar-inverse {
-    background-color: #E3001B;
-    border-color: #a593c2;
 }
 
 .nav.navbar-nav.navbar-right li a {
@@ -51,46 +24,6 @@ l {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color: white;
     line-height: 50px;
-}
-
-.navbar-nav {
-    flex-direction: row;
-}
-
-.navbar li {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.navbar-header img {
-    float: left;
-    max-width: 100px;
-    margin-right: 25px;
-    padding: 10px;
-}
-
-.navbar-header h1 {
-    float: left;
-}
-
-.lobster {
-    font-family: 'Lobster 1.3', sans-serif
-}
-
-.primary {
-    color: #44A72A;
-}
-
-.primarybg {
-    background-color: #44A72A;
-}
-
-.secondary {
-    color: #E3001B;
-}
-
-.secondarybg {
-    background-color: #E3001B;
 }
 
 .caption {
@@ -120,37 +53,6 @@ l {
         color: #333;
     }
 
-header {
-    background-color: #E3001B;
-    float: left;
-    width: 100%;
-}
-
-    header h1 {
-        font-family: 'Lobster 1.3', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        float: left;
-        color: #44A72A;
-        font-size: 2.5em;
-    }
-
-    header img {
-        float: left;
-        max-width: 100px;
-        margin-right: 25px;
-        padding: 10px;
-    }
-
-    header ul {
-        float: right;
-        list-style-type: none;
-        vertical-align: middle;
-    }
-
-        header ul li {
-            float: left;
-            margin: 10px;
-        }
-
     header a {
         text-decoration: none;
     }
@@ -159,12 +61,4 @@ header {
     margin: 5px 15px;
     border: 1px solid #007bff;
     border-radius: 5px;
-}
-
-.border {
-    border: 1px solid red;
-}
-
-.padding {
-    padding: 15px;
 }

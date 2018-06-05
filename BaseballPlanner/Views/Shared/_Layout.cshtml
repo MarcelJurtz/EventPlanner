@@ -6,35 +6,37 @@
     <title>Planner</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/Images/logo.png" alt="page logo" />
-                </a>
-                <h1 class="lobster primary">Leprechauns&nbsp;-&nbsp;Events</h1>
+    <div class="page-wrap">
+        <nav class="navbar navbar-inverse navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/Images/logo.png" alt="page logo" />
+                    </a>
+                    <h1 class="lobster primary">Leprechauns&nbsp;-&nbsp;Events</h1>
+                </div>
+                @await Html.PartialAsync("LoginPartial")
             </div>
-            @await Html.PartialAsync("LoginPartial")
-        </div>
-    </nav>
+        </nav>
 
-    <!-- RenderBody will be replaced by actual view -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                @await Html.PartialAsync("Sidebar")
-            </div>
-            <div class="col-md-9">
-                @RenderBody()
+        <!-- RenderBody will be replaced by actual view -->
+        <div class="container-fluid clearleft">
+            <div class="row">
+                <div class="col-md-2">
+                    @await Html.PartialAsync("Sidebar")
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
-    <footer class="page-footer fixed-bottom secondarybg">
+    <footer class="page-footer secondarybg">
         <!--Copyright-->
         <div class="footer-copyright py-3 text-center">
             @if (DateTime.Today.Year == 2018)
