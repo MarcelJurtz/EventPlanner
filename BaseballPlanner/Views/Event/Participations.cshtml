@@ -10,31 +10,31 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Status</th>
+                        <th class="text-center">Status</th>
                         <th>Bemerkung</th>
                         @if (Model.DisplayIsPlayer)
                         {
-                            <th>Spieler</th>
+                            <th class="text-center">Spieler</th>
                         }
 
                         @if (Model.DisplayIsCoach)
                         {
-                            <th>Coach</th>
+                            <th class="text-center">Coach</th>
                         }
 
                         @if (Model.DisplayIsUmpire)
                         {
-                            <th>Umpire</th>
+                            <th class="text-center">Umpire</th>
                         }
 
                         @if (Model.DisplayIsScorer)
                         {
-                            <th>Scorer</th>
+                            <th class="text-center">Scorer</th>
                         }
 
                         @if (Model.DisplayHasSeats)
                         {
-                            <th>Sitzplätze</th>
+                            <th class="text-center">Sitzplätze</th>
                         }
                 </thead>
                 <tbody>
@@ -42,35 +42,66 @@
                     {
                     <tr>
                         <td>@item.Username</td>
-                        <td>@item.AnswerYes ? "Ja" : "Nein"</td>
+                        <td class="text-center">@(item.AnswerYes ? Symbols.Checkmark : Symbols.Cross)</td>
                         <td>@item.Note</td>
                         @if (Model.DisplayIsPlayer)
                         {
-                            <th>@item.IsPlayer</th>
+                        <th class="text-center">@(item.IsPlayer ? Symbols.Checkmark : Symbols.Cross)</th>
                         }
 
                         @if (Model.DisplayIsCoach)
                         {
-                            <th>@item.IsCoach</th>
+                            <th class="text-center">@(item.IsCoach ? Symbols.Checkmark : Symbols.Cross)</th>
                         }
 
                         @if (Model.DisplayIsUmpire)
                         {
-                            <th>@item.IsUmpire</th>
+                            <th class="text-center">@(item.IsUmpire ? Symbols.Checkmark : Symbols.Cross)</th>
                         }
 
                         @if (Model.DisplayIsScorer)
                         {
-                            <th>@item.IsScorer</th>
+                            <th class="text-center">@(item.IsScorer ? Symbols.Checkmark : Symbols.Cross)</th>
                         }
 
                         @if (Model.DisplayHasSeats)
                         {
-                            <th>@item.Seats</th>
+                            <th class="text-center">@item.Seats</th>
                         }
                     </tr>
                     }
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td class="text-center">@Model.SumParticipations</td>
+                        <td></td>
+                        @if (Model.DisplayIsPlayer)
+                        {
+                            <td class="text-center">@Model.SumPlayers / @Model.RequiredPlayers</td>
+                        }
+
+                        @if (Model.DisplayIsCoach)
+                        {
+                            <td class="text-center">@Model.SumCoaches / @Model.RequiredCoaches</td>
+                        }
+
+                        @if (Model.DisplayIsUmpire)
+                        {
+                            <td class="text-center">@Model.SumUmpires / @Model.RequiredUmpires</td>
+                        }
+
+                        @if (Model.DisplayIsScorer)
+                        {
+                            <td class="text-center">@Model.SumScorer / @Model.RequiredScorer</td>
+                        }
+
+                        @if (Model.DisplayHasSeats)
+                        {
+                            <td class="text-center">@Model.SumSeats / @Model.RequiredScorer</td>
+                        }
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

@@ -23,17 +23,19 @@ namespace Planner.Controllers
         private readonly ITeamRepository _teamRepository;
         private readonly IEventParticipationRepository _participationRepository;
         private readonly IEventAssociationRepository _eventAssociationRepository;
+        private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
 
         // Constructor parameters will be injected 
         // because the objects have been registered in startup.cs
         public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository, 
-            IEventAssociationRepository eventAssociationRepository, UserManager<User> usermanager)
+            IEventAssociationRepository eventAssociationRepository, IUserRepository userRepository, UserManager<User> usermanager)
         {
             _eventRepository = eventRepository;
             _teamRepository = teamRepository;
             _participationRepository = participationRepository;
             _eventAssociationRepository = eventAssociationRepository;
+            _userRepository = userRepository;
             _userManager = usermanager;
         }
 
@@ -254,8 +256,7 @@ namespace Planner.Controllers
             var participations = _participationRepository.Find(x => x.EventId == id).ToList();
             foreach(var participation in participations)
             {
-                //participation.Username = _userManager.Find TODO
-                participation.Username = "Test";
+                participation.Username = _userRepository.GetUsernameByUserId(participation.UserId);
             }
 
             EventParticipationViewModel viewModel = new EventParticipationViewModel();
@@ -268,6 +269,18 @@ namespace Planner.Controllers
             viewModel.DisplayIsCoach = e.CoachesRequired > 0;
             viewModel.DisplayIsUmpire = e.UmpiresRequired > 0;
             viewModel.DisplayIsScorer = e.ScorersRequired > 0;
+
+            viewModel.SumParticipations = participations.Where(x => x.AnswerYes).Count();
+            viewModel.SumCoaches = participations.Where(x => x.IsCoach).Count();
+            viewModel.SumPlayers = participations.Where(x => x.IsPlayer).Count();
+            viewModel.SumScorer = participations.Where(x => x.IsScorer).Count();
+            viewModel.SumUmpires = participations.Where(x => x.IsUmpire).Count();
+            viewModel.SumSeats = participations.Sum(x => x.Seats);
+            viewModel.RequiredCoaches = e.CoachesRequired;
+            viewModel.RequiredPlayers = e.PlayersRequired;
+            viewModel.RequiredScorer = e.ScorersRequired;
+            viewModel.RequiredUmpires = e.UmpiresRequired;
+            viewModel.RequiredSeats = e.SeatsRequired;
 
             return View(viewModel);
         }

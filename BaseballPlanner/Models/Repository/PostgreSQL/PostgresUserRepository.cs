@@ -24,6 +24,17 @@ namespace Planner.Models.Repository.PostgreSQL
             return _appDbContext.Users;
         }
 
+        public User FindUserByUserId(int userId)
+        {
+            return _appDbContext.Users.Where(x => x.UserId == userId).FirstOrDefault();
+        }
+
+        public String GetUsernameByUserId(int userId)
+        {
+            var user = FindUserByUserId(userId);
+            return user == null ? "Not Found" : user.UserName;
+        }
+
         public void CommitChanges()
         {
             _appDbContext.SaveChanges();

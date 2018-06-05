@@ -13,5 +13,18 @@ namespace Planner.ViewModels
         public bool DisplayIsUmpire { get; set; }
         public bool DisplayIsScorer { get; set; }
         public bool DisplayHasSeats { get; set; }
+
+        public int SumParticipations { get; set; }
+        public int SumPlayers { get; set; }
+        public int SumCoaches { get; set; }
+        public int SumUmpires { get; set; }
+        public int SumScorer { get; set; }
+        public int SumSeats { get; set; }
+
+        public int RequiredPlayers { get; set; }
+        public int RequiredCoaches { get; set; }
+        public int RequiredUmpires { get; set; }
+        public int RequiredScorer { get; set; }
+        public int RequiredSeats { get; set; }
     }
 }
