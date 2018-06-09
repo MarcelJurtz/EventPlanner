@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
+using Planner.Models.Enums;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
@@ -111,9 +112,13 @@ namespace Planner.Controllers
 
             if (participation != null)
             {
-                viewModel.ParticipateYes = participation.AnswerYes;
-                viewModel.ParticipateNo = participation.AnswerNo;
-                viewModel.ParticipateMaybe = !viewModel.ParticipateYes && !viewModel.ParticipateNo;
+                if (participation.AnswerYes)
+                    viewModel.ParticipationType = ParticipationTypesEnum.yes;
+                else if (participation.AnswerNo)
+                    viewModel.ParticipationType = ParticipationTypesEnum.no;
+                else
+                    viewModel.ParticipationType = ParticipationTypesEnum.maybe;
+
                 viewModel.Note = participation.Note;
                 viewModel.IsPlayer = participation.IsPlayer;
                 viewModel.IsCoach = participation.IsCoach;
@@ -123,7 +128,7 @@ namespace Planner.Controllers
             }
             else
             {
-                viewModel.ParticipateMaybe = true;
+                viewModel.ParticipationType = ParticipationTypesEnum.maybe;
             }
 
             

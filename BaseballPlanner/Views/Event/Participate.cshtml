@@ -1,14 +1,10 @@
 ﻿@model EventParticipateViewModel
 
-<h2>Teilnahme am Event bearbeiten</h2>
-
 <form asp-action="Participate" asp-controller="Event">
     <div class="col-md-10 form-group">
 
         <!-- Event Information -->
-        <p>
-            @Model.CurrentEvent.Designation
-        </p>
+        <h2>@Model.CurrentEvent.Designation</h2>
         <p>
             @Model.CurrentEvent.Description
         </p>
@@ -37,16 +33,14 @@
 
         </p>
 
-        <input asp-for="ParticipateYes" />
-        <label asp-for="ParticipateYes"></label>
-        <br />
+        <h4>Teilnahme Bearbeiten</h4>
 
-        <input asp-for="ParticipateNo" />
-        <label asp-for="ParticipateNo"></label>
+        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.yes) Ich bin dabei!
         <br />
-
-        <input asp-for="ParticipateMaybe" />
-        <label asp-for="ParticipateMaybe"></label>
+        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.no) Ich habe leider keine Zeit
+        <br />
+        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.maybe) Ich bin noch unentschieden
+        <br />
         <br />
 
         @if (Model.DisplayIsPlayer)

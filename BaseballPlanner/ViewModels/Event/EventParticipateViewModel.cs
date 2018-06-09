@@ -1,4 +1,5 @@
 ﻿using Planner.Models;
+using Planner.Models.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,14 +9,15 @@ namespace Planner.ViewModels
     {
         public Event CurrentEvent { get; set; }
 
-        [DisplayName("Ich bin dabei!")]
-        public bool ParticipateYes { get; set; }
+        //[DisplayName("Ich bin dabei!")]
+        //public bool ParticipateYes { get; set; }
 
-        [DisplayName("Ich habe leider keine Zeit")]
-        public bool ParticipateNo { get; set; }
+        //[DisplayName("Ich habe leider keine Zeit")]
+        //public bool ParticipateNo { get; set; }
 
-        [DisplayName("Ich weiss es noch nicht")]
-        public bool ParticipateMaybe { get; set; }
+        //[DisplayName("Ich weiss es noch nicht")]
+        //public bool ParticipateMaybe { get; set; }
+        public ParticipationTypesEnum ParticipationType { get; set; }
 
         [DisplayName("Ich nehme als Spieler teil")]
         public bool IsPlayer { get; set; }

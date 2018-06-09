@@ -1,4 +1,5 @@
-﻿using Planner.ViewModels;
+﻿using Planner.Models.Enums;
+using Planner.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,8 +79,8 @@ namespace Planner.Models.Repository.PostgreSQL
 
             p.Modified = date;
 
-            p.AnswerYes = viewModel.ParticipateYes;
-            p.AnswerNo = viewModel.ParticipateNo;
+            p.AnswerYes = viewModel.ParticipationType == ParticipationTypesEnum.yes;
+            p.AnswerNo = viewModel.ParticipationType == ParticipationTypesEnum.no;
             p.Note = viewModel.Note;
             p.IsPlayer = viewModel.IsPlayer;
             p.IsCoach = viewModel.IsCoach;
