@@ -19,6 +19,8 @@ namespace Planner.Models
         public int Id { get; set; }
 
         [Column("content")]
+        [DisplayName("Inhalt")]
+        [StringLength(250)]
         public string Content
         {
             get { return _content; }

@@ -4,7 +4,7 @@
 
 <form asp-action="Delete" method="post" role="form">
     <p>
-        Möchten Sie das Tam '@Model.Team.Designation' wirklich löschen?
+        Möchten Sie das Team '@Model.Team.Designation' wirklich löschen?
         @if (Model.TeamAssociationCount == 0)
         {
             <span>Es sind noch keine Mitglieder vorhanden.</span>

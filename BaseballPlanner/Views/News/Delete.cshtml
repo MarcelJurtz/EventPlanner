@@ -1,0 +1,21 @@
+﻿@model News
+
+<h2>News Löschen</h2>
+
+<form asp-action="Delete" method="post" role="form">
+    <p>
+        Möchten Sie den folgenden Eintrag wirklich löschen?
+    </p>
+    <p>
+        @Model.Content
+    </p>
+    <div class="form-group">
+        <div class="col-md-5">
+            <a class="btn btn-primary"
+               role="button"
+               asp-controller="News"
+               asp-action="Index">Nein</a>
+            <input type="submit" class="btn btn-danger" value="Ja" />
+        </div>
+    </div>
+</form>
