@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Planner.Models
 {
+    [Table("event")]
     public class Event : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

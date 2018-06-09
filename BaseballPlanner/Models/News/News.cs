@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Planner.Models.Helper;
+﻿using Planner.Models.Helper;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -8,10 +7,10 @@ using System.Runtime.CompilerServices;
 
 namespace Planner.Models
 {
-    [Table("team")]
-    public class Team : INotifyPropertyChanged
+    [Table("news")]
+    public class News : INotifyPropertyChanged
     {
-        private string _designation;
+        private string _content;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -19,25 +18,33 @@ namespace Planner.Models
         [Column("id")]
         public int Id { get; set; }
 
-        [DisplayName(DisplayNames.DESIGNATION)]
-        [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
-        [StringLength(100)]
-        [Column("designation")]
-        public string Designation
+        [Column("content")]
+        public string Content
         {
-            get { return _designation; }
+            get { return _content; }
             set
             {
-                if (_designation != value)
+                if(_content != value)
                 {
-                    _designation = value;
+                    _content = value;
                     NotifyPropertyChanged();
                 }
             }
         }
 
         [NotMapped]
-        public bool Selected { get; set; }
+        [DisplayFormat(DataFormatString = DisplayFormats.DATE_ONLY)]
+        public DateTime GroupableDate
+        {
+            get
+            {
+                var date = new DateTime();
+                date = date.AddYears(Created.Year -1);
+                date = date.AddMonths(Created.Month -1);
+                date = date.AddDays(Created.Day -1);
+                return date;
+            }
+        }
 
         [DisplayName(DisplayNames.CREATED)]
         [Column("created")]

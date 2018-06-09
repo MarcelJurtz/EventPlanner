@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Planner.Models
 {
+    [Table("user")]
     public class User : IdentityUser
     {
         [Required]

@@ -1,13 +1,17 @@
 ﻿@model HomeViewModel
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
-@if (SignInManager.IsSignedIn(User))
-{
-<p>Hello @UserManager.GetUserName(User)!</p>
-}
-else
-{
-    <p>No User logged in</p>
-}
+<p>@Model.WelcomeText</p>
 
+<h2>Neuigkeiten</h2>
+@foreach (var news in Model.News)
+{
+    <p>
+        <span>@news.Key.ToShortDateString()</span>
+        <ul>
+            @foreach(var item in news)
+            {
+                <li>@item.Content</li>
+            }
+        </ul>
+    </p>
+}

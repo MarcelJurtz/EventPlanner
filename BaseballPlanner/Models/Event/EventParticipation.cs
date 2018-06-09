@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Planner.Models
 {
+    [Table("event_participation")]
     public class EventParticipation : INotifyPropertyChanged
     {
         private int _userId;
