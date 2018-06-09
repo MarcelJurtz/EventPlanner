@@ -3,41 +3,34 @@
 @using Planner.Models.Helper
 
 <div class="sidebar">
-    <h2>Menü</h2>
-
-    @if (User.IsInRole(RoleNames.ROLE_ADMIN))
-    {
-        <ul>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            @if (User.IsInRole(RoleNames.ROLE_ADMIN))
+            {
+                <li class="sidebar-brand">Administration</li>
+                <li>
+                    <a asp-controller="User"
+                       asp-action="Index">Benutzer</a>
+                </li>
+                <li>
+                    <a asp-controller="Team"
+                       asp-action="Index">Teams</a>
+                </li>
+                <li>
+                    <a asp-controller="Event"
+                       asp-action="Administrate">Events</a>
+                </li>
+            }
+            <li class="sidebar-brand">Men&uuml;</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Neue Events</a></li>
             <li>
-                Administration
-                <ul>
-                    <li>
-                        <a asp-controller="Team"
-                        asp-action="Index">Teams</a>
-                    </li>
-                    <li>
-                        <a asp-controller="User"
-                           asp-action="Index">Benutzer</a>
-                    </li>
-                    <li>
-                        <a asp-controller="Event"
-                           asp-action="Administrate">Events</a>
-                    </li>
-                </ul>
+                <a asp-controller="Event"
+                   asp-action="Index">Meine Events</a>
             </li>
+            <li><a href="#">Historie</a></li>
+            <li><a href="#">Einstellungen</a></li>
+            <li><a id="loginLink" asp-controller="Account" asp-action="Login">Abmelden</a></li>
         </ul>
-    }
-
-    <ul>
-        <li>
-            <a asp-controller="Event"
-               asp-action="Index">Meine Events</a> <!-- TODO UserId -->
-        </li>
-        <li>Offene Events</li>
-        <li>Einstellungen</li>
-    </ul>
-
-    <ul>
-        <li><a id="loginLink" asp-controller="Account" asp-action="Login">Abmelden</a></li>
-    </ul>
+    </nav>
 </div>
