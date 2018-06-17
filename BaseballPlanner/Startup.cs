@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Planner.Config;
 using Planner.Models;
-using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.Models.Repository.PostgreSQL;
 using System;
-using System.Threading.Tasks;
 
 namespace Planner
 {
@@ -52,6 +51,9 @@ namespace Planner
                 options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
+                // Mail Confirmation
+                //options.SignIn.RequireConfirmedEmail = true;
+
                 // User settings
                 options.User.RequireUniqueEmail = true;
             });
@@ -78,6 +80,9 @@ namespace Planner
             services.AddTransient<IUserRepository, PostgresUserRepository>();
             services.AddTransient<IEventParticipationRepository, PostgresEventParticipationRepository>();
             services.AddTransient<INewsRepository, PostgresNewsRepository>();
+
+
+            services.Configure<AuthMessageSenderOptions>(_configurationRoot.GetSection("SendGrid"));
 
             services.AddMvc();
         }

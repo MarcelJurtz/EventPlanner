@@ -36,7 +36,10 @@
                    asp-action="Index">Meine Events</a>
             </li>
             <li><a href="#">Historie</a></li>
-            <li><a href="#">Einstellungen</a></li>
+            <li>
+                <a asp-controller="Usersettings"
+                   asp-action="Index">Einstellungen</a>
+            </li>
             <li><a id="loginLink" asp-controller="Account" asp-action="Login">Abmelden</a></li>
         </ul>
     </nav>

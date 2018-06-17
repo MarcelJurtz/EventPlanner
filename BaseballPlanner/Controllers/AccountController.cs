@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Planner.Config;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.ViewModels;
@@ -15,10 +17,13 @@ namespace BaseballPlanner.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IOptions<AuthMessageSenderOptions> _config;
+
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOptions<AuthMessageSenderOptions> config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _config = config;
         }
 
         [AllowAnonymous]
@@ -51,7 +56,7 @@ namespace BaseballPlanner.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Username / Password not found");
+            ModelState.AddModelError("", "Benutzername oder Kennwort ungültig.");
             return View(viewModel);
         }
 
@@ -97,6 +102,13 @@ namespace BaseballPlanner.Controllers
         public ActionResult AccessDenied()
         {
             return View();
+        }
+
+        public ActionResult MailTest()
+        {
+            EMailSender sender = new EMailSender(_config);
+            sender.SendEmail("jurtzmarcel@gmail.com", "Testmail 1", "Hello World!");
+            return RedirectToAction("Index");
         }
     }
 }
