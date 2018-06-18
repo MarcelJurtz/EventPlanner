@@ -32,6 +32,10 @@ h1 {
 .navbar-nav {
   flex-direction: row;
 }
+.navbar-nav li {
+  color: white;
+  margin-right: 20px;
+}
 .navbar {
   background-color: #E3001B;
   float: left;

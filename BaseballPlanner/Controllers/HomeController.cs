@@ -31,6 +31,7 @@ namespace BaseballPlanner.Controllers
 
             var results = from i in newsList
                           group i by i.GroupableDate into g
+                          orderby g.Key descending
                           select g;
 
             viewModel.WelcomeText = WELCOME_PREFIX + _userManager.GetUserName(User);
