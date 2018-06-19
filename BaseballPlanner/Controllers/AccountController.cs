@@ -106,13 +106,6 @@ namespace BaseballPlanner.Controllers
             return View();
         }
 
-        public ActionResult MailTest()
-        {
-            EMailSender sender = new EMailSender(_config);
-            sender.SendEmail("jurtzmarcel@gmail.com", "Testmail 1", "Hello World!");
-            return RedirectToAction("Index");
-        }
-
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
@@ -135,7 +128,7 @@ namespace BaseballPlanner.Controllers
             var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Scheme);
 
             EMailSender sender = new EMailSender(_config);
-            await sender.SendEmail(user.Email, "Kennwort zurückgesetzt", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+            await sender.SendEmail(user.Email, "Kennwort zurückgesetzt", "Klicke hier, um dein Kennwort zurückzusetzen: <a href=\"" + callbackUrl + "\">link</a>");
 
             return View("ForgotPasswordConfirmation");
         }
