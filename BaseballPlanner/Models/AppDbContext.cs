@@ -17,6 +17,7 @@ namespace Planner.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamAssociation> TeamAssociations { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<NotificationConfiguration> NotificationConfigurations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
