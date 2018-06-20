@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Planner.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Planner.ViewModels
@@ -20,5 +21,8 @@ namespace Planner.ViewModels
         [Required]
         [Compare(nameof(NewPassword), ErrorMessage = "Die eingegebenen Kennwörter stimmen nicht überein")]
         public string NewPasswordConfirmation { get; set; }
+
+        // Admins only
+        public NotificationConfiguration NotificationConfiguration { get; set; }
     }
 }

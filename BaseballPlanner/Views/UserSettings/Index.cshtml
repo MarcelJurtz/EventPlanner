@@ -2,8 +2,9 @@
 
 <h2>Einstellungen</h2>
 
-<h3>Passwort ändern</h3>
+<p>Hier findest du verschiedene Optionen, dein Profil zu bearbeiten.</p>
 
+<h3>Passwort ändern</h3>
 <form asp-controller="UserSettings" asp-action="Index" method="post" class="form-horizontal" role="form">
     @Html.AntiForgeryToken()
     <hr />
@@ -35,3 +36,26 @@
         </div>
     </div>
 </form>
+
+@if(User.IsInRole(RoleNames.ROLE_ADMIN))
+{
+<h3>Benachrichtigungen</h3>
+<form asp-controller="UserSettings" asp-action="Index" method="post" class="form-horizontal" role="form">
+    @Html.AntiForgeryToken()
+    <hr />
+
+    <input asp-for="NotificationConfiguration.NewUserRegistered" />
+    <label asp-for="NotificationConfiguration.NewUserRegistered"></label>
+    <br />
+
+    <input asp-for="NotificationConfiguration.UserParticipationUpdated" />
+    <label asp-for="NotificationConfiguration.UserParticipationUpdated"></label>
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Speichern" />
+        </div>
+    </div>
+</form>
+}
