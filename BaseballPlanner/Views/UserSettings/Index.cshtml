@@ -5,7 +5,7 @@
 <p>Hier findest du verschiedene Optionen, dein Profil zu bearbeiten.</p>
 
 <h3>Passwort ändern</h3>
-<form asp-controller="UserSettings" asp-action="Index" method="post" class="form-horizontal" role="form">
+<form asp-controller="UserSettings" asp-action="SavePassword" method="post" class="form-horizontal" role="form">
     @Html.AntiForgeryToken()
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -40,7 +40,7 @@
 @if(User.IsInRole(RoleNames.ROLE_ADMIN))
 {
 <h3>Benachrichtigungen</h3>
-<form asp-controller="UserSettings" asp-action="Index" method="post" class="form-horizontal" role="form">
+<form asp-controller="UserSettings" asp-action="SaveNotificationConfiguration" method="post" class="form-horizontal" role="form">
     @Html.AntiForgeryToken()
     <hr />
 

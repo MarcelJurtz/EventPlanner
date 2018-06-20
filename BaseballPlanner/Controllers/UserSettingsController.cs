@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
+using Planner.Models.Helper;
+using Planner.Models.Repository;
 using Planner.ViewModels;
 
 namespace BaseballPlanner.Controllers
@@ -14,37 +16,81 @@ namespace BaseballPlanner.Controllers
     public class UserSettingsController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly INotificationConfigurationRepository _notificationConfigRepository;
 
-        public UserSettingsController(UserManager<User> userManager)
+        public UserSettingsController(UserManager<User> userManager, INotificationConfigurationRepository repo)
         {
             _userManager = userManager;
+            _notificationConfigRepository = repo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(new UserSettingsViewModel());
+            UserSettingsViewModel viewModel = new UserSettingsViewModel();
+
+            if (User.IsInRole(RoleNames.ROLE_ADMIN))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                viewModel.NotificationConfiguration = _notificationConfigRepository.Find(x => x.AdminId == user.UserId).FirstOrDefault(); 
+            }
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(UserSettingsViewModel viewModel)
+        public IActionResult Index(UserSettingsViewModel viewModel)
+        {
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SavePassword(UserSettingsViewModel viewModel)
         {
             if (!ModelState.IsValid)
-                return View(viewModel);
+                return RedirectToAction("Index", viewModel);
 
             var user = await _userManager.GetUserAsync(User);
 
-            if(_userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, viewModel.OldPassword) == PasswordVerificationResult.Failed)
+            if (_userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, viewModel.OldPassword) == PasswordVerificationResult.Failed)
             {
                 ModelState.AddModelError("", "Dein eingegebenes altes Kennwort ist nicht korrekt.");
-                return View(viewModel);
+                return RedirectToAction("Index", viewModel);
             }
 
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, viewModel.NewPassword);
             await _userManager.UpdateAsync(user);
 
-            return View(viewModel);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveNotificationConfiguration(UserSettingsViewModel viewModel)
+        {
+            //    if (!ModelState.IsValid)
+            //        return RedirectToAction("Index", viewModel);
+
+            if (!User.IsInRole(RoleNames.ROLE_ADMIN))
+                return RedirectToAction("Index", viewModel);
+
+            var user = await _userManager.GetUserAsync(User);
+            NotificationConfiguration config = _notificationConfigRepository.Find(c => c.AdminId == user.UserId).FirstOrDefault();
+
+            if (config == null)
+            {
+                config = new NotificationConfiguration();
+                config.AdminId = user.UserId;
+                _notificationConfigRepository.Add(config, false);
+            }
+            
+            config.NewUserRegistered = viewModel.NotificationConfiguration.NewUserRegistered;
+            config.UserParticipationUpdated = viewModel.NotificationConfiguration.UserParticipationUpdated;
+
+            _notificationConfigRepository.CommitChanges();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -81,7 +81,7 @@ namespace Planner
             services.AddTransient<IUserRepository, PostgresUserRepository>();
             services.AddTransient<IEventParticipationRepository, PostgresEventParticipationRepository>();
             services.AddTransient<INewsRepository, PostgresNewsRepository>();
-
+            services.AddTransient<INotificationConfigurationRepository, PostgresNotificationConfigurationRepository>();
 
             services.Configure<AuthMessageSenderOptions>(_configurationRoot.GetSection("SendGrid"));
 
