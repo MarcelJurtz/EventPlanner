@@ -85,10 +85,14 @@ namespace BaseballPlanner.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, RoleNames.ROLE_MEMBER);
+                    //await _userManager.AddToRoleAsync(user, RoleNames.ROLE_MEMBER);
                     await _userManager.UpdateAsync(user);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Registered", "Account");
+                }
+                else
+                {
+                    ModelState.AddModelError("err_register", "Beim anlegen des Accounts ist ein Fehler aufgetreten. Die E-Mail Addresse oder der Benutzername ist bereits vergeben.");
                 }
             }
             return View(viewModel);
@@ -163,6 +167,12 @@ namespace BaseballPlanner.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult Registered()
+        {
             return View();
         }
     }

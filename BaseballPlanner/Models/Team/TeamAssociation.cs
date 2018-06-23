@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Planner.Models
 {
+    [Table("team_association")]
     public class TeamAssociation : INotifyPropertyChanged
     {
         private int _userId;

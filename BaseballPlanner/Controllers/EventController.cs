@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Planner.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleNames.ROLE_MEMBER)]
     public class EventController : Controller
     {
         private readonly IEventRepository _eventRepository;
@@ -53,6 +53,7 @@ namespace Planner.Controllers
             // Passing Parameters to View results in a strongly typed view. Alternative: Razor / ViewBag-Property
         }
 
+        [Authorize(Roles = RoleNames.ROLE_ADMIN)]
         public ViewResult Add()
         {
             EventEditViewModel viewModel = new EventEditViewModel();
@@ -62,6 +63,7 @@ namespace Planner.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleNames.ROLE_ADMIN)]
         public IActionResult Add(EventEditViewModel viewModel)
         {
             if (!ModelState.IsValid)

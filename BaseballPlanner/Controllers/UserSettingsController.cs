@@ -12,7 +12,7 @@ using Planner.ViewModels;
 
 namespace BaseballPlanner.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleNames.ROLE_MEMBER)]
     public class UserSettingsController : Controller
     {
         private readonly UserManager<User> _userManager;

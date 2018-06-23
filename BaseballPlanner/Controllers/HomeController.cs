@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Planner.Models;
+using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
 using System.Linq;
 
 namespace BaseballPlanner.Controllers
 {
+    [Authorize(Roles = RoleNames.ROLE_MEMBER)]
     public class HomeController : Controller
     {
         private const int NEWS_COUNT = 10;
@@ -22,7 +24,6 @@ namespace BaseballPlanner.Controllers
             _userManager = userManager;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             HomeViewModel viewModel = new HomeViewModel();

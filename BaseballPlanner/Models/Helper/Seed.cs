@@ -35,7 +35,7 @@ namespace Planner.Models.Helper
             {
                 var createPowerUser = await userManager.CreateAsync(defaultAdmin, password);
                 if (createPowerUser.Succeeded)
-                    await userManager.AddToRoleAsync(defaultAdmin, RoleNames.ROLE_ADMIN);
+                    await userManager.AddToRolesAsync(defaultAdmin, RoleNames.ROLES);
             }
         }
     }
