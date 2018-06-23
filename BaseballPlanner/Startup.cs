@@ -83,7 +83,7 @@ namespace Planner
             services.AddTransient<INewsRepository, PostgresNewsRepository>();
             services.AddTransient<INotificationConfigurationRepository, PostgresNotificationConfigurationRepository>();
 
-            services.Configure<AuthMessageSenderOptions>(_configurationRoot.GetSection("SendGrid"));
+            services.Configure<AuthMessageSenderOptions>(_configurationRoot.GetSection("ClubSettings"));
 
             services.AddMvc();
         }

@@ -27,5 +27,10 @@ namespace Planner.Config
             msg.AddTo(new EmailAddress(email));
             return client.SendEmailAsync(msg);
         }
+
+        public Task SendUserConfirmationEmail(string email)
+        {
+            return SendEmail(email, _options.WelcomeSubject, _options.WelcomeText);
+        }
     }
 }

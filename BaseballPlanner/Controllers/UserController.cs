@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Planner.Config;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -18,13 +20,15 @@ namespace BaseballPlanner.Controllers
         private readonly IUserRepository _userRepository;
         private readonly ITeamRepository _teamRepository;
         private readonly ITeamAssociationRepository _teamAssociationRepository;
+        private readonly EMailSender _eMailSender;
 
-        public UserController(UserManager<User> userManager, IUserRepository userRepository, ITeamRepository teamRepository, ITeamAssociationRepository teamAssociationRepository)
+        public UserController(UserManager<User> userManager, IUserRepository userRepository, ITeamRepository teamRepository, ITeamAssociationRepository teamAssociationRepository, IOptions<AuthMessageSenderOptions> config)
         {
             _userManager = userManager;
             _userRepository = userRepository;
             _teamRepository = teamRepository;
             _teamAssociationRepository = teamAssociationRepository;
+            _eMailSender = new EMailSender(config);
         }
 
         public IActionResult Index()
@@ -114,6 +118,8 @@ namespace BaseballPlanner.Controllers
             found.Verified = true;
 
             _userRepository.CommitChanges();
+
+            await _eMailSender.SendUserConfirmationEmail(found.Email);
 
             return RedirectToAction("Unverified", "User");
         }
