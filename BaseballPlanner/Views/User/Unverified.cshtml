@@ -1,0 +1,45 @@
+﻿@model UserIndexViewModel
+
+<h2>Unbestätigte Registrierungen</h2>
+
+@if (Model.Users.Count() > 0)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-bordred table-striped">
+                <thead>
+                    <tr>
+                        <th>Benutzername</th>
+                        <th>E-Mail Adresse</th>
+                        <th>Registriert</th>
+                        <th></th>
+                        <th></th>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Registered</td>
+                            <td>
+                                <a asp-controller="User"
+                                   asp-action="Confirm"
+                                   asp-route-id="@user.UserId"><i class="fas fa-check"></i></a>
+                            </td>
+                            <td>
+                                <a asp-controller="User"
+                                   asp-action="Delete"
+                                   asp-route-id="@user.UserId"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <p>Keine Einträge vorhanden</p>
+}

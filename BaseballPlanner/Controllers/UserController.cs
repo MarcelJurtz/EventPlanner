@@ -30,7 +30,14 @@ namespace BaseballPlanner.Controllers
         public IActionResult Index()
         {
             UserIndexViewModel viewModel = new UserIndexViewModel();
-            viewModel.Users = _userRepository.GetAll();
+            viewModel.Users = _userRepository.Find(x => x.Verified);
+            return View(viewModel);
+        }
+
+        public IActionResult Unverified()
+        {
+            UserIndexViewModel viewModel = new UserIndexViewModel();
+            viewModel.Users = _userRepository.Find(x => !x.Verified);
             return View(viewModel);
         }
 
@@ -85,6 +92,30 @@ namespace BaseballPlanner.Controllers
             await _userManager.UpdateAsync(found);
 
             return RedirectToAction("Index", "User");
+        }
+
+        public async Task<IActionResult> Confirm(int? id)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("Unverified");
+
+            if (id == null)
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            var found = _userRepository.Find(x => x.UserId == id).FirstOrDefault();
+
+            if (found == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            
+            await _userManager.AddToRoleAsync(found, RoleNames.ROLE_MEMBER);
+            await _userManager.UpdateAsync(found);
+
+            found.Verified = true;
+
+            _userRepository.CommitChanges();
+
+            return RedirectToAction("Unverified", "User");
         }
     }
 }

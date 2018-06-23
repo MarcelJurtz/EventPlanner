@@ -17,5 +17,8 @@ namespace Planner.Models
         [DisplayName("Registriert")]
         [Column("registered")]
         public DateTime Registered { get; set; }
+
+        [Column("verified")]
+        public bool Verified { get; set; }
     }
 }

@@ -26,7 +26,8 @@ namespace Planner.Models.Helper
             var defaultAdmin = new User
             {
                 UserName = configuration.GetSection("UserSettings")["Mail"],
-                Email = configuration.GetSection("UserSettings")["Mail"]
+                Email = configuration.GetSection("UserSettings")["Mail"],
+                Verified = true
             };
 
             string password = configuration.GetSection("UserSettings")["Password"];
