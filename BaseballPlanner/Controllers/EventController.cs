@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Planner.Config;
 using Planner.Models;
 using Planner.Models.Enums;
 using Planner.Models.Helper;
@@ -25,19 +27,24 @@ namespace Planner.Controllers
         private readonly IEventParticipationRepository _participationRepository;
         private readonly IEventAssociationRepository _eventAssociationRepository;
         private readonly IUserRepository _userRepository;
+        private readonly INotificationConfigurationRepository _notificationConfigurationRepository;
         private readonly UserManager<User> _userManager;
+        private readonly EMailSender _eMailSender;
 
         // Constructor parameters will be injected 
         // because the objects have been registered in startup.cs
         public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository, 
-            IEventAssociationRepository eventAssociationRepository, IUserRepository userRepository, UserManager<User> usermanager)
+            IEventAssociationRepository eventAssociationRepository, IUserRepository userRepository, INotificationConfigurationRepository configurationRepository, 
+            UserManager<User> usermanager, IOptions<AuthMessageSenderOptions> config)
         {
             _eventRepository = eventRepository;
             _teamRepository = teamRepository;
             _participationRepository = participationRepository;
             _eventAssociationRepository = eventAssociationRepository;
             _userRepository = userRepository;
+            _notificationConfigurationRepository = configurationRepository;
             _userManager = usermanager;
+            _eMailSender = new EMailSender(config);
         }
 
         // ActionResults
@@ -133,8 +140,6 @@ namespace Planner.Controllers
                 viewModel.ParticipationType = ParticipationTypesEnum.maybe;
             }
 
-            
-
             if (viewModel.CurrentEvent != null)
                 return View(viewModel);
             else
@@ -150,6 +155,17 @@ namespace Planner.Controllers
             var user = await _userManager.GetUserAsync(this.User);
 
             _participationRepository.Update((int)id, user.UserId,viewModel);
+
+            // Send participation update to opted-in admins
+            var admins = await _userManager.GetUsersInRoleAsync(RoleNames.ROLE_ADMIN);
+            foreach(var admin in admins)
+            {
+                var config = _notificationConfigurationRepository.GetConfigurationForUser(admin.UserId);
+                if(config != null && config.UserParticipationUpdated)
+                {
+                    await _eMailSender.SendUserParticipationEmail(admin.Email);
+                }
+            }
 
             return RedirectToAction("Index");
         }

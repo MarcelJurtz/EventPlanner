@@ -2,5 +2,6 @@
 {
     public interface INotificationConfigurationRepository : IRepository<NotificationConfiguration>
     {
+        NotificationConfiguration GetConfigurationForUser(int userId);
     }
 }

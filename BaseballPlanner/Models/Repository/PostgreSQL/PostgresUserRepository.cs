@@ -1,17 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Planner.Models.Repository.PostgreSQL
 {
     public class PostgresUserRepository : IUserRepository
     {
         private readonly AppDbContext _appDbContext;
+        private readonly UserManager<User> _userManager;
 
-        public PostgresUserRepository(AppDbContext context)
+        public PostgresUserRepository(AppDbContext context, UserManager<User> userManager)
         {
             _appDbContext = context;
+            _userManager = userManager;
         }
 
         public IEnumerable<User> Find(Expression<Func<User, bool>> predicate)
@@ -22,6 +26,12 @@ namespace Planner.Models.Repository.PostgreSQL
         public IEnumerable<User> GetAll()
         {
             return _appDbContext.Users;
+        }
+
+        public async Task<IEnumerable<User>> GetUsersInRole(string roleName)
+        {
+            //var role = _appDbContext.Roles.SingleOrDefault(m => m.Name == roleName);
+            return await _userManager.GetUsersInRoleAsync(roleName);
         }
 
         public User FindUserByUserId(int userId)

@@ -50,6 +50,11 @@ namespace Planner.Models.Repository.PostgreSQL
             return _appDbContext.NotificationConfigurations;
         }
 
+        public NotificationConfiguration GetConfigurationForUser(int userId)
+        {
+            return _appDbContext.NotificationConfigurations.FirstOrDefault(c => c.AdminId == userId);
+        }
+
         public void Remove(NotificationConfiguration entity, bool commit = true)
         {
             _appDbContext.NotificationConfigurations.Remove(entity);

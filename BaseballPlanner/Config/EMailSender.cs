@@ -32,5 +32,10 @@ namespace Planner.Config
         {
             return SendEmail(email, _options.WelcomeSubject, _options.WelcomeText);
         }
+
+        public Task SendUserParticipationEmail(string email)
+        {
+            return SendEmail(email, _options.ParticipationSubject, _options.ParticipationText);
+        }
     }
 }

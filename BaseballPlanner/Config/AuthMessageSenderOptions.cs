@@ -10,5 +10,8 @@
 
         public string WelcomeText { get; set; }
         public string WelcomeSubject { get; set; }
+
+        public string ParticipationText { get; set; }
+        public string ParticipationSubject { get; set; }
     }
 }
