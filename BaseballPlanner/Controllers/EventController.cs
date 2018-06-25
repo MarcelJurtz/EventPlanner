@@ -47,7 +47,7 @@ namespace Planner.Controllers
             _eMailSender = new EMailSender(config);
         }
 
-        // ActionResults
+        // Auflistung aller Events
         public async Task<ViewResult> Index() // Action
         {
             EventListViewModel viewModel = new EventListViewModel();
@@ -58,6 +58,17 @@ namespace Planner.Controllers
             return View(viewModel); // View to Show -> Render default view for this method action
             // Default View: Controller will search in View-Subfolder for View with same name as the controller
             // Passing Parameters to View results in a strongly typed view. Alternative: Razor / ViewBag-Property
+        }
+
+        // Auflistung von Events, die noch nicht beantwortet werden
+        public async Task<ViewResult> Unread()
+        {
+            EventListViewModel viewModel = new EventListViewModel();
+            var user = await _userManager.GetUserAsync(this.User);
+            viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
+            viewModel.Events = _eventRepository.GetUnreadForUser(user.UserId);
+            return View(viewModel);
+
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]

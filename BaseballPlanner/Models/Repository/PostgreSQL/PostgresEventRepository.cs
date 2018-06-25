@@ -83,5 +83,28 @@ namespace Planner.Models.Repository.PostgreSQL
 
             return results;           
         }
+
+        // Gibt alle unbeantworteten Events zurück
+        // Beinhaltet auch mit "vielleicht" beantwortete!
+        public IEnumerable<Event> GetUnreadForUser(int userId)
+        {
+            var teamIds = from t in _appDbContext.Teams
+                          join association in _appDbContext.TeamAssociations
+                          on t.Id equals association.TeamId
+                          where (association.UserId == userId)
+                          select t.Id;
+
+            var participations = from p in _appDbContext.EventParticipations
+                                where p.UserId == userId && (p.AnswerYes || p.AnswerNo)
+                                select p.EventId;
+
+            var results = from e in _appDbContext.Events
+                          join association in _appDbContext.EventAssociations
+                          on e.Id equals association.EventId
+                          where (teamIds.Contains(association.TeamId)) && !participations.Contains(e.Id)
+                          select e;
+
+            return results;
+        }
     }
 }
