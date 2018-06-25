@@ -67,7 +67,7 @@ namespace Planner.Models.Repository.PostgreSQL
             _appDbContext.SaveChanges();
         }
 
-        public IEnumerable<Event> GetAllForUser(int userId)
+        public IEnumerable<Event> GetAllForUser(int userId, bool upcomingOnly = false)
         {
             var teamIds = from t in _appDbContext.Teams
                           join association in _appDbContext.TeamAssociations
@@ -81,12 +81,15 @@ namespace Planner.Models.Repository.PostgreSQL
                           where (teamIds.Contains(association.TeamId))
                           select e;
 
+            if (upcomingOnly)
+                results = results.Where(e => e.Start > DateTime.Now);
+
             return results;           
         }
 
         // Gibt alle unbeantworteten Events zurück
         // Beinhaltet auch mit "vielleicht" beantwortete!
-        public IEnumerable<Event> GetUnreadForUser(int userId)
+        public IEnumerable<Event> GetUnreadForUser(int userId, bool upcomingOnly = false)
         {
             var teamIds = from t in _appDbContext.Teams
                           join association in _appDbContext.TeamAssociations
@@ -103,6 +106,9 @@ namespace Planner.Models.Repository.PostgreSQL
                           on e.Id equals association.EventId
                           where (teamIds.Contains(association.TeamId)) && !participations.Contains(e.Id)
                           select e;
+
+            if (upcomingOnly)
+                results = results.Where(e => e.Start > DateTime.Now);
 
             return results;
         }

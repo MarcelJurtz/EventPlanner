@@ -54,7 +54,7 @@ namespace Planner.Controllers
             //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await _userManager.GetUserAsync(this.User);
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
-            viewModel.Events = _eventRepository.GetAllForUser(user.UserId);
+            viewModel.Events = _eventRepository.GetAllForUser(user.UserId, true);
             return View(viewModel); // View to Show -> Render default view for this method action
             // Default View: Controller will search in View-Subfolder for View with same name as the controller
             // Passing Parameters to View results in a strongly typed view. Alternative: Razor / ViewBag-Property
@@ -66,7 +66,7 @@ namespace Planner.Controllers
             EventListViewModel viewModel = new EventListViewModel();
             var user = await _userManager.GetUserAsync(this.User);
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
-            viewModel.Events = _eventRepository.GetUnreadForUser(user.UserId);
+            viewModel.Events = _eventRepository.GetUnreadForUser(user.UserId, true);
             return View(viewModel);
 
         }
