@@ -33,8 +33,8 @@ namespace Planner.Controllers
 
         // Constructor parameters will be injected 
         // because the objects have been registered in startup.cs
-        public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository, 
-            IEventAssociationRepository eventAssociationRepository, IUserRepository userRepository, INotificationConfigurationRepository configurationRepository, 
+        public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository,
+            IEventAssociationRepository eventAssociationRepository, IUserRepository userRepository, INotificationConfigurationRepository configurationRepository,
             UserManager<User> usermanager, IOptions<AuthMessageSenderOptions> config)
         {
             _eventRepository = eventRepository;
@@ -68,7 +68,16 @@ namespace Planner.Controllers
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
             viewModel.Events = _eventRepository.GetUnreadForUser(user.UserId, true);
             return View(viewModel);
+        }
 
+        // Laden vergangener Events
+        public async Task<ViewResult> History()
+        {
+            EventListViewModel viewModel = new EventListViewModel();
+            var user = await _userManager.GetUserAsync(this.User);
+            viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
+            viewModel.Events = _eventRepository.GetHistoricalForUser(user.UserId).OrderByDescending(e => e.Start);
+            return View(viewModel);
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
@@ -93,7 +102,7 @@ namespace Planner.Controllers
 
             var associations = new List<EventAssociation>();
             var date = DateTime.Now;
-            foreach(var team in viewModel.Teams)
+            foreach (var team in viewModel.Teams)
             {
                 if (team.Selected)
                     associations.Add(new EventAssociation()
@@ -112,7 +121,7 @@ namespace Planner.Controllers
 
         public async Task<IActionResult> Participate(int? id)
         {
-            if(id == null)
+            if (id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
             EventParticipateViewModel viewModel = new EventParticipateViewModel();
@@ -163,16 +172,19 @@ namespace Planner.Controllers
             if (id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
+            if (viewModel.CurrentEvent.Start < DateTime.Now)
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
             var user = await _userManager.GetUserAsync(this.User);
 
-            _participationRepository.Update((int)id, user.UserId,viewModel);
+            _participationRepository.Update((int)id, user.UserId, viewModel);
 
             // Send participation update to opted-in admins
             var admins = await _userManager.GetUsersInRoleAsync(RoleNames.ROLE_ADMIN);
-            foreach(var admin in admins)
+            foreach (var admin in admins)
             {
                 var config = _notificationConfigurationRepository.GetConfigurationForUser(admin.UserId);
-                if(config != null && config.UserParticipationUpdated)
+                if (config != null && config.UserParticipationUpdated)
                 {
                     await _eMailSender.SendUserParticipationEmail(admin.Email);
                 }
@@ -288,7 +300,7 @@ namespace Planner.Controllers
                 return StatusCode((int)HttpStatusCode.NotFound);
 
             var participations = _participationRepository.Find(x => x.EventId == id).ToList();
-            foreach(var participation in participations)
+            foreach (var participation in participations)
             {
                 participation.Username = _userRepository.GetUsernameByUserId(participation.UserId);
             }

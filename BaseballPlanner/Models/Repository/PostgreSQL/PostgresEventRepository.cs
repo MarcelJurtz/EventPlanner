@@ -108,7 +108,24 @@ namespace Planner.Models.Repository.PostgreSQL
                           select e;
 
             if (upcomingOnly)
-                results = results.Where(e => e.Start > DateTime.Now);
+                results = results.Where(e => e.Start >= DateTime.Now);
+
+            return results;
+        }
+
+        public IEnumerable<Event> GetHistoricalForUser(int userId)
+        {
+            var teamIds = from t in _appDbContext.Teams
+                          join association in _appDbContext.TeamAssociations
+                          on t.Id equals association.TeamId
+                          where (association.UserId == userId)
+                          select t.Id;
+
+            var results = from e in _appDbContext.Events
+                          join association in _appDbContext.EventAssociations
+                          on e.Id equals association.EventId
+                          where (teamIds.Contains(association.TeamId)) && e.Start < DateTime.Now
+                          select e;
 
             return results;
         }

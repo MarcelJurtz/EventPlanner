@@ -6,5 +6,6 @@ namespace Planner.Models.Repository
     {
         IEnumerable<Event> GetAllForUser(int userId, bool upcomingOnly);
         IEnumerable<Event> GetUnreadForUser(int userId, bool upcomingOnly);
+        IEnumerable<Event> GetHistoricalForUser(int userId);
     }
 }
