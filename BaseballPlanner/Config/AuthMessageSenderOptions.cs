@@ -2,6 +2,8 @@
 {
     public class AuthMessageSenderOptions
     {
+        public int NewsCount { get; set; }
+
         public string SendGridUser { get; set; }
         public string SendGridKey { get; set; }
 

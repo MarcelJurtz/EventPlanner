@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Planner.Config;
+using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Enums;
 using Planner.Models.Helper;
@@ -47,11 +48,9 @@ namespace Planner.Controllers
             _eMailSender = new EMailSender(config);
         }
 
-        // Auflistung aller Events
-        public async Task<ViewResult> Index() // Action
+        public async Task<ViewResult> Index()
         {
             EventListViewModel viewModel = new EventListViewModel();
-            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = await _userManager.GetUserAsync(this.User);
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
             viewModel.Events = _eventRepository.GetAllForUser(user.UserId, true);
@@ -116,7 +115,7 @@ namespace Planner.Controllers
 
             _eventAssociationRepository.AddRange(associations);
 
-            return RedirectToAction("Administrate");
+            return RedirectToAction(MethodNames.EVT_ADMINISTRATE);
         }
 
         public async Task<IActionResult> Participate(int? id)
@@ -163,7 +162,7 @@ namespace Planner.Controllers
             if (viewModel.CurrentEvent != null)
                 return View(viewModel);
             else
-                return RedirectToAction("Index");
+                return RedirectToAction(MethodNames.INDEX);
         }
 
         [HttpPost]
@@ -190,7 +189,7 @@ namespace Planner.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
@@ -254,7 +253,7 @@ namespace Planner.Controllers
 
             _eventRepository.CommitChanges();
 
-            return RedirectToAction("Administrate");
+            return RedirectToAction(MethodNames.EVT_ADMINISTRATE);
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
@@ -286,7 +285,7 @@ namespace Planner.Controllers
             _participationRepository.RemoveRange(participations);
             _eventRepository.Remove(e);
 
-            return RedirectToAction("Administrate");
+            return RedirectToAction(MethodNames.EVT_ADMINISTRATE);
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]

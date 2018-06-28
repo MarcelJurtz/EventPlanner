@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -40,7 +41,7 @@ namespace BaseballPlanner.Controllers
             news.Created = DateTime.Now;
             _newsRepository.Add(news);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
 
         public IActionResult Edit(int? id)
@@ -73,7 +74,7 @@ namespace BaseballPlanner.Controllers
             found.Content = news.Content;
             _newsRepository.CommitChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
 
         public IActionResult Delete(int? id)
@@ -97,7 +98,7 @@ namespace BaseballPlanner.Controllers
 
             _newsRepository.Remove(news);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
     }
 }

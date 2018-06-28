@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -46,7 +47,7 @@ namespace BaseballPlanner.Controllers
 
             _teamRepository.Add(viewModel.CurrentTeam);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
 
         public IActionResult Edit(int? id)
@@ -81,7 +82,7 @@ namespace BaseballPlanner.Controllers
             found.Designation = viewModel.CurrentTeam.Designation;
             _teamRepository.CommitChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
 
         [Authorize(Roles = RoleNames.ROLE_ADMIN)]
@@ -113,7 +114,7 @@ namespace BaseballPlanner.Controllers
             _teamAssociationRepository.RemoveRange(associations);
             _teamRepository.Remove(team);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MethodNames.INDEX);
         }
     }
 }

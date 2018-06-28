@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Planner.Config;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -12,14 +14,13 @@ namespace BaseballPlanner.Controllers
     [Authorize(Roles = RoleNames.ROLE_MEMBER)]
     public class HomeController : Controller
     {
-        private const int NEWS_COUNT = 10;
-        private const string WELCOME_PREFIX = "Hallo, ";
-
         private INewsRepository _newsRepository;
         private UserManager<User> _userManager;
+        private AuthMessageSenderOptions _options;
 
-        public HomeController(INewsRepository newsRepository, UserManager<User> userManager)
+        public HomeController(INewsRepository newsRepository, UserManager<User> userManager, IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
+            _options = optionsAccessor.Value;
             _newsRepository = newsRepository;
             _userManager = userManager;
         }
@@ -28,14 +29,13 @@ namespace BaseballPlanner.Controllers
         {
             HomeViewModel viewModel = new HomeViewModel();
 
-            var newsList = _newsRepository.GetLastItems(NEWS_COUNT).ToList();
+            var newsList = _newsRepository.GetLastItems(_options.NewsCount).ToList();
 
             var results = from i in newsList
                           group i by i.GroupableDate into g
                           orderby g.Key descending
                           select g;
 
-            viewModel.WelcomeText = WELCOME_PREFIX + _userManager.GetUserName(User);
             viewModel.News = results;
 
             return View(viewModel);

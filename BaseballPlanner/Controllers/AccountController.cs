@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Planner.Config;
+using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -56,7 +57,7 @@ namespace BaseballPlanner.Controllers
                     var s = User.Identity.IsAuthenticated;
 
                     if (string.IsNullOrEmpty(viewModel.ReturnUrl))
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction(MethodNames.INDEX, ControllerNames.HOME);
 
                     return Redirect(viewModel.ReturnUrl);
                 }
@@ -102,7 +103,7 @@ namespace BaseballPlanner.Controllers
                         }
                     }
 
-                    return RedirectToAction("Registered", "Account");
+                    return RedirectToAction(MethodNames.ACC_REGISTERED);
                 }
                 else
                 {
@@ -116,7 +117,7 @@ namespace BaseballPlanner.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MethodNames.INDEX, ControllerNames.HOME);
         }
 
         public ActionResult AccessDenied()
@@ -140,14 +141,14 @@ namespace BaseballPlanner.Controllers
 
             var user = await _userManager.FindByEmailAsync(viewModel.Email);
             if (user == null)
-                return View("ForgotPasswordConfirmation");
+                return View(MethodNames.ACC_FORGOT_PASSWORD_CONFIRMATION);
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Scheme);
+            var callbackUrl = Url.Action(MethodNames.ACC_RESET_PASSWORD, ControllerNames.ACCOUNT, new { UserId = user.Id, code = code }, protocol: Request.Scheme);
 
             await _eMailSender.SendEmail(user.Email, "Kennwort zurückgesetzt", "Klicke hier, um dein Kennwort zurückzusetzen: <a href=\"" + callbackUrl + "\">link</a>");
 
-            return View("ForgotPasswordConfirmation");
+            return View(MethodNames.ACC_FORGOT_PASSWORD_CONFIRMATION);
         }
 
         [AllowAnonymous]
@@ -172,13 +173,11 @@ namespace BaseballPlanner.Controllers
 
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction(MethodNames.ACC_LOGIN);
 
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+                return RedirectToAction(MethodNames.ACC_LOGIN);
 
             return View();
         }

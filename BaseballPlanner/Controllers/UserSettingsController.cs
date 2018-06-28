@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -49,31 +50,28 @@ namespace BaseballPlanner.Controllers
         public async Task<IActionResult> SavePassword(UserSettingsViewModel viewModel)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction("Index", viewModel);
+                return RedirectToAction(MethodNames.INDEX, viewModel);
 
             var user = await _userManager.GetUserAsync(User);
 
             if (_userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, viewModel.OldPassword) == PasswordVerificationResult.Failed)
             {
                 ModelState.AddModelError("", "Dein eingegebenes altes Kennwort ist nicht korrekt.");
-                return RedirectToAction("Index", viewModel);
+                return RedirectToAction(MethodNames.INDEX, viewModel);
             }
 
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, viewModel.NewPassword);
             await _userManager.UpdateAsync(user);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MethodNames.INDEX, ControllerNames.HOME);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveNotificationConfiguration(UserSettingsViewModel viewModel)
         {
-            //    if (!ModelState.IsValid)
-            //        return RedirectToAction("Index", viewModel);
-
             if (!User.IsInRole(RoleNames.ROLE_ADMIN))
-                return RedirectToAction("Index", viewModel);
+                return RedirectToAction(MethodNames.INDEX, viewModel);
 
             var user = await _userManager.GetUserAsync(User);
             NotificationConfiguration config = _notificationConfigRepository.Find(c => c.AdminId == user.UserId).FirstOrDefault();
@@ -90,7 +88,7 @@ namespace BaseballPlanner.Controllers
 
             _notificationConfigRepository.CommitChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MethodNames.INDEX, ControllerNames.HOME);
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Planner.Config;
+using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
@@ -95,13 +96,13 @@ namespace BaseballPlanner.Controllers
 
             await _userManager.UpdateAsync(found);
 
-            return RedirectToAction("Index", "User");
+            return RedirectToAction(MethodNames.INDEX);
         }
 
         public async Task<IActionResult> Confirm(int? id)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction("Unverified");
+                return RedirectToAction(MethodNames.USR_UNVERIFIED);
 
             if (id == null)
                 return StatusCode((int)HttpStatusCode.BadRequest);
@@ -121,7 +122,7 @@ namespace BaseballPlanner.Controllers
 
             await _eMailSender.SendUserConfirmationEmail(found.Email);
 
-            return RedirectToAction("Unverified", "User");
+            return RedirectToAction(MethodNames.USR_UNVERIFIED);
         }
     }
 }
