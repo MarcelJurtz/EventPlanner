@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Planner.Config;
 using Planner.Models;
 using Planner.Models.Helper;
+using Planner.Models.Repository;
 using Planner.ViewModels;
 using System;
 using System.Net;
@@ -19,12 +20,16 @@ namespace BaseballPlanner.Controllers
         private readonly SignInManager<User> _signInManager;
 
         private readonly IOptions<AuthMessageSenderOptions> _config;
+        private readonly INotificationConfigurationRepository _notificationConfigurationRepository;
+        private readonly EMailSender _eMailSender;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOptions<AuthMessageSenderOptions> config)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOptions<AuthMessageSenderOptions> config, INotificationConfigurationRepository configurationRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
+            _notificationConfigurationRepository = configurationRepository;
+            _eMailSender = new EMailSender(config);
         }
 
         [AllowAnonymous]
@@ -85,9 +90,18 @@ namespace BaseballPlanner.Controllers
 
                 if (result.Succeeded)
                 {
-                    //await _userManager.AddToRoleAsync(user, RoleNames.ROLE_MEMBER);
                     await _userManager.UpdateAsync(user);
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    var admins = await _userManager.GetUsersInRoleAsync(RoleNames.ROLE_ADMIN);
+                    foreach (var admin in admins)
+                    {
+                        var config = _notificationConfigurationRepository.GetConfigurationForUser(admin.UserId);
+                        if (config != null && config.NewUserRegistered)
+                        {
+                            await _eMailSender.SendUserConfirmationEmail(admin.Email);
+                        }
+                    }
+
                     return RedirectToAction("Registered", "Account");
                 }
                 else
@@ -131,8 +145,7 @@ namespace BaseballPlanner.Controllers
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { UserId = user.Id, code = code }, protocol: Request.Scheme);
 
-            EMailSender sender = new EMailSender(_config);
-            await sender.SendEmail(user.Email, "Kennwort zurückgesetzt", "Klicke hier, um dein Kennwort zurückzusetzen: <a href=\"" + callbackUrl + "\">link</a>");
+            await _eMailSender.SendEmail(user.Email, "Kennwort zurückgesetzt", "Klicke hier, um dein Kennwort zurückzusetzen: <a href=\"" + callbackUrl + "\">link</a>");
 
             return View("ForgotPasswordConfirmation");
         }

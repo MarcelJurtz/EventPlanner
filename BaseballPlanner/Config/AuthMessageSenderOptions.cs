@@ -13,5 +13,8 @@
 
         public string ParticipationText { get; set; }
         public string ParticipationSubject { get; set; }
+
+        public string UserRegisteredText { get; set; }
+        public string UserRegisteredSubject { get; set; }
     }
 }

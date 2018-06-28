@@ -103,7 +103,6 @@ namespace Planner
 
             app.UseAuthentication();
             app.UseStaticFiles();
-            //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
