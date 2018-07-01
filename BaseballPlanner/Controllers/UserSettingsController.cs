@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Planner.Helper;
 using Planner.Models;
 using Planner.Models.Helper;
@@ -18,8 +19,9 @@ namespace BaseballPlanner.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly INotificationConfigurationRepository _notificationConfigRepository;
+        private readonly IStringLocalizer<UserSettingsController> _localizer;
 
-        public UserSettingsController(UserManager<User> userManager, INotificationConfigurationRepository repo)
+        public UserSettingsController(UserManager<User> userManager, INotificationConfigurationRepository repo, IStringLocalizer<UserSettingsController> localizer)
         {
             _userManager = userManager;
             _notificationConfigRepository = repo;
@@ -56,7 +58,7 @@ namespace BaseballPlanner.Controllers
 
             if (_userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash, viewModel.OldPassword) == PasswordVerificationResult.Failed)
             {
-                ModelState.AddModelError("", "Dein eingegebenes altes Kennwort ist nicht korrekt.");
+                ModelState.AddModelError("", _localizer[UserSettingsStrings.SETT_ERR_INVALID_CREDENTIALS]);
                 return RedirectToAction(MethodNames.INDEX, viewModel);
             }
 
