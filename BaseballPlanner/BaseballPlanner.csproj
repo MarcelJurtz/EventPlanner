@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>SportsPlanner</AssemblyName>
-    <RootNamespace>Planner</RootNamespace>
+    <AssemblyName>BaseballPlanner</AssemblyName>
+    <RootNamespace>BaseballPlanner</RootNamespace>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 

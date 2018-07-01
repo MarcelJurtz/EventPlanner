@@ -1,14 +1,18 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Planner.Config;
 using Planner.Models;
 using Planner.Models.Repository;
 using Planner.Models.Repository.PostgreSQL;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Planner
 {
@@ -85,7 +89,28 @@ namespace Planner
 
             services.Configure<AuthMessageSenderOptions>(_configurationRoot.GetSection("ClubSettings"));
 
-            services.AddMvc();
+            // Localization
+            services.Configure<RequestLocalizationOptions>(
+                opts =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("en"),
+                        new CultureInfo("de")
+                    };
+
+                    opts.DefaultRequestCulture = new RequestCulture("de");
+                    // Formatting numbers, dates, etc.
+                    opts.SupportedCultures = supportedCultures;
+                    // UI strings that we have localized.
+                    opts.SupportedUICultures = supportedCultures;
+                });
+
+            services.AddMvc()
+                .AddViewLocalization(
+                    Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix,
+                    opts => { opts.ResourcesPath = "Resources"; })
+                    .AddDataAnnotationsLocalization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,6 +125,9 @@ namespace Planner
             {
                 app.UseExceptionHandler("/AppException");
             }
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.UseAuthentication();
             app.UseStaticFiles();

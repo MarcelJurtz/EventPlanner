@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Planner.Config;
 using Planner.Helper;
@@ -19,17 +20,20 @@ namespace BaseballPlanner.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IStringLocalizer<AccountController> _localizer;
 
         private readonly IOptions<AuthMessageSenderOptions> _config;
         private readonly INotificationConfigurationRepository _notificationConfigurationRepository;
         private readonly EMailSender _eMailSender;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOptions<AuthMessageSenderOptions> config, INotificationConfigurationRepository configurationRepository)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IOptions<AuthMessageSenderOptions> config, 
+            INotificationConfigurationRepository configurationRepository, IStringLocalizer<AccountController> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
             _notificationConfigurationRepository = configurationRepository;
+            _localizer = localizer;
             _eMailSender = new EMailSender(config);
         }
 
@@ -63,7 +67,7 @@ namespace BaseballPlanner.Controllers
                 }
             }
 
-            ModelState.AddModelError("", "Benutzername oder Kennwort ungültig.");
+            ModelState.AddModelError("err_login", _localizer[AccountStrings.ACC_ERR_INVALID_CREDENTIALS]);
             return View(viewModel);
         }
 
@@ -107,7 +111,7 @@ namespace BaseballPlanner.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("err_register", "Beim anlegen des Accounts ist ein Fehler aufgetreten. Die E-Mail Addresse oder der Benutzername ist bereits vergeben.");
+                    ModelState.AddModelError("err_register", _localizer[AccountStrings.ACC_ERR_DUPLICATE_REGISTRATION]);
                 }
             }
             return View(viewModel);
@@ -146,7 +150,7 @@ namespace BaseballPlanner.Controllers
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callbackUrl = Url.Action(MethodNames.ACC_RESET_PASSWORD, ControllerNames.ACCOUNT, new { UserId = user.Id, code = code }, protocol: Request.Scheme);
 
-            await _eMailSender.SendEmail(user.Email, "Kennwort zurückgesetzt", "Klicke hier, um dein Kennwort zurückzusetzen: <a href=\"" + callbackUrl + "\">link</a>");
+            await _eMailSender.SendEmail(user.Email, _localizer[AccountStrings.ACC_MAIL_PASSWORD_RESET_SUBJECT], _localizer[AccountStrings.ACC_MAIL_PASSWORD_RESET_CONTENT] + " <a href=\"" + callbackUrl + "\">link</a>");
 
             return View(MethodNames.ACC_FORGOT_PASSWORD_CONFIRMATION);
         }
