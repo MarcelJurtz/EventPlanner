@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Planner.Models
+namespace ClubGrid.Repository
 {
     public class AppDbContext : IdentityDbContext<User>
     {

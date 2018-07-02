@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Planner.Migrations
+namespace ClubGrid.Migrations
 {
     public partial class CustomUserV3 : Migration
     {

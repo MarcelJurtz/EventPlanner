@@ -2,7 +2,7 @@
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using System;
 
-namespace Planner.Migrations
+namespace ClubGrid.Migrations
 {
     public partial class Identity : Migration
     {

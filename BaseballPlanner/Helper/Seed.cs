@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
 
-namespace Planner.Models.Helper
+namespace ClubGrid.Helper
 {
     public static class Seed
     {

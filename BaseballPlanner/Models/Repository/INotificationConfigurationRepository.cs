@@ -1,6 +1,6 @@
 ﻿using ClubGrid.Models;
 
-namespace Planner.Models.Repository
+namespace ClubGrid.Repository
 {
     public interface INotificationConfigurationRepository : IRepository<NotificationConfiguration>
     {

@@ -1,4 +1,7 @@
-﻿using ClubGrid.Models;
+﻿using ClubGrid.Config;
+using ClubGrid.Models;
+using ClubGrid.Repository;
+using ClubGrid.Repository.PostgreSQL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,15 +10,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Planner.Config;
-using Planner.Models;
 using Planner.Models.Repository;
-using Planner.Models.Repository.PostgreSQL;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Planner
+namespace ClubGrid
 {
     public class Startup
     {

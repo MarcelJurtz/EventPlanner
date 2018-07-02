@@ -1,16 +1,15 @@
-﻿using ClubGrid.Models;
+﻿using ClubGrid.Helper;
+using ClubGrid.Models;
+using ClubGrid.Repository;
+using ClubGrid.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Planner.Helper;
-using Planner.Models.Helper;
-using Planner.Models.Repository;
-using Planner.ViewModels;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BaseballPlanner.Controllers
+namespace ClubGrid.Controllers
 {
     [Authorize(Roles = RoleNames.ROLE_MEMBER)]
     public class UserSettingsController : Controller

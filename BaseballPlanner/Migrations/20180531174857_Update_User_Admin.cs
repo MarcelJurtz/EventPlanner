@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Planner.Migrations
+namespace ClubGrid.Migrations
 {
     public partial class Update_User_Admin : Migration
     {

@@ -1,12 +1,12 @@
 ﻿using ClubGrid.Enums;
 using ClubGrid.Models;
-using Planner.ViewModels;
+using ClubGrid.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Planner.Models.Repository.PostgreSQL
+namespace ClubGrid.Repository.PostgreSQL
 {
     public class PostgresEventParticipationRepository : IEventParticipationRepository
     {

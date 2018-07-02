@@ -1,19 +1,18 @@
-﻿using ClubGrid.Models;
+﻿using ClubGrid.Config;
+using ClubGrid.Helper;
+using ClubGrid.Models;
+using ClubGrid.Repository;
+using ClubGrid.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Planner.Config;
-using Planner.Helper;
-using Planner.Models.Helper;
-using Planner.Models.Repository;
-using Planner.ViewModels;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace BaseballPlanner.Controllers
+namespace ClubGrid.Controllers
 {
     [Authorize]
     public class AccountController : Controller

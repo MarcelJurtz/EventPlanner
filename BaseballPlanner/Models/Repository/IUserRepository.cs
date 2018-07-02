@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Planner.Models.Repository
+namespace ClubGrid.Repository
 {
     public interface IUserRepository
     {

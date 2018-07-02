@@ -1,14 +1,14 @@
-﻿using ClubGrid.Enums;
+﻿using ClubGrid.Config;
+using ClubGrid.Enums;
+using ClubGrid.Helper;
 using ClubGrid.Models;
+using ClubGrid.Repository;
+using ClubGrid.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Planner.Config;
-using Planner.Helper;
-using Planner.Models.Helper;
 using Planner.Models.Repository;
-using Planner.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Planner.Controllers
+namespace ClubGrid.Controllers
 {
     [Authorize(Roles = RoleNames.ROLE_MEMBER)]
     public class EventController : Controller

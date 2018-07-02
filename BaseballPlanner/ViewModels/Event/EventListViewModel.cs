@@ -1,7 +1,7 @@
 ﻿using ClubGrid.Models;
 using System.Collections.Generic;
 
-namespace Planner.ViewModels
+namespace ClubGrid.ViewModels
 {
     public class EventListViewModel
     {

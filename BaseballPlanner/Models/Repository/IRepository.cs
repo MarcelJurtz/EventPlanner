@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Planner.Models.Repository
+namespace ClubGrid.Repository
 {
     public interface IRepository<TEntity> where TEntity : class
     {

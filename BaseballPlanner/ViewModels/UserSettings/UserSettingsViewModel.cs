@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Planner.ViewModels
+namespace ClubGrid.ViewModels
 {
     public class UserSettingsViewModel
     {

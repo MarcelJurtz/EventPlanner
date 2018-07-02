@@ -1,14 +1,13 @@
-﻿using ClubGrid.Models;
+﻿using ClubGrid.Helper;
+using ClubGrid.Models;
+using ClubGrid.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Planner.Helper;
-using Planner.Models.Helper;
-using Planner.Models.Repository;
 using System;
 using System.Linq;
 using System.Net;
 
-namespace BaseballPlanner.Controllers
+namespace ClubGrid.Controllers
 {
     [Authorize(Roles = RoleNames.ROLE_ADMIN)]
     public class NewsController : Controller

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using System;
 using System.Collections.Generic;
 
-namespace Planner.Migrations
+namespace ClubGrid.Migrations
 {
     public partial class addNews : Migration
     {

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore;
+﻿using ClubGrid.Helper;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Planner.Models.Helper;
 using System;
 
-namespace Planner
+namespace ClubGrid
 {
     public class Program
     {

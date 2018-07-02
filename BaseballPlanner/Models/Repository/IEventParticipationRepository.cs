@@ -1,7 +1,7 @@
 ﻿using ClubGrid.Models;
-using Planner.ViewModels;
+using ClubGrid.ViewModels;
 
-namespace Planner.Models.Repository
+namespace ClubGrid.Repository
 {
     public interface IEventParticipationRepository : IRepository<EventParticipation>
     {

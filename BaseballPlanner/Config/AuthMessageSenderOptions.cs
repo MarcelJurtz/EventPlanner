@@ -1,4 +1,4 @@
-﻿namespace Planner.Config
+﻿namespace ClubGrid.Config
 {
     public class AuthMessageSenderOptions
     {

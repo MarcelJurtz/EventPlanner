@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Options;
+﻿using ClubGrid.Interfaces;
+using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
-namespace Planner.Config
+namespace ClubGrid.Config
 {
-    public class EMailSender
+    public class EMailSender : IEmailSender
     {
         public AuthMessageSenderOptions _options { get; }
 

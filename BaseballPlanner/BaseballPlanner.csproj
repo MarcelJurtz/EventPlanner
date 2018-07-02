@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <AssemblyName>BaseballPlanner</AssemblyName>
-    <RootNamespace>BaseballPlanner</RootNamespace>
+    <AssemblyName>ClubGrid</AssemblyName>
+    <RootNamespace>ClubGrid</RootNamespace>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
@@ -29,11 +29,6 @@
   
 <ItemGroup>
   <ProjectReference Include="..\ClubGrid.Interface\ClubGrid.Interface.csproj" />
-</ItemGroup>
-
-  
-<ItemGroup>
-  <Folder Include="Planner\" />
 </ItemGroup>
 
 </Project>

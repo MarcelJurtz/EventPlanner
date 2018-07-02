@@ -1,6 +1,6 @@
 ﻿using ClubGrid.Models;
 
-namespace Planner.ViewModels
+namespace ClubGrid.ViewModels
 {
     public class TeamDeleteViewModel
     {

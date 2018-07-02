@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Planner.Models.Repository.PostgreSQL
+namespace ClubGrid.Repository.PostgreSQL
 {
     public class PostgresTeamAssociationRepository : ITeamAssociationRepository
     {

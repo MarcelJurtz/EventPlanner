@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
-namespace Planner.Migrations
+namespace ClubGrid.Migrations
 {
     public partial class Upd_TeamAssociation_TableName : Migration
     {

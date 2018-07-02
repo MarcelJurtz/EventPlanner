@@ -1,7 +1,7 @@
 ﻿using ClubGrid.Enums;
 using System.Collections.Generic;
 
-namespace Planner.ViewModels
+namespace ClubGrid.ViewModels
 {
     public class TeamRoleViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using ClubGrid.Models;
 using System.Collections.Generic;
 
-namespace Planner.Models.Repository
+namespace ClubGrid.Repository
 {
     public interface ITeamAssociationRepository : IRepository<TeamAssociation>
     {

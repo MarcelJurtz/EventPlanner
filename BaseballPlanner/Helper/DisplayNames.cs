@@ -1,4 +1,4 @@
-﻿namespace Planner.Models.Helper
+﻿namespace ClubGrid.Helper
 {
     public class DisplayNames
     {

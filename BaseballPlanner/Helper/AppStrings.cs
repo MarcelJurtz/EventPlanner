@@ -1,4 +1,4 @@
-﻿namespace Planner.Helper
+﻿namespace ClubGrid.Helper
 {
     public class AppStrings
     {

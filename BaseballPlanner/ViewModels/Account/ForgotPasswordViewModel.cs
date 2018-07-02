@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Planner.ViewModels
+namespace ClubGrid.ViewModels
 {
     public class ForgotPasswordViewModel
     {
