@@ -1,4 +1,4 @@
-﻿namespace Planner.Notification
+﻿namespace ClubGrid.Models
 {
     public interface IEmail : INotification
     {

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseballPlanner", "BaseballPlanner\BaseballPlanner.csproj", "{0A9B87D6-6432-41FC-94A3-AA2B8DBB1531}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubGrid.Interface", "ClubGrid.Interface\ClubGrid.Interface.csproj", "{57EDDDD7-7606-4506-AC74-657F091DF137}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0A9B87D6-6432-41FC-94A3-AA2B8DBB1531}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A9B87D6-6432-41FC-94A3-AA2B8DBB1531}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A9B87D6-6432-41FC-94A3-AA2B8DBB1531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57EDDDD7-7606-4506-AC74-657F091DF137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57EDDDD7-7606-4506-AC74-657F091DF137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57EDDDD7-7606-4506-AC74-657F091DF137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57EDDDD7-7606-4506-AC74-657F091DF137}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

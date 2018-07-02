@@ -1,4 +1,4 @@
-﻿using Planner.Models;
+﻿using ClubGrid.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

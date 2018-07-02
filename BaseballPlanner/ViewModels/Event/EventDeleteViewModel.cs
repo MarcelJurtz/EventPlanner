@@ -1,8 +1,10 @@
-﻿namespace Planner.ViewModels
+﻿using ClubGrid.Models;
+
+namespace Planner.ViewModels
 {
     public class EventDeleteViewModel
     {
-        public Models.Event SelectedEvent { get; set; }
+        public Event SelectedEvent { get; set; }
         public int UserParticipationCount { get; set; }
     }
 }

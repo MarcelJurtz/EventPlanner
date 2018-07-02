@@ -1,5 +1,5 @@
-﻿using Planner.Models;
-using Planner.Models.Enums;
+﻿using ClubGrid.Enums;
+using ClubGrid.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

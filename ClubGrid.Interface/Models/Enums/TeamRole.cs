@@ -1,4 +1,4 @@
-﻿namespace Planner.Models
+﻿namespace ClubGrid.Enums
 {
     public enum TeamRole
     {

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClubGrid.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Planner.Config;
 using Planner.Helper;
-using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;

@@ -1,11 +1,12 @@
-﻿using Planner.Models.Helper;
+﻿using ClubGrid.Enums;
+using ClubGrid.Models.Helper;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
-namespace Planner.Models
+namespace ClubGrid.Models
 {
     [Table("team_association")]
     public class TeamAssociation : INotifyPropertyChanged

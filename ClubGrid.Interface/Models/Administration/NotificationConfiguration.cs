@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Planner.Models
+namespace ClubGrid.Models
 {
     [Table("notification_configuration")]
     public class NotificationConfiguration

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ClubGrid.Enums;
+using ClubGrid.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Planner.Config;
 using Planner.Helper;
-using Planner.Models;
-using Planner.Models.Enums;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -83,7 +82,7 @@ namespace Planner.Controllers
         public ViewResult Add()
         {
             EventEditViewModel viewModel = new EventEditViewModel();
-            viewModel.CurrentEvent = new Models.Event();
+            viewModel.CurrentEvent = new Event();
             viewModel.Teams = _teamRepository.GetAll().ToList();
             return View(viewModel);
         }

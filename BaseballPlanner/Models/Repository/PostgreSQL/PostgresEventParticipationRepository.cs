@@ -1,4 +1,5 @@
-﻿using Planner.Models.Enums;
+﻿using ClubGrid.Enums;
+using ClubGrid.Models;
 using Planner.ViewModels;
 using System;
 using System.Collections.Generic;

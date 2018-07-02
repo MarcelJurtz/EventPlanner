@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ClubGrid.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Planner.Helper;
-using Planner.Models;
 using Planner.Models.Helper;
 using Planner.Models.Repository;
 using Planner.ViewModels;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BaseballPlanner.Controllers
 {

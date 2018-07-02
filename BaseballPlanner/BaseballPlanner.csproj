@@ -26,4 +26,14 @@
   <Content Include="Styles\main.less" />
 </ItemGroup>
 
+  
+<ItemGroup>
+  <ProjectReference Include="..\ClubGrid.Interface\ClubGrid.Interface.csproj" />
+</ItemGroup>
+
+  
+<ItemGroup>
+  <Folder Include="Planner\" />
+</ItemGroup>
+
 </Project>

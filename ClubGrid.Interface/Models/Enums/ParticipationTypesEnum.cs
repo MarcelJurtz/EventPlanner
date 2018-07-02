@@ -1,4 +1,4 @@
-﻿namespace Planner.Models.Enums
+﻿namespace ClubGrid.Enums
 {
     public enum ParticipationTypesEnum
     {

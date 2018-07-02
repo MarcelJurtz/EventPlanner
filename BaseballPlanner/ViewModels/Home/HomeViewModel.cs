@@ -1,4 +1,4 @@
-﻿using Planner.Models;
+﻿using ClubGrid.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

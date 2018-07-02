@@ -1,4 +1,6 @@
-﻿namespace Planner.Models.Repository
+﻿using ClubGrid.Models;
+
+namespace Planner.Models.Repository
 {
     public interface INotificationConfigurationRepository : IRepository<NotificationConfiguration>
     {

@@ -1,4 +1,4 @@
-﻿using Planner.Models;
+﻿using ClubGrid.Models;
 
 namespace Planner.ViewModels
 {

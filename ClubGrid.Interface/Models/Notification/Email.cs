@@ -1,6 +1,6 @@
-﻿using Planner.Config;
+﻿using ClubGrid.Interfaces;
 
-namespace Planner.Notification
+namespace ClubGrid.Models
 {
     public class Email : IEmail
     {
@@ -8,7 +8,7 @@ namespace Planner.Notification
         private string _recipient;
         private string _content;
 
-        private EMailSender _sender;
+        private IEmailSender _sender;
 
         public Email(string recipient, string content) : this(recipient, string.Empty, content) { }
 

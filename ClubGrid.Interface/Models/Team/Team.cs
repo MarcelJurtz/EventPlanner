@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Planner.Models.Helper;
+﻿using ClubGrid.Models.Helper;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
-namespace Planner.Models
+namespace ClubGrid.Models
 {
     [Table("team")]
     public class Team : INotifyPropertyChanged
