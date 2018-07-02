@@ -22,6 +22,7 @@ namespace ClubGrid.Controllers
         {
             _userManager = userManager;
             _notificationConfigRepository = repo;
+            _localizer = localizer;
         }
 
         public async Task<IActionResult> Index()
