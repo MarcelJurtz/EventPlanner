@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ev_available_for_teams" xml:space="preserve">
-    <value>Share with teams</value>
+    <value>Freigabe für Teams</value>
   </data>
   <data name="ev_save" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
-  <data name="ev_view_caption_add" xml:space="preserve">
-    <value>Add Event</value>
+  <data name="ev_view_caption_edit" xml:space="preserve">
+    <value>Veranstaltung bearbeiten</value>
   </data>
 </root>

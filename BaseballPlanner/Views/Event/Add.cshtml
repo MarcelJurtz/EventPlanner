@@ -1,7 +1,7 @@
 ﻿@model EventEditViewModel
 @inject IViewLocalizer _localizer
 
-<h3>@Model.Caption</h3>
+<h3>@_localizer[EventStrings.EV_VIEW_CAPTION_ADD]</h3>
 <form asp-action="Add" method="post" role="form">
     <div class="form-group">
         <!-- Bezeichnung -->

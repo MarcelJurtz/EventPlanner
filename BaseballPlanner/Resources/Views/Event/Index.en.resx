@@ -117,13 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ev_available_for_teams" xml:space="preserve">
-    <value>Share with teams</value>
+  <data name="ev_caption_designation" xml:space="preserve">
+    <value>Designation</value>
   </data>
-  <data name="ev_save" xml:space="preserve">
-    <value>Save</value>
+  <data name="ev_caption_location" xml:space="preserve">
+    <value>Location</value>
   </data>
-  <data name="ev_view_caption_add" xml:space="preserve">
-    <value>Add Event</value>
+  <data name="ev_caption_meetingpoint" xml:space="preserve">
+    <value>Meetingpoint</value>
+  </data>
+  <data name="ev_caption_start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="ev_no_entries_available" xml:space="preserve">
+    <value>No entries available</value>
+  </data>
+  <data name="ev_view_caption" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="ev_your_teams" xml:space="preserve">
+    <value>Your teams</value>
   </data>
 </root>

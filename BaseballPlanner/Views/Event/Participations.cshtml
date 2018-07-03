@@ -1,6 +1,7 @@
 ﻿@model EventParticipationViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Teilnahmen - @Model.EventDesignation</h2>
+<h2>@_localizer[EventStrings.EV_PARTICIPATIONS] - @Model.EventDesignation</h2>
 
 @if (Model.EventParticipations.Count() > 0)
 {
@@ -9,32 +10,32 @@
             <table class="table table-bordred table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th class="text-center">Status</th>
-                        <th>Bemerkung</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_NAME]</th>
+                        <th class="text-center">@_localizer[EventStrings.EV_CAPTION_STATUS]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_NOTE]</th>
                         @if (Model.DisplayIsPlayer)
                         {
-                            <th class="text-center">Spieler</th>
+                        <th class="text-center">@_localizer[EventStrings.EV_CAPTION_NOTE]</th>
                         }
 
                         @if (Model.DisplayIsCoach)
                         {
-                            <th class="text-center">Coach</th>
+                        <th class="text-center">@_localizer[EventStrings.EV_CAPTION_COACH]</th>
                         }
 
                         @if (Model.DisplayIsUmpire)
                         {
-                            <th class="text-center">Umpire</th>
+                        <th class="text-center">@_localizer[EventStrings.EV_CAPTION_UMPIRE]</th>
                         }
 
                         @if (Model.DisplayIsScorer)
                         {
-                            <th class="text-center">Scorer</th>
+                        <th class="text-center">@_localizer[EventStrings.EV_CAPTION_SCORER]</th>
                         }
 
                         @if (Model.DisplayHasSeats)
                         {
-                            <th class="text-center">Sitzplätze</th>
+                        <th class="text-center">@_localizer[EventStrings.EV_CAPTION_SEATS]</th>
                         }
                 </thead>
                 <tbody>
@@ -108,6 +109,6 @@
 }
 else
 {
-    <p>Keine Einträge vorhanden</p>
+    <p>@_localizer[EventStrings.EV_NO_ENTRIES_AVAILABLE]</p>
 }
 

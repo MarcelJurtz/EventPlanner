@@ -1,17 +1,18 @@
 ﻿@model EventDeleteViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Event Löschen</h2>
+<h2>@Model.Caption</h2>
 
 <form asp-action="Delete" method="post" role="form">
     <p>
-        Möchten Sie das Event '@Model.SelectedEvent.Designation' wirklich löschen?
+        @_localizer[EventStrings.EV_DELETE_CONFIRMATION_TEXT] '@Model.SelectedEvent.Designation' ?
         @if (Model.UserParticipationCount == 0)
         {
-            <span>Es sind noch keine Zu- oder Absagen vorhanden.</span>
+            <span>@_localizer[EventStrings.EV_DELETE_NO_PARTICIPATIONS]</span>
         }
         else
         {
-            <span>Es sind @Model.UserParticipationCount Zu- oder Absagen vorhanden.</span>
+            <span>@Model.UserParticipationCount @_localizer[EventStrings.EV_DELETE_PARTICIPATIONS]</span>
         }
     </p>
     <div class="form-group">
@@ -19,8 +20,8 @@
             <a class="btn btn-primary"
                role="button"
                asp-controller="Event"
-               asp-action="Administrate">Nein</a>
-            <input type="submit" class="btn btn-danger" value="Ja" />
+               asp-action="Administrate">@_localizer[EventStrings.EV_DELETE_CANCEL]</a>
+            <input type="submit" class="btn btn-danger" value="@_localizer[EventStrings.EV_DELETE_CONFIRM]" />
         </div>
     </div>
 </form>

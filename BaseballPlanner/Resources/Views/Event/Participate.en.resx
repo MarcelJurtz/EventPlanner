@@ -117,13 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ev_available_for_teams" xml:space="preserve">
-    <value>Share with teams</value>
+  <data name="ev_coaches_required" xml:space="preserve">
+    <value>Coaches required</value>
+  </data>
+  <data name="ev_edit_participation" xml:space="preserve">
+    <value>Edit participation</value>
+  </data>
+  <data name="ev_meetingpoint" xml:space="preserve">
+    <value>Meetingpoint</value>
+  </data>
+  <data name="ev_participate_maybe" xml:space="preserve">
+    <value>I don't know yet</value>
+  </data>
+  <data name="ev_participate_no" xml:space="preserve">
+    <value>I'm out</value>
+  </data>
+  <data name="ev_participate_yes" xml:space="preserve">
+    <value>Count me in!</value>
+  </data>
+  <data name="ev_players_required" xml:space="preserve">
+    <value>Players required</value>
   </data>
   <data name="ev_save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="ev_view_caption_add" xml:space="preserve">
-    <value>Add Event</value>
+  <data name="ev_scorers_required" xml:space="preserve">
+    <value>Scorers required</value>
+  </data>
+  <data name="ev_time_from" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="ev_time_until" xml:space="preserve">
+    <value>until</value>
+  </data>
+  <data name="ev_umpires_required" xml:space="preserve">
+    <value>Umpires required</value>
   </data>
 </root>

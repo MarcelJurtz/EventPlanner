@@ -1,8 +1,9 @@
 ﻿@model EventListViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Vergangene Events</h2>
+<h2>@_localizer[EventStrings.EV_VIEW_CAPTION_HISTORY]</h2>
 
-<p>Deine Teams: @String.Join(",", @Model.TeamNames)</p>
+<p>@_localizer[EventStrings.EV_YOUR_TEAMS]: @String.Join(",", @Model.TeamNames)</p>
 
 @if (Model.Events.Count() > 0)
 {
@@ -11,10 +12,10 @@
             <table class="table table-bordred table-striped">
                 <thead>
                     <tr>
-                        <th>Bezeichnung</th>
-                        <th>Ort</th>
-                        <th>Start</th>
-                        <th>Treffpunkt</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_DESIGNATION]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_LOCATION]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_START]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_MEETINGPOINT]</th>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Events)
@@ -33,5 +34,5 @@
 }
 else
 {
-    <p>Keine Einträge vorhanden</p>
+    <p>@_localizer[EventStrings.EV_NO_ENTRIES_AVAILABLE]</p>
 }

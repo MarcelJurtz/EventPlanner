@@ -88,7 +88,6 @@ namespace ClubGrid.Controllers
         public ViewResult Add()
         {
             EventEditViewModel viewModel = new EventEditViewModel();
-            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION_ADD];
             viewModel.CurrentEvent = new Event();
             viewModel.Teams = _teamRepository.GetAll().ToList();
             return View(viewModel);
@@ -214,7 +213,6 @@ namespace ClubGrid.Controllers
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
             EventEditViewModel viewModel = new EventEditViewModel();
-            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION_EDIT];
             viewModel.CurrentEvent = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
             if (viewModel.CurrentEvent == null)
                 return StatusCode((int)HttpStatusCode.NotFound);
@@ -275,6 +273,7 @@ namespace ClubGrid.Controllers
                 return StatusCode((int)HttpStatusCode.NotFound);
 
             EventDeleteViewModel viewModel = new EventDeleteViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION_DELETE];
             viewModel.SelectedEvent = e;
             viewModel.UserParticipationCount = _participationRepository.Find(x => x.EventId == e.Id).Count();
 

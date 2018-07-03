@@ -126,7 +126,4 @@
   <data name="ev_view_caption_add" xml:space="preserve">
     <value>Veranstaltung hinzufügen</value>
   </data>
-  <data name="ev_view_caption_edit" xml:space="preserve">
-    <value>Veranstaltung bearbeiten</value>
-  </data>
 </root>

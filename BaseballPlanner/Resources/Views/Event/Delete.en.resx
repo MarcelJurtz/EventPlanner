@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ev_available_for_teams" xml:space="preserve">
-    <value>Share with teams</value>
+  <data name="ev_delete_cancel" xml:space="preserve">
+    <value>No</value>
   </data>
-  <data name="ev_save" xml:space="preserve">
-    <value>Save</value>
+  <data name="ev_delete_confirm" xml:space="preserve">
+    <value>Yes</value>
   </data>
-  <data name="ev_view_caption_add" xml:space="preserve">
-    <value>Add Event</value>
+  <data name="ev_delete_confirmation_text" xml:space="preserve">
+    <value>Do you really want to delete this event:</value>
+  </data>
+  <data name="ev_delete_no_participations" xml:space="preserve">
+    <value>No users specified their participation yet.</value>
+  </data>
+  <data name="ev_delete_participations" xml:space="preserve">
+    <value>users already specified their participation.</value>
+  </data>
+  <data name="ev_view_caption_delete" xml:space="preserve">
+    <value>Delete Event</value>
   </data>
 </root>

@@ -1,45 +1,46 @@
 ﻿@model EventParticipateViewModel
+@inject IViewLocalizer _localizer
 
+<h2>@Model.CurrentEvent.Designation</h2>
 <form asp-action="Participate" asp-controller="Event">
     <div class="col-md-10 form-group">
 
         <!-- Event Information -->
-        <h2>@Model.CurrentEvent.Designation</h2>
         <p>
             @Model.CurrentEvent.Description
         </p>
-        <p>Von @Model.CurrentEvent.Start bis @Model.CurrentEvent.End</p>
-        <p>Treffpunkt: @Model.CurrentEvent.MeetingLocation, @Model.CurrentEvent.MeetingTime</p>
+        <p>@_localizer[EventStrings.EV_TIME_FROM] @Model.CurrentEvent.Start @_localizer[EventStrings.EV_TIME_UNTIL] @Model.CurrentEvent.End</p>
+        <p>@_localizer[EventStrings.EV_MEETINGPOINT]: @Model.CurrentEvent.MeetingLocation, @Model.CurrentEvent.MeetingTime</p>
         <p>
             @if (Model.CurrentEvent.PlayersRequired > 0)
             {
-                <span>Spieler benötigt: @Model.CurrentEvent.PlayersRequired</span><br />
+                <span>@_localizer[EventStrings.EV_PLAYERS_REQUIRED]: @Model.CurrentEvent.PlayersRequired</span><br />
             }
 
             @if (@Model.CurrentEvent.CoachesRequired > 0)
             {
-                <span>Coaches benötigt: @Model.CurrentEvent.CoachesRequired</span><br />
+                <span>@_localizer[EventStrings.EV_COACHES_REQUIRED]: @Model.CurrentEvent.CoachesRequired</span><br />
             }
 
             @if (Model.CurrentEvent.UmpiresRequired > 0)
             {
-                <span>Umpires benötigt: @Model.CurrentEvent.UmpiresRequired</span><br />
+                <span>@_localizer[EventStrings.EV_UMPIRES_REQUIRED]: @Model.CurrentEvent.UmpiresRequired</span><br />
             }
 
             @if (@Model.CurrentEvent.ScorersRequired > 0)
             {
-                <span>Scorer benötigt: @Model.CurrentEvent.ScorersRequired</span>
+                <span>@_localizer[EventStrings.EV_SCORERS_REQUIRED]: @Model.CurrentEvent.ScorersRequired</span>
             }
 
         </p>
 
-        <h4>Teilnahme Bearbeiten</h4>
+        <h4>@_localizer[EventStrings.EV_EDIT_PARTICIPATION]</h4>
 
-        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.yes) Ich bin dabei!
+        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.yes) @_localizer[EventStrings.EV_PARTICIPATE_YES]
         <br />
-        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.no) Ich habe leider keine Zeit
+        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.no) @_localizer[EventStrings.EV_PARTICIPATE_NO]
         <br />
-        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.maybe) Ich bin noch unentschieden
+        @Html.RadioButtonFor(x => x.ParticipationType, ParticipationTypesEnum.maybe) @_localizer[EventStrings.EV_PARTICIPATE_MAYBE]
         <br />
         <br />
 
@@ -88,7 +89,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
-            <input type="submit" class="btn btn-primary" value="Speichern" />
+            <input type="submit" class="btn btn-primary" value="@_localizer[EventStrings.EV_SAVE]" />
         </div>
     </div>
 </form>

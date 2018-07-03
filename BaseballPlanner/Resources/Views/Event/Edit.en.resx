@@ -123,7 +123,7 @@
   <data name="ev_save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="ev_view_caption_add" xml:space="preserve">
-    <value>Add Event</value>
+  <data name="ev_view_caption_edit" xml:space="preserve">
+    <value>Edit Event</value>
   </data>
 </root>
