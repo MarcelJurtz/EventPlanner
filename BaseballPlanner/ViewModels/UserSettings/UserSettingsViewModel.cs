@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClubGrid.ViewModels
 {
-    public class UserSettingsViewModel
+    public class UserSettingsViewModel : BaseViewModel
     {
         [DisplayName("Altes Kennwort")]
         [DataType(DataType.Password)]

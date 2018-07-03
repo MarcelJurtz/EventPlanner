@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace ClubGrid.ViewModels
 {
-    public class EventEditViewModel
+    public class EventEditViewModel : BaseViewModel
     {
+        public string Caption { get; set; }
+
         public Event CurrentEvent { get; set; }
         public List<Team> Teams { get; set; }
     }

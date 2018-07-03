@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClubGrid.ViewModels
 {
-    public class ResetPasswordViewModel
+    public class ResetPasswordViewModel : BaseViewModel
     {
         public string Code { get; set; }
 

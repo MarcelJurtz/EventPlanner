@@ -2,7 +2,7 @@
 
 namespace ClubGrid.ViewModels
 {
-    public class TeamEditViewModel
+    public class TeamEditViewModel : BaseViewModel
     { 
         public Team CurrentTeam { get; set; }
     }

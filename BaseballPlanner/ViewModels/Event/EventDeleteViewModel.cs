@@ -2,7 +2,7 @@
 
 namespace ClubGrid.ViewModels
 {
-    public class EventDeleteViewModel
+    public class EventDeleteViewModel : BaseViewModel
     {
         public Event SelectedEvent { get; set; }
         public int UserParticipationCount { get; set; }

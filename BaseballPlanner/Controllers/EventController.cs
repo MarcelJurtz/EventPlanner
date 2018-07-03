@@ -7,6 +7,7 @@ using ClubGrid.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Planner.Models.Repository;
 using System;
@@ -30,12 +31,13 @@ namespace ClubGrid.Controllers
         private readonly INotificationConfigurationRepository _notificationConfigurationRepository;
         private readonly UserManager<User> _userManager;
         private readonly EMailSender _eMailSender;
+        private readonly IStringLocalizer<EventController> _localizer;
 
         // Constructor parameters will be injected 
         // because the objects have been registered in startup.cs
         public EventController(IEventRepository eventRepository, ITeamRepository teamRepository, IEventParticipationRepository participationRepository,
             IEventAssociationRepository eventAssociationRepository, IUserRepository userRepository, INotificationConfigurationRepository configurationRepository,
-            UserManager<User> usermanager, IOptions<AuthMessageSenderOptions> config)
+            IStringLocalizer<EventController> localizer, UserManager<User> usermanager, IOptions<AuthMessageSenderOptions> config)
         {
             _eventRepository = eventRepository;
             _teamRepository = teamRepository;
@@ -44,12 +46,14 @@ namespace ClubGrid.Controllers
             _userRepository = userRepository;
             _notificationConfigurationRepository = configurationRepository;
             _userManager = usermanager;
+            _localizer = localizer;
             _eMailSender = new EMailSender(config);
         }
 
         public async Task<ViewResult> Index()
         {
             EventListViewModel viewModel = new EventListViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION];
             var user = await _userManager.GetUserAsync(this.User);
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
             viewModel.Events = _eventRepository.GetAllForUser(user.UserId, true);
@@ -62,6 +66,7 @@ namespace ClubGrid.Controllers
         public async Task<ViewResult> Unread()
         {
             EventListViewModel viewModel = new EventListViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION];
             var user = await _userManager.GetUserAsync(this.User);
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
             viewModel.Events = _eventRepository.GetUnreadForUser(user.UserId, true);
@@ -72,6 +77,7 @@ namespace ClubGrid.Controllers
         public async Task<ViewResult> History()
         {
             EventListViewModel viewModel = new EventListViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION];
             var user = await _userManager.GetUserAsync(this.User);
             viewModel.TeamNames = _teamRepository.GetForUser(user.UserId).Select(t => t.Designation).ToArray();
             viewModel.Events = _eventRepository.GetHistoricalForUser(user.UserId).OrderByDescending(e => e.Start);
@@ -82,6 +88,7 @@ namespace ClubGrid.Controllers
         public ViewResult Add()
         {
             EventEditViewModel viewModel = new EventEditViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION_ADD];
             viewModel.CurrentEvent = new Event();
             viewModel.Teams = _teamRepository.GetAll().ToList();
             return View(viewModel);
@@ -195,6 +202,7 @@ namespace ClubGrid.Controllers
         public IActionResult Administrate()
         {
             EventListViewModel viewModel = new EventListViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION];
             viewModel.Events = _eventRepository.GetAll();
             return View(viewModel);
         }
@@ -206,6 +214,7 @@ namespace ClubGrid.Controllers
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
             EventEditViewModel viewModel = new EventEditViewModel();
+            viewModel.Caption = _localizer[EventStrings.EV_VIEW_CAPTION_EDIT];
             viewModel.CurrentEvent = _eventRepository.Find(x => x.Id == id).FirstOrDefault();
             if (viewModel.CurrentEvent == null)
                 return StatusCode((int)HttpStatusCode.NotFound);

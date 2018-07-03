@@ -2,7 +2,7 @@
 
 namespace ClubGrid.ViewModels
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         [Required(ErrorMessage = "Bitte gib einen Benutzernamen an")]
         [Display(Name = "Benutzername")]

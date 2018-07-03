@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ClubGrid.ViewModels
 {
-    public class UserEditViewModel
+    public class UserEditViewModel : BaseViewModel
     {
         public User CurrentUser { get; set; }
         public List<Team> AllTeams { get; set; }

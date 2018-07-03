@@ -1,6 +1,7 @@
 ﻿@model EventListViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Events</h2>
+<h2>@Model.Caption</h2>
 
 @if (Model.Events.Count() > 0)
 {
@@ -9,12 +10,12 @@
             <table class="table table-bordred table-striped">
                 <thead>
                     <tr>
-                        <th>Bezeichnung</th>
-                        <th>Ort</th>
-                        <th>Start</th>
-                        <th>Treffpunkt</th>
-                        <th>Bearbeiten</th>
-                        <th>Löschen</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_DESIGNATION]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_LOCATION]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_START]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_MEETINGPOINT]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_EDIT]</th>
+                        <th>@_localizer[EventStrings.EV_CAPTION_DELETE]</th>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Events)
@@ -47,10 +48,10 @@
 }
 else
 {
-    <p>Keine Einträge vorhanden</p>
+    <p>@_localizer[EventStrings.EV_NO_ENTRIES_AVAILABLE]</p>
 }
 
 <a class="btn btn-primary"
    role="button"
    asp-controller="Event"
-   asp-action="Add"><i class="fas fa-plus"></i>&nbsp;Eintrag hinzufügen</a>
+   asp-action="Add"><i class="fas fa-plus"></i>&nbsp;@_localizer[EventStrings.EV_ADD_ENTRY]</a>

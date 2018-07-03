@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClubGrid.ViewModels
 {
-    public class EventParticipateViewModel
+    public class EventParticipateViewModel : BaseViewModel
     {
         public Event CurrentEvent { get; set; }
 

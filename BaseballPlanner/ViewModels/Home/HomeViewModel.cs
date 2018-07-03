@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ClubGrid.ViewModels
 {
-    public class HomeViewModel
+    public class HomeViewModel : BaseViewModel
     {
         public IEnumerable<IGrouping<DateTime, News>> News {get;set;}
     }

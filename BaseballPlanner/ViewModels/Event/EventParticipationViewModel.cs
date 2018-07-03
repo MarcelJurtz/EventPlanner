@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ClubGrid.ViewModels
 {
-    public class EventParticipationViewModel
+    public class EventParticipationViewModel : BaseViewModel
     {
         public int EventId { get; set; }
         public string EventDesignation { get; set; }
