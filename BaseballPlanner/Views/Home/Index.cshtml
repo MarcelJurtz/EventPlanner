@@ -1,6 +1,7 @@
 ﻿@model HomeViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Neuigkeiten</h2>
+<h2>@_localizer[HomeStrings.HM_CAPTION_INDEX]</h2>
 @foreach (var news in Model.News)
 {
     <p>

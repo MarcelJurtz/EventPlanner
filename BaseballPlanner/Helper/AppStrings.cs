@@ -75,4 +75,9 @@
 
         public const string EV_CAPTION_UNREAD = "ev_caption_unread";
     }
+
+    public class HomeStrings
+    {
+        public const string HM_CAPTION_INDEX = "hm_caption_index";
+    }
 }
