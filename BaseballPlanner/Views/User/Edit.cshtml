@@ -1,13 +1,14 @@
 ﻿@model UserEditViewModel
+@inject IViewLocalizer _localizer
 
-<h3>Eintrag bearbeiten</h3>
+<h2>@_localizer[UserStrings.US_CAPTION_EDIT]</h2>
 <form asp-action="Edit" method="post" role="form">
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <p>Benutzername: @Model.CurrentUser.UserName</p>
-        <p>E-Mail Adresse: @Model.CurrentUser.Email</p>
+        <p>@_localizer[UserStrings.US_INFO_USERNAME]: @Model.CurrentUser.UserName</p>
+        <p>@_localizer[UserStrings.US_INFO_EMAIL]: @Model.CurrentUser.Email</p>
 
-        <h3>Teams</h3>
+        <h3>@_localizer[UserStrings.US_CAPTION_TEAMS]</h3>
         <div class="pre-scrollable border border-primary padding">
             @for (int i = 0; i < Model.AllTeams.Count(); i++)
             {
@@ -21,12 +22,12 @@
             }
         </div>
 
-        <h3>Rolle</h3>
-        <label><input asp-for="IsAdmin" />&nbsp;Ist Administrator</label>
+        <h3>@_localizer[UserStrings.US_CAPTION_ROLES]</h3>
+        <label><input asp-for="IsAdmin" />&nbsp;@_localizer[UserStrings.US_IS_ADMIN]</label>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
-            <input type="submit" class="btn btn-primary" value="Speichern" />
+            <input type="submit" class="btn btn-primary" value="@_localizer[UserStrings.US_BUTTON_SAVE]" />
         </div>
     </div>
 </form>

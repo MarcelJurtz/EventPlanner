@@ -1,6 +1,7 @@
 ﻿@model UserIndexViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Benutzer</h2>
+<h2>@_localizer[UserStrings.US_CAPTION_INDEX]</h2>
 
 @if (Model.Users.Count() > 0)
 {
@@ -9,9 +10,9 @@
             <table class="table table-bordred table-striped">
                 <thead>
                     <tr>
-                        <th>Benutzername</th>
-                        <th>E-Mail Adresse</th>
-                        <th>Registriert</th>
+                        <th>@_localizer[UserStrings.US_CAPTION_COL_USERNAME]</th>
+                        <th>@_localizer[UserStrings.US_CAPTION_COL_EMAIL]</th>
+                        <th>@_localizer[UserStrings.US_CAPTION_COL_REGISTERED]</th>
                         <th></th>
                         <th></th>
                 </thead>
@@ -45,5 +46,5 @@
 }
 else
 {
-    <p>Keine Einträge vorhanden</p>
+    <p>@_localizer[UserStrings.US_NO_ENTRIES]</p>
 }

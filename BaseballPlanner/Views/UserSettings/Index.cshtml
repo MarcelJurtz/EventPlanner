@@ -1,10 +1,11 @@
 ﻿@model UserSettingsViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Einstellungen</h2>
+<h2>@_localizer[UserSettingsStrings.SETT_V_CAPTION_INDEX]</h2>
 
-<p>Hier findest du verschiedene Optionen, dein Profil zu bearbeiten.</p>
+<p>@_localizer[UserSettingsStrings.SETT_V_INFO]</p>
 
-<h3>Passwort ändern</h3>
+<h3>@_localizer[UserSettingsStrings.SETT_V_CAPTION_CHANGE_PASSWORD]</h3>
 <form asp-controller="UserSettings" asp-action="SavePassword" method="post" class="form-horizontal" role="form">
     @Html.AntiForgeryToken()
     <hr />
@@ -32,14 +33,14 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Speichern" />
+            <input type="submit" class="btn btn-primary" value="@_localizer[UserSettingsStrings.SETT_V_BUTTON_SAVE]" />
         </div>
     </div>
 </form>
 
 @if(User.IsInRole(RoleNames.ROLE_ADMIN))
 {
-<h3>Benachrichtigungen</h3>
+<h3>@_localizer[UserSettingsStrings.SETT_V_CAPTION_NOTIFICATIONS]</h3>
 <form asp-controller="UserSettings" asp-action="SaveNotificationConfiguration" method="post" class="form-horizontal" role="form">
     @Html.AntiForgeryToken()
     <hr />
@@ -54,7 +55,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Speichern" />
+            <input type="submit" class="btn btn-primary" value="@_localizer[UserSettingsStrings.SETT_V_BUTTON_SAVE]" />
         </div>
     </div>
 </form>

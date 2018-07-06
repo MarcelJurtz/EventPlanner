@@ -18,6 +18,12 @@
     public class UserSettingsStrings
     {
         public const string SETT_ERR_INVALID_CREDENTIALS = "sett_err_invalid_credentials";
+
+        public const string SETT_V_CAPTION_INDEX = "sett_v_caption_index";
+        public const string SETT_V_INFO = "sett_v_info";
+        public const string SETT_V_CAPTION_CHANGE_PASSWORD = "sett_v_caption_change_password";
+        public const string SETT_V_BUTTON_SAVE = "sett_v_button_save";
+        public const string SETT_V_CAPTION_NOTIFICATIONS = "sett_v_caption_notifications";
     }
 
     public class EventStrings
@@ -115,5 +121,24 @@
         public const string TM_CAPTION_COL_UPDATED = "tm_caption_col_updated";
         public const string TM_NO_ENTRIES = "tm_no_entries";
         public const string TM_ENTRY_ADD = "tm_entry_add";
+    }
+
+    public class UserStrings
+    {
+        public const string US_CAPTION_EDIT = "us_caption_edit";
+        public const string US_INFO_USERNAME = "us_info_username";
+        public const string US_INFO_EMAIL = "us_info_email";
+        public const string US_CAPTION_TEAMS = "us_caption_teams";
+        public const string US_CAPTION_ROLES = "us_caption_roles";
+        public const string US_IS_ADMIN = "us_is_admin";
+        public const string US_BUTTON_SAVE = "us_button_save";
+
+        public const string US_CAPTION_INDEX = "us_caption_index";
+        public const string US_CAPTION_COL_USERNAME = "us_caption_col_username";
+        public const string US_CAPTION_COL_EMAIL = "us_caption_col_email";
+        public const string US_CAPTION_COL_REGISTERED = "us_caption_col_registered";
+        public const string US_NO_ENTRIES = "us_no_entries";
+
+        public const string US_CAPTION_UNVERIFIED = "us_caption_unverified";
     }
 }
