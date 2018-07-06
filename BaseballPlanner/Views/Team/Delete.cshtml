@@ -1,17 +1,18 @@
 ﻿@model TeamDeleteViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Team Löschen</h2>
+<h2>@_localizer[TeamStrings.TM_CAPTION_DELETE]</h2>
 
 <form asp-action="Delete" method="post" role="form">
     <p>
-        Möchten Sie das Team '@Model.Team.Designation' wirklich löschen?
+        @_localizer[TeamStrings.TM_DELETE_CONFIRM] - '@Model.Team.Designation'
         @if (Model.TeamAssociationCount == 0)
         {
-            <span>Es sind noch keine Mitglieder vorhanden.</span>
+            <span>@_localizer[TeamStrings.TM_MEMBERS_NONE]</span>
         }
         else
         {
-            <span>Es sind @Model.TeamAssociationCount Mitglieder vorhanden.</span>
+            <span>@_localizer[TeamStrings.TM_MEMBERS_COUNT]: @Model.TeamAssociationCount</span>
         }
     </p>
     <div class="form-group">
@@ -19,8 +20,8 @@
             <a class="btn btn-primary"
                role="button"
                asp-controller="Team"
-               asp-action="Index">Nein</a>
-            <input type="submit" class="btn btn-danger" value="Ja" />
+               asp-action="Index">@_localizer[TeamStrings.TM_BUTTON_NO]</a>
+            <input type="submit" class="btn btn-danger" value="@_localizer[TeamStrings.TM_BUTTON_YES]" />
         </div>
     </div>
 </form>

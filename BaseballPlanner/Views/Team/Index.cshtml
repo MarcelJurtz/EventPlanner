@@ -1,6 +1,7 @@
 ﻿@model TeamIndexViewModel
+@inject IViewLocalizer _localizer
 
-<h2>Teams</h2>
+<h2>@_localizer[TeamStrings.TM_CAPTION_INDEX]</h2>
 
 @if (Model.Teams.Count() > 0)
 {
@@ -9,9 +10,10 @@
             <table class="table table-bordred table-striped">
                 <thead>
                     <tr>
-                        <th>Bezeichnung</th>
-                        <th>Anzahl Mitglieder</th>
-                        <th>Zuletzt bearbeitet</th>
+                        <th>@_localizer[TeamStrings.TM_CAPTION_COL_DESIGNATION]</th>
+                        <th>@_localizer[TeamStrings.TM_CAPTION_COL_MEMBERCOUNT]</th>
+                        <th>@_localizer[TeamStrings.TM_CAPTION_COL_UPDATED]</th>
+
                         <th></th>
                         <th></th>
                 </thead>
@@ -24,7 +26,7 @@
                                    asp-action="Edit"
                                    asp-route-id="@item.Id">@item.Designation</a>
                             </td>
-                            <td>42</td>
+                            <td>42</td> <!-- TODO -->
                             <td>@item.Modified</td>
                             <td>
                                 <a asp-controller="Team"
@@ -45,10 +47,12 @@
 }
 else
 {
-    <p>Keine Einträge vorhanden</p>
+    <p>
+        @_localizer[TeamStrings.TM_NO_ENTRIES]
+    </p>
 }
 
 <a class="btn btn-primary"
    role="button"
    asp-controller="Team"
-   asp-action="Add"><i class="fas fa-plus"></i>&nbsp;Eintrag hinzufügen</a>
+   asp-action="Add"><i class="fas fa-plus"></i>&nbsp;@_localizer[TeamStrings.TM_ENTRY_ADD]</a>

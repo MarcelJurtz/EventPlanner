@@ -97,4 +97,23 @@
         public const string NS_NO_ENTRIES = "ns_no_entries";
         public const string NS_ADD_ENTRY = "ns_add_entry";
     }
+
+    public class TeamStrings
+    {
+        public const string TM_CAPTION_ADD = "tm_caption_add";
+        public const string TM_BUTTON_SAVE = "tm_button_save";
+        public const string TM_CAPTION_DELETE = "tm_caption_delete";
+        public const string TM_DELETE_CONFIRM = "tm_delete_confirm";
+        public const string TM_MEMBERS_NONE = "tm_members_none";
+        public const string TM_MEMBERS_COUNT = "tm_members_count";
+        public const string TM_BUTTON_YES = "tm_button_yes";
+        public const string TM_BUTTON_NO = "tm_button_no";
+        public const string TM_CAPTION_EDIT = "tm_caption_edit";
+        public const string TM_CAPTION_INDEX = "tm_caption_index";
+        public const string TM_CAPTION_COL_DESIGNATION = "tm_caption_col_designation";
+        public const string TM_CAPTION_COL_MEMBERCOUNT = "tm_caption_col_membercount";
+        public const string TM_CAPTION_COL_UPDATED = "tm_caption_col_updated";
+        public const string TM_NO_ENTRIES = "tm_no_entries";
+        public const string TM_ENTRY_ADD = "tm_entry_add";
+    }
 }
