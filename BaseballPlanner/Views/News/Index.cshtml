@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<News>
+@inject IViewLocalizer _localizer
 
-<h2>Neuigkeiten</h2>
+<h2>@_localizer[NewsStrings.NS_CAPTION_INDEX]</h2>
 
 @if (Model.Count() > 0)
 {
@@ -9,9 +10,9 @@
             <table class="table table-bordred table-striped">
                 <thead>
                     <tr>
-                        <th>Inhalt</th>
-                        <th>Erstellt</th>
-                        <th>Bearbeitet</th>
+                        <th>@_localizer[NewsStrings.NS_CAPTION_COL_CONTENT]</th>
+                        <th>@_localizer[NewsStrings.NS_CAPTION_COL_CREATED]</th>
+                        <th>@_localizer[NewsStrings.NS_CAPTION_COL_UPDATED]</th>
                         <th></th>
                         <th></th>
                 </thead>
@@ -45,10 +46,10 @@
 }
 else
 {
-    <p>Keine Einträge vorhanden</p>
+    <p>@_localizer[NewsStrings.NS_NO_ENTRIES]</p>
 }
 
 <a class="btn btn-primary"
    role="button"
    asp-controller="News"
-   asp-action="Add"><i class="fas fa-plus"></i>&nbsp;Eintrag hinzufügen</a>
+   asp-action="Add"><i class="fas fa-plus"></i>&nbsp;@_localizer[NewsStrings.NS_ADD_ENTRY]</a>

@@ -80,4 +80,21 @@
     {
         public const string HM_CAPTION_INDEX = "hm_caption_index";
     }
+
+    public class NewsStrings
+    {
+        public const string NS_CAPTION_ADD = "ns_caption_add";
+        public const string NS_BUTTON_SAVE = "ns_button_save";
+        public const string NS_CAPTION_DELETE = "ns_caption_delete";
+        public const string NS_DELETE_CONFIRM = "ns_delete_confirm";
+        public const string NS_BUTTON_YES = "ns_button_yes";
+        public const string NS_BUTTON_NO = "ns_button_no";
+        public const string NS_CAPTION_EDIT = "ns_caption_edit";
+        public const string NS_CAPTION_INDEX = "ns_caption_index";
+        public const string NS_CAPTION_COL_CONTENT = "ns_caption_col_content";
+        public const string NS_CAPTION_COL_CREATED = "ns_caption_col_created";
+        public const string NS_CAPTION_COL_UPDATED = "ns_caption_col_updated";
+        public const string NS_NO_ENTRIES = "ns_no_entries";
+        public const string NS_ADD_ENTRY = "ns_add_entry";
+    }
 }
