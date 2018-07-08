@@ -1,5 +1,6 @@
 ﻿using ClubGrid.Enums;
 using ClubGrid.Models.Helper;
+using ClubGrid.ResourceHelpers;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -79,11 +80,9 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.CREATED)]
         [Column("created")]
         public DateTime Created { get; set; }
 
-        [DisplayName(DisplayNames.MODIFIED)]
         [Column("modified")]
         public DateTime Modified { get; set; }
 

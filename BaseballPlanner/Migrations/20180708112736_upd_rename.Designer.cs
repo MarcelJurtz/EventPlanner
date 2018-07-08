@@ -3,15 +3,17 @@ using System;
 using ClubGrid.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ClubGrid.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180708112736_upd_rename")]
+    partial class upd_rename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,7 +208,7 @@ namespace ClubGrid.Migrations
                         .HasColumnName("designation")
                         .HasMaxLength(100);
 
-                    b.Property<DateTime>("Modified")
+                    b.Property<DateTime>("Updated")
                         .HasColumnName("updated");
 
                     b.HasKey("Id");

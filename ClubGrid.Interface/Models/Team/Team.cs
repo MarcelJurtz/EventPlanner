@@ -1,4 +1,5 @@
 ﻿using ClubGrid.Models.Helper;
+using ClubGrid.ResourceHelpers;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,7 @@ namespace ClubGrid.Models
         [Column("id")]
         public int Id { get; set; }
 
-        [DisplayName(DisplayNames.DESIGNATION)]
+        [Display( Name = ModelStrings.DESIGNATION, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
         [StringLength(100)]
         [Column("designation")]
@@ -38,12 +39,12 @@ namespace ClubGrid.Models
         [NotMapped]
         public bool Selected { get; set; }
 
-        [DisplayName(DisplayNames.CREATED)]
+        [Display(Name = ModelStrings.CREATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Column("created")]
         public DateTime Created { get; set; }
 
-        [DisplayName(DisplayNames.MODIFIED)]
-        [Column("modified")]
+        [Display(Name = ModelStrings.UPDATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
+        [Column("updated")]
         public DateTime Modified { get; set; }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

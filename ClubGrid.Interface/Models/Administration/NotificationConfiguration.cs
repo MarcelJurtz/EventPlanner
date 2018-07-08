@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using ClubGrid.ResourceHelpers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,16 +11,16 @@ namespace ClubGrid.Models
         [Column("id")]
         public int Id { get; set; }
 
-        [DisplayName("Administrator")]
+        [Display(Name = ModelStrings.ADMINISTRATOR, ResourceType = typeof(Interface.Resources.NotificationConfiguration))]
         [Column("admin_id")]
         [ForeignKey(nameof(User))]
         public int AdminId { get; set; }
 
-        [DisplayName("Neuer Benutzer registriert")]
+        [Display(Name = ModelStrings.NEW_USER_REGISTERED, ResourceType = typeof(Interface.Resources.NotificationConfiguration))]
         [Column("new_user_registered")]
         public bool NewUserRegistered { get; set; }
 
-        [DisplayName("Eventteilnahme eines Benutzers aktualisiert")]
+        [Display(Name = ModelStrings.EVENT_PARTICIPATION_UPDATED, ResourceType = typeof(Interface.Resources.NotificationConfiguration))]
         [Column("user_participation_updated")]
         public bool UserParticipationUpdated { get; set; }
     }

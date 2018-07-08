@@ -1,4 +1,5 @@
 ﻿using ClubGrid.Models.Helper;
+using ClubGrid.ResourceHelpers;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -29,7 +30,7 @@ namespace ClubGrid.Models
         [Column("id")]
         public int Id { get; set; }
 
-        [DisplayName(DisplayNames.DESIGNATION)]
+        [Display(Name = ModelStrings.DESIGNATION, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
         [StringLength(100)]
         [Column("designation")]
@@ -46,7 +47,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.DESCRIPTION)]
+        [Display(Name = ModelStrings.DESCRIPTION, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [StringLength(500)]
         [Column("description")]
         public string Description
@@ -62,7 +63,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.LOCATION)]
+        [Display(Name = ModelStrings.LOCATION, ResourceType = typeof(Interface.Resources.Event))]
         [StringLength(50)]
         [Column("location")]
         public string Location
@@ -78,7 +79,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.START)]
+        [Display(Name = ModelStrings.START, ResourceType = typeof(Interface.Resources.Event))]
         [Required(ErrorMessage = "Bitte geben Sie einen Startzeitpunkt an")]
         [Column("start")]
         public DateTime Start
@@ -94,7 +95,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.END)]
+        [Display(Name = ModelStrings.END, ResourceType = typeof(Interface.Resources.Event))]
         [Column("end")]
         public DateTime? End
         {
@@ -109,7 +110,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName("Treffpunkt")]
+        [Display(Name = ModelStrings.MEETING_LOCATION, ResourceType = typeof(Interface.Resources.Event))]
         [StringLength(100)]
         [Column("meeting_location")]
         public string MeetingLocation
@@ -125,7 +126,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName("Treffpunkt Uhrzeit")]
+        [Display(Name = ModelStrings.MEETING_TIME, ResourceType = typeof(Interface.Resources.Event))]
         [Column("meeting_time")]
         public DateTime MeetingTime
         {
@@ -140,7 +141,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName("Sitzplätze benötigt")]
+        [Display(Name = ModelStrings.SEATS_REQUIRED, ResourceType = typeof(Interface.Resources.Event))]
         [Column("seats_required")]
         public int SeatsRequired
         {
@@ -155,7 +156,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.REQUIRED_PLAYERS)]
+        [Display(Name = ModelStrings.PLAYERS_REQUIRED, ResourceType = typeof(Interface.Resources.Event))]
         [Column("players_required")]
         public int PlayersRequired
         {
@@ -170,7 +171,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.REQUIRED_COACHES)]
+        [Display(Name = ModelStrings.COACHES_REQUIRED, ResourceType = typeof(Interface.Resources.Event))]
         [Column("coaches_required")]
         public int CoachesRequired
         {
@@ -185,7 +186,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.REQUIRED_SCORERS)]
+        [Display(Name = ModelStrings.SCORERS_REQUIRED, ResourceType = typeof(Interface.Resources.Event))]
         [Column("scorers_required")]
         public int ScorersRequired
         {
@@ -200,7 +201,7 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.REQUIRED_UMPIRES)]
+        [Display(Name = ModelStrings.UMPIRES_REQUIRED, ResourceType = typeof(Interface.Resources.Event))]
         [Column("umpires_required")]
         public int UmpiresRequired
         {
@@ -215,11 +216,11 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.CREATED)]
+        [Display(Name = ModelStrings.CREATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Column("created")]
         public DateTime Created { get; set; }
 
-        [DisplayName(DisplayNames.MODIFIED)]
+        [Display(Name = ModelStrings.UPDATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Column("modified")]
         public DateTime Modified { get; set; }
 

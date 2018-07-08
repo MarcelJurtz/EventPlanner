@@ -79,11 +79,9 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.CREATED)]
         [Column("created")]
         public DateTime Created { get; set; }
 
-        [DisplayName(DisplayNames.MODIFIED)]
         [Column("modified")]
         public DateTime Modified { get; set; }
 

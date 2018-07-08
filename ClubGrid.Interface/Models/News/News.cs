@@ -1,4 +1,5 @@
 ﻿using ClubGrid.Models.Helper;
+using ClubGrid.ResourceHelpers;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace ClubGrid.Models
         public int Id { get; set; }
 
         [Column("content")]
-        [DisplayName("Inhalt")]
+        [Display(Name = ModelStrings.CONTENT, ResourceType = typeof(Interface.Resources.News))]
         [StringLength(250)]
         public string Content
         {
@@ -48,11 +49,11 @@ namespace ClubGrid.Models
             }
         }
 
-        [DisplayName(DisplayNames.CREATED)]
+        [Display(Name = ModelStrings.CREATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Column("created")]
         public DateTime Created { get; set; }
 
-        [DisplayName(DisplayNames.MODIFIED)]
+        [Display(Name = ModelStrings.UPDATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Column("modified")]
         public DateTime Modified { get; set; }
 
