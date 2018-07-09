@@ -141,4 +141,19 @@
 
         public const string US_CAPTION_UNVERIFIED = "us_caption_unverified";
     }
+
+    public class ErrorMessageStrings
+    {
+        public const string REQUIRE_USERNAME = "require_username";
+        public const string REQUIRE_EMAIL = "require_email";
+        public const string NOT_MATCHING_EMAILS = "not_matching_emails";
+    }
+
+    public class DisplayNameStrings
+    {
+        public const string USERNAME = "username";
+        public const string PASSWORD = "password";
+        public const string EMAIL = "email";
+        public const string EMAIL_CONFIRM = "email_confirm";
+    }
 }

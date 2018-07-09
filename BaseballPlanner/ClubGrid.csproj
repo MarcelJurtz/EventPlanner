@@ -31,4 +31,30 @@
   <ProjectReference Include="..\ClubGrid.Interface\ClubGrid.Interface.csproj" />
 </ItemGroup>
 
+  
+<ItemGroup>
+  <Compile Update="Resources\DataAnnotations\ErrorMessages.Designer.cs">
+    <DesignTime>True</DesignTime>
+    <AutoGen>True</AutoGen>
+    <DependentUpon>ErrorMessages.resx</DependentUpon>
+  </Compile>
+  <Compile Update="Resources\DataAnnotations\DisplayNames.Designer.cs">
+    <DesignTime>True</DesignTime>
+    <AutoGen>True</AutoGen>
+    <DependentUpon>DisplayNames.resx</DependentUpon>
+  </Compile>
+</ItemGroup>
+
+  
+<ItemGroup>
+  <EmbeddedResource Update="Resources\DataAnnotations\ErrorMessages.resx">
+    <Generator>PublicResXFileCodeGenerator</Generator>
+    <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+  </EmbeddedResource>
+  <EmbeddedResource Update="Resources\DataAnnotations\DisplayNames.resx">
+    <Generator>PublicResXFileCodeGenerator</Generator>
+    <LastGenOutput>DisplayNames.Designer.cs</LastGenOutput>
+  </EmbeddedResource>
+</ItemGroup>
+
 </Project>

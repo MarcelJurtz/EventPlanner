@@ -31,7 +31,7 @@ namespace ClubGrid.Models
         public int Id { get; set; }
 
         [Display(Name = ModelStrings.DESIGNATION, ResourceType = typeof(Interface.Resources.ClubGrid))]
-        [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
+        [Required(ErrorMessageResourceType = typeof(Interface.Resources.DataAnnotations.ErrorMessages), ErrorMessageResourceName = ModelStrings.REQUIRE_DESIGNATION)]
         [StringLength(100)]
         [Column("designation")]
         public string Designation
@@ -80,7 +80,7 @@ namespace ClubGrid.Models
         }
 
         [Display(Name = ModelStrings.START, ResourceType = typeof(Interface.Resources.Event))]
-        [Required(ErrorMessage = "Bitte geben Sie einen Startzeitpunkt an")]
+        [Required(ErrorMessageResourceType = typeof(Interface.Resources.DataAnnotations.ErrorMessages), ErrorMessageResourceName = ModelStrings.REQUIRE_START)]
         [Column("start")]
         public DateTime Start
         {

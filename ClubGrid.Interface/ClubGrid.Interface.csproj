@@ -14,6 +14,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ClubGrid.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\DataAnnotations\ErrorMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Event.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -43,6 +48,10 @@
     <EmbeddedResource Update="Resources\ClubGrid.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ClubGrid.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\DataAnnotations\ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Event.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

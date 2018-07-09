@@ -34,5 +34,14 @@ namespace ClubGrid.ResourceHelpers
 
         // News
         public const string CONTENT = "content";
+
+        // ErrorMessage
+
+        // Allgemein
+        public const string REQUIRE_DESIGNATION = "require_designation";
+
+        // Event
+        public const string REQUIRE_START = "require_start";
+
     }
 }

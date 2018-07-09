@@ -20,7 +20,7 @@ namespace ClubGrid.Models
         public int Id { get; set; }
 
         [Display( Name = ModelStrings.DESIGNATION, ResourceType = typeof(Interface.Resources.ClubGrid))]
-        [Required(ErrorMessage = "Bitte geben Sie eine Bezeichnung an")]
+        [Required(ErrorMessageResourceType = typeof(Interface.Resources.DataAnnotations.ErrorMessages), ErrorMessageResourceName = ModelStrings.REQUIRE_DESIGNATION)]
         [StringLength(100)]
         [Column("designation")]
         public string Designation

@@ -1,20 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ClubGrid.Helper;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClubGrid.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        [Required(ErrorMessage = "Bitte gib einen Benutzernamen an")]
-        [Display(Name = "Benutzername")]
+        [Required(ErrorMessageResourceType = typeof(Resources.DataAnnotations.ErrorMessages), ErrorMessageResourceName = ErrorMessageStrings.REQUIRE_USERNAME)]
+        [Display(Name = DisplayNameStrings.USERNAME, ResourceType = typeof(Resources.DataAnnotations.DisplayNames))]
         public string Username { get; set; }
-
-        //[Required(ErrorMessage = "Bitte gib eine E-Mail Adresse an")]
-        //[Display(Name = "E-Mail Adresse")]
-        //public string Mail { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Passwort")]
+        [Display(Name = DisplayNameStrings.PASSWORD, ResourceType = typeof(Resources.DataAnnotations.DisplayNames))]
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }
