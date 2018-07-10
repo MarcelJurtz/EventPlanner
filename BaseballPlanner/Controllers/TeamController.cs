@@ -34,6 +34,7 @@ namespace ClubGrid.Controllers
         {
             TeamEditViewModel viewModel = new TeamEditViewModel();
             viewModel.CurrentTeam = new Team();
+            viewModel.AllUsers = _userRepository.GetAll().ToList();
             return View(viewModel);
         }
 
@@ -47,6 +48,7 @@ namespace ClubGrid.Controllers
                 return View(viewModel);
 
             _teamRepository.Add(viewModel.CurrentTeam);
+            _teamAssociationRepository.Update(viewModel.CurrentTeam.Id, viewModel.AllUsers);
 
             return RedirectToAction(MethodNames.INDEX);
         }

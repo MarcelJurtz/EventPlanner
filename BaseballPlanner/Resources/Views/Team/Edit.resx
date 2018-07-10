@@ -124,6 +124,6 @@
     <value>Edit team</value>
   </data>
   <data name="tm_caption_users" xml:space="preserve">
-    <value>Users</value>
+    <value>Members</value>
   </data>
 </root>
