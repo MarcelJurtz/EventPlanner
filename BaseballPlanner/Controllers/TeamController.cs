@@ -14,11 +14,13 @@ namespace ClubGrid.Controllers
     {
         private readonly ITeamRepository _teamRepository;
         private readonly ITeamAssociationRepository _teamAssociationRepository;
+        private readonly IUserRepository _userRepository;
 
-        public TeamController(ITeamRepository teamRepository, ITeamAssociationRepository teamAssociationRepository)
+        public TeamController(ITeamRepository teamRepository, ITeamAssociationRepository teamAssociationRepository, IUserRepository userRepository)
         {
             _teamRepository = teamRepository;
             _teamAssociationRepository = teamAssociationRepository;
+            _userRepository = userRepository;
         }
 
         public ViewResult Index()
@@ -57,6 +59,14 @@ namespace ClubGrid.Controllers
                 return StatusCode((int)HttpStatusCode.BadRequest);
 
             viewModel.CurrentTeam = _teamRepository.Find(x => x.Id == id).FirstOrDefault();
+            viewModel.AllUsers = _userRepository.GetAll().ToList();
+
+            var associations = _teamAssociationRepository.Find(x => x.TeamId == id);
+            foreach (var user in viewModel.AllUsers)
+            {
+                user.Selected = associations.FirstOrDefault(x => x.UserId == user.UserId) != null;
+            }
+
             if (viewModel.CurrentTeam == null)
                 return StatusCode((int)HttpStatusCode.NotFound);
             else
@@ -77,6 +87,8 @@ namespace ClubGrid.Controllers
 
             if (found == null)
                 return StatusCode((int)HttpStatusCode.NotFound);
+
+            _teamAssociationRepository.Update((int)id, viewModel.AllUsers);
 
             found.Designation = viewModel.CurrentTeam.Designation;
             _teamRepository.CommitChanges();

@@ -14,6 +14,9 @@ namespace ClubGrid.Models
         [Column("user_id")]
         public int UserId { get; set; }
 
+        [NotMapped]
+        public bool Selected { get; set; }
+
         [Display(Name = ModelStrings.USER_REGISTERED, ResourceType = typeof(Interface.Resources.User))]
         [Column("registered")]
         public DateTime Registered { get; set; }

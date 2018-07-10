@@ -123,4 +123,7 @@
   <data name="tm_caption_edit" xml:space="preserve">
     <value>Edit team</value>
   </data>
+  <data name="tm_caption_users" xml:space="preserve">
+    <value>Users</value>
+  </data>
 </root>

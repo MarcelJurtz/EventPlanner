@@ -101,6 +101,35 @@ namespace ClubGrid.Repository.PostgreSQL
             CommitChanges();
         }
 
+        public void Update(int teamId, IEnumerable<User> users)
+        {
+            var userAssociations = _appDbContext.TeamAssociations.Where(x => x.TeamId == teamId);
+            foreach (var user in users)
+            {
+                var association = userAssociations.FirstOrDefault(x => x.UserId == user.UserId && x.TeamId == teamId);
+
+                if (association != null && !user.Selected)
+                {
+                    _appDbContext.TeamAssociations.Remove(association);
+                    _appDbContext.Teams.First(t => t.Id == teamId).UserCount -= 1;
+                }
+                else if (association == null && user.Selected)
+                {
+                    var date = DateTime.Now;
+                    association = new TeamAssociation()
+                    {
+                        Created = date,
+                        Modified = date,
+                        TeamId = teamId,
+                        UserId = user.UserId
+                    };
+                    _appDbContext.TeamAssociations.Add(association);
+                    _appDbContext.Teams.First(t => t.Id == teamId).UserCount += 1;
+                }
+            }
+            CommitChanges();
+        }
+
         public void CommitChanges()
         {
             _appDbContext.SaveChanges();

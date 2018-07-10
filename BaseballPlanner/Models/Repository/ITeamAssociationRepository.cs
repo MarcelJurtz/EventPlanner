@@ -6,5 +6,6 @@ namespace ClubGrid.Repository
     public interface ITeamAssociationRepository : IRepository<TeamAssociation>
     {
         void Update(int userId, IEnumerable<Team> teams);
+        void Update(int teamId, IEnumerable<User> users);
     }
 }

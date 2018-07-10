@@ -121,6 +121,7 @@
         public const string TM_CAPTION_COL_UPDATED = "tm_caption_col_updated";
         public const string TM_NO_ENTRIES = "tm_no_entries";
         public const string TM_ENTRY_ADD = "tm_entry_add";
+        public const string TM_CAPTION_USERS = "tm_caption_users";
     }
 
     public class UserStrings
