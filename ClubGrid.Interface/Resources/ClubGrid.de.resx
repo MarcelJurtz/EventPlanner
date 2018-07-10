@@ -129,4 +129,7 @@
   <data name="updated" xml:space="preserve">
     <value>Geändert</value>
   </data>
+  <data name="user_count" xml:space="preserve">
+    <value>Mitglieder</value>
+  </data>
 </root>

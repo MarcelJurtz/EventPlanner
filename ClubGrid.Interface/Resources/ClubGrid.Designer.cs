@@ -95,5 +95,14 @@ namespace ClubGrid.Interface.Resources {
                 return ResourceManager.GetString("updated", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Members ähnelt.
+        /// </summary>
+        public static string user_count {
+            get {
+                return ResourceManager.GetString("user_count", resourceCulture);
+            }
+        }
     }
 }

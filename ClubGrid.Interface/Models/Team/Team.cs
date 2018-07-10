@@ -1,6 +1,7 @@
 ﻿using ClubGrid.Models.Helper;
 using ClubGrid.ResourceHelpers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,6 +39,10 @@ namespace ClubGrid.Models
 
         [NotMapped]
         public bool Selected { get; set; }
+
+        [Display(Name = ModelStrings.USER_COUNT, ResourceType = typeof(Interface.Resources.ClubGrid))]
+        [Column("user_count")]
+        public int UserCount { get; set; }
 
         [Display(Name = ModelStrings.CREATED, ResourceType = typeof(Interface.Resources.ClubGrid))]
         [Column("created")]

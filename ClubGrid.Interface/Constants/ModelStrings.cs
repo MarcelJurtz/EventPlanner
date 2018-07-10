@@ -12,6 +12,9 @@ namespace ClubGrid.ResourceHelpers
         public const string DESCRIPTION = "description";
         public const string DESIGNATION = "designation";
 
+        // Team
+        public const string USER_COUNT = "user_count";
+
         // User
         public const string USER_REGISTERED = "registered";
 

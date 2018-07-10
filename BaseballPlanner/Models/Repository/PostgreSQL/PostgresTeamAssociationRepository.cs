@@ -18,6 +18,7 @@ namespace ClubGrid.Repository.PostgreSQL
         public void Add(TeamAssociation entity, bool commit = true)
         {
             _appDbContext.TeamAssociations.Add(entity);
+            _appDbContext.Teams.First(t => t.Id == entity.TeamId).UserCount += 1;
 
             if (commit)
                 CommitChanges();
@@ -26,6 +27,10 @@ namespace ClubGrid.Repository.PostgreSQL
         public void AddRange(IEnumerable<TeamAssociation> entities, bool commit = true)
         {
             _appDbContext.TeamAssociations.AddRange(entities);
+            foreach (var entity in entities)
+            {
+                _appDbContext.Teams.First(t => t.Id == entity.TeamId).UserCount += 1;
+            }
 
             if (commit)
                 CommitChanges();
@@ -49,6 +54,7 @@ namespace ClubGrid.Repository.PostgreSQL
         public void Remove(TeamAssociation entity, bool commit = true)
         {
             _appDbContext.TeamAssociations.Remove(entity);
+            _appDbContext.Teams.First(t => t.Id == entity.TeamId).UserCount -= 1;
 
             if (commit)
                 CommitChanges();
@@ -57,6 +63,10 @@ namespace ClubGrid.Repository.PostgreSQL
         public void RemoveRange(IEnumerable<TeamAssociation> entities, bool commit = true)
         {
             _appDbContext.TeamAssociations.RemoveRange(entities);
+            foreach(var entity in entities)
+            {
+                _appDbContext.Teams.First(t => t.Id == entity.TeamId).UserCount -= 1;
+            }
 
             if (commit)
                 CommitChanges();
@@ -70,8 +80,11 @@ namespace ClubGrid.Repository.PostgreSQL
                 var association = userAssociations.FirstOrDefault(x => x.UserId == userId && x.TeamId == team.Id);
 
                 if (association != null && !team.Selected)
+                {
                     _appDbContext.TeamAssociations.Remove(association);
-                else if(association == null && team.Selected)
+                    _appDbContext.Teams.First(t => t.Id == team.Id).UserCount -= 1;
+                }
+                else if (association == null && team.Selected)
                 {
                     var date = DateTime.Now;
                     association = new TeamAssociation()
@@ -82,6 +95,7 @@ namespace ClubGrid.Repository.PostgreSQL
                         UserId = userId
                     };
                     _appDbContext.TeamAssociations.Add(association);
+                    _appDbContext.Teams.First(t => t.Id == team.Id).UserCount += 1;
                 }
             }
             CommitChanges();
