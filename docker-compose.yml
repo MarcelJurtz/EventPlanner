@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  clubgrid:
+    image: marceljurtz/clubgrid
+    build:
+      context: .
+      dockerfile: BaseballPlanner/Dockerfile
+    links: 
+      - postgres
+  postgres:
+    image: postgres:10.4
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'clubgrid'
+      POSTGRES_PASSWORD: 'default'
+      POSTGRES_DB: 'clubgrid'

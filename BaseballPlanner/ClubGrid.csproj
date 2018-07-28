@@ -5,6 +5,7 @@
     <AssemblyName>ClubGrid</AssemblyName>
     <RootNamespace>ClubGrid</RootNamespace>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
