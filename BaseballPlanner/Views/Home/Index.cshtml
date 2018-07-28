@@ -2,15 +2,24 @@
 @inject IViewLocalizer _localizer
 
 <h2>@_localizer[HomeStrings.HM_CAPTION_INDEX]</h2>
-@foreach (var news in Model.News)
+@if (Model.News.Count() > 0)
 {
-    <p>
-        <span>@news.Key.ToShortDateString()</span>
-        <ul>
-            @foreach(var item in news)
-            {
-                <li>@item.Content</li>
-            }
-        </ul>
-    </p>
+    @foreach (var news in Model.News)
+    {
+        <p>
+            <span>@news.Key.ToShortDateString()</span>
+            <ul>
+                @foreach (var item in news)
+                {
+                    <li>@item.Content</li>
+                }
+            </ul>
+        </p>
+    }
+}
+else
+{
+
+    <p>@_localizer[HomeStrings.HM_NO_ENTRIES] </p>
+
 }

@@ -85,6 +85,7 @@
     public class HomeStrings
     {
         public const string HM_CAPTION_INDEX = "hm_caption_index";
+        public const string HM_NO_ENTRIES = "hm_no_entries";
     }
 
     public class NewsStrings

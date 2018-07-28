@@ -120,4 +120,7 @@
   <data name="hm_caption_index" xml:space="preserve">
     <value>News</value>
   </data>
+  <data name="hm_no_entries" xml:space="preserve">
+    <value>No entries available!</value>
+  </data>
 </root>
